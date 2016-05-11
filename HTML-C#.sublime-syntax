@@ -26,9 +26,6 @@ contexts:
         - match: '%>'
           scope: punctuation.section.embedded.end.cshtml
           pop: true
-    - match: '<%[=#:]?'
-      scope: punctuation.section.embedded.begin.cshtml
-      push: [close_embedded_cs, begin_embedded_cs]
 
   html:
     - match: ''
@@ -37,15 +34,24 @@ contexts:
         - include: comments
         - include: script_tag_cs
         - include: cshtml_punctuation_begin
+        - include: block_cs
 
-  begin_embedded_cs:
-    - meta_scope: source.cs.embedded.html
-    - include: scope:source.cs
-
-  close_embedded_cs:
-    - match: '%>'
-      scope: source.asp.embedded.html punctuation.section.embedded.end.cshtml
-      pop: true
+  block_cs:
+    - match: '<%[=#:]?'
+      scope: punctuation.section.embedded.begin.cshtml
+      push:
+        - meta_scope: source.cs.embedded.html
+        - match: '%>'
+          scope: punctuation.section.embedded.end.cshtml
+          pop: true
+        - match: ''
+          scope: punctuation.definition.tag.end.html
+          push:
+            - meta_content_scope: source.cs.embedded.html
+            - include: 'scope:source.cs'
+          with_prototype:
+             - match: '(?=%>)'
+               pop: true
 
   script_tag_cs:
     - match: "(<)((?i:script))[^>]+(runat)(=)['\"](server)['\"]"
@@ -63,7 +69,6 @@ contexts:
             2: entity.name.tag.html
             3: punctuation.definition.tag.end.html
           pop: true
-        - include: tag-stuff
         - match: '>'
           scope: punctuation.definition.tag.end.html
           push:
