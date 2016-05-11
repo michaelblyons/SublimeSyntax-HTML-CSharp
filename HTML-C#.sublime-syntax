@@ -1,0 +1,83 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: HTML (C#)
+file_extensions:
+  - aspx
+  - ascx
+  - cshtml
+  - master
+scope: text.html.cshtml
+contexts:
+  main:
+    - include: html
+
+  cshtml_punctuation_begin:
+    - match: '<%@' # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
+      scope: punctuation.section.embedded.begin.cshtml
+      push:
+        - match: '\s*(Page|Control|Import|Implements|Register|Assembly|OutputCache|Reference|Master|PreviousPageType|MasterType|WebHandler)\b'
+          scope: constant.language.processing-directive.cshtml
+        - match: '\b(\w+)\s*(=)\s*"([^"]+)"\s*'
+          captures:
+            1: entity.other.attribute-name.cshtml
+            2: punctuation.separator.key-value.cshtml
+            3: string.quoted.double.cshtml
+        - match: '%>'
+          scope: punctuation.section.embedded.end.cshtml
+          pop: true
+    - match: '<%[=#:]?'
+      scope: punctuation.section.embedded.begin.cshtml
+      push: [close_embedded_cs, begin_embedded_cs]
+
+  html:
+    - match: ''
+      set: scope:text.html.basic
+      with_prototype:
+        - include: comments
+        - include: script_tag_cs
+        - include: cshtml_punctuation_begin
+
+  begin_embedded_cs:
+    - meta_scope: source.cs.embedded.html
+    - include: scope:source.cs
+
+  close_embedded_cs:
+    - match: '%>'
+      scope: source.asp.embedded.html punctuation.section.embedded.end.cshtml
+      pop: true
+
+  script_tag_cs:
+    - match: "(<)((?i:script))[^>]+(runat)(=)['\"](server)['\"]"
+      captures:
+        1: punctuation.definition.tag.begin.html
+        2: entity.name.tag.script.html
+        3: constant.language.processing-directive.cshtml
+        4: punctuation.separator.key-value.cshtml
+        5: string.quoted.double.cshtml
+      push:
+        - meta_scope: source.cs.embedded.html
+        - match: (?i)(</)(script)(>)
+          captures:
+            1: punctuation.definition.tag.begin.html
+            2: entity.name.tag.html
+            3: punctuation.definition.tag.end.html
+          pop: true
+        - include: tag-stuff
+        - match: '>'
+          scope: punctuation.definition.tag.end.html
+          push:
+            - meta_content_scope: source.cs.embedded.html
+            - include: 'scope:source.cs'
+          with_prototype:
+             - match: (?i)(?=</script)
+               pop: true
+
+  comments:
+    - match: <%--
+      scope: comment.block.begin.cshtml
+      push:
+        - meta_scope: comment.block.cshtml
+        - match: "--%>"
+          scope: comment.block.end.cshtml
+          pop: true
