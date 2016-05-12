@@ -43,12 +43,11 @@ contexts:
     - match: '<%[=#:]?'
       scope: punctuation.section.embedded.begin.cshtml
       push:
-        - meta_scope: source.cs.embedded.html
+        - meta_content_scope: source.cs.embedded.html
         - match: '%>'
           scope: punctuation.section.embedded.end.cshtml
           pop: true
         - match: ''
-          scope: punctuation.definition.tag.end.html
           push:
             - include: 'scope:source.cs'
           with_prototype:
@@ -64,7 +63,7 @@ contexts:
         4: punctuation.separator.key-value.cshtml
         5: string.quoted.double.cshtml
       push:
-        - meta_scope: source.cs.embedded.html
+        - meta_content_scope: source.cs.embedded.html
         - match: (?i)(</)(script)(>)
           captures:
             1: punctuation.definition.tag.begin.html
@@ -72,7 +71,6 @@ contexts:
             3: punctuation.definition.tag.end.html
           pop: true
         - match: '>'
-          scope: punctuation.definition.tag.end.html
           push:
             - include: 'scope:source.cs'
           with_prototype:

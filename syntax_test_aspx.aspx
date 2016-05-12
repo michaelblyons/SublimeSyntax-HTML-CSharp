@@ -8,9 +8,9 @@
 <%@ Register TagPrefix="my" Namespace="Foo.Bar" Assembly="Solution.LinkLibrary" %>
 
 <script runat="server">
-// ^^^^ source.cs.embedded.html entity.name.tag.script.html
-//      ^^^^^ constant.language.processing-directive.cshtml
-
+// ^^^^                   entity.name.tag.script.html - source.cs.embedded.html
+//      ^^^^^             constant.language.processing-directive.cshtml
+//                      ^ source.cs.embedded.html
     var variable = "value";
     // <- source.cs.embedded.html
     var url = "http://example.com";
@@ -28,7 +28,7 @@
         }
     }
 </script>
-//        ^^^^ - source.cs.embedded.html
+// ^^^^^^^^^ - source.cs.embedded.html
 
 <!DOCTYPE html>
 <html>
@@ -49,11 +49,12 @@
     <my:Bar runat="server" />
 
     <% if(3 > 10)
-    // <-         punctuation.section.embedded.begin.cshtml
+    // <-         punctuation.section.embedded.begin.cshtml - source.cs.embedded.html
     // ^^^^^^^^^^ source.cs.embedded.html
         { %>
     //  ^         punctuation.section.block.begin.source.cs
-    //      ^^^   - source.cs.embedded.html
+    //    ^^      punctuation.section.embedded.end.cshtml
+    //    ^^^^^   - source.cs.embedded.html
     <p>Baz</p>
     <% } %>
     // ^          source.cs.embedded.html
@@ -61,16 +62,15 @@
 
     <a href="<%= bullion ? url : "http://other.com" %>">link</a>
     // ^^^^       entity.other.attribute-name.html - source.cs.embedded.html
-    //       ^^^  punctuation.section.embedded.begin.cshtml
+    //       ^^^  punctuation.section.embedded.begin.cshtml - source.cs.embedded.html
     //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^      source.cs.embedded.html
     //                            ^^^^^^^^^^^^^^^^        string.quoted.double.source.cs
-    //                                                ^^^ - source.cs.embedded.html
+    //                                              ^^^^^ - source.cs.embedded.html
 
     <p><%= variable %></p>
     // ^^^                 punctuation.section.embedded.begin.cshtml
     //    ^^^^^^^^^^       source.cs.embedded.html
     //              ^^     punctuation.section.embedded.end.cshtml
-    //                 ^^^ - source.cs.embedded.html
-    
+    //              ^^^^^^ - source.cs.embedded.html
 </body>
 </html>
