@@ -47,7 +47,6 @@ contexts:
         - match: ''
           scope: punctuation.definition.tag.end.html
           push:
-            - meta_content_scope: source.cs.embedded.html
             - include: 'scope:source.cs'
           with_prototype:
              - match: '(?=%>)'
@@ -72,7 +71,6 @@ contexts:
         - match: '>'
           scope: punctuation.definition.tag.end.html
           push:
-            - meta_content_scope: source.cs.embedded.html
             - include: 'scope:source.cs'
           with_prototype:
              - match: (?i)(?=</script)
