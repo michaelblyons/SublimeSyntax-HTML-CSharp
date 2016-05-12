@@ -1,4 +1,4 @@
-// SYNTAX TEST "Packages/C# HTML/HTML-C#.sublime-syntax"
+// SYNTAX TEST "Packages/HTML-C#/HTML-C#.sublime-syntax"
 
 <%@ Page Debug="true" AutoEventWireup="true" Inherits="System.Web.UI.Page" %>
 // <-                 punctuation.section.embedded.begin.cshtml
