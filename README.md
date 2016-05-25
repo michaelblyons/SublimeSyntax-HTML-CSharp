@@ -23,6 +23,14 @@
       <% } %>
       ```
 
+- No recognition of exluded scopes to return to HTML. In the snippet below, the C# scope ends immediately after `"bar`.
+
+      ```asp
+      <%
+        var foo = "bar%>";
+      %>
+      ```
+
 - C# highlighting is only as good as the core C# definition.
 
 
