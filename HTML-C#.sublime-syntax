@@ -12,18 +12,18 @@ contexts:
   main:
     - include: html
 
-  cshtml_punctuation_begin:
+  directive:
     - match: '<%@' # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
       scope: punctuation.section.embedded.begin.cshtml
       push:
-        - match: '\s*(Page|Control|Import|Implements|Register|Assembly|OutputCache|Reference|Master|PreviousPageType|MasterType|WebHandler)\b(?:(=)"([^"]+)")?'
-          captures:
-            1: constant.language.processing-directive.cshtml
-            2: punctuation.separator.key-value.cshtml
-            3: string.quoted.double.cshtml
         - match: '\b(\w+)\s*(=)\s*"([^"]+)"\s*'
           captures:
             1: entity.other.attribute-name.cshtml
+            2: punctuation.separator.key-value.cshtml
+            3: string.quoted.double.cshtml
+        - match: '\s*(Page|Control|Import|Implements|Register|Assembly|OutputCache|Reference|Master|PreviousPageType|MasterType|WebHandler)\b(?:(=)"([^"]+)")?'
+          captures:
+            1: constant.language.processing-directive.cshtml
             2: punctuation.separator.key-value.cshtml
             3: string.quoted.double.cshtml
         - match: '%>'
@@ -36,7 +36,7 @@ contexts:
       with_prototype:
         - include: comments
         - include: script_tag_cs
-        - include: cshtml_punctuation_begin
+        - include: directive
         - include: block_cs
 
   block_cs:

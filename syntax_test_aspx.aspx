@@ -6,6 +6,10 @@
 //       ^^^^^        entity.other.attribute-name.cshtml
 //              ^^^^  string.quoted.double.cshtml
 <%@ Register TagPrefix="my" Namespace="Foo.Bar" Assembly="Solution.LinkLibrary" %>
+// <-                 punctuation.section.embedded.begin.cshtml
+//  ^^^^^^^^          constant.language.processing-directive.cshtml
+//                                              ^^^^^^^^         entity.other.attribute-name.cshtml - constant.language.processing-directive.cshtml
+//                                                         ^^^^  string.quoted.double.cshtml
 
 <script runat="server">
 // ^^^^                   entity.name.tag.script.html - source.cs.embedded.html
