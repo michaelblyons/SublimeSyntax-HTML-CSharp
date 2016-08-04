@@ -4,7 +4,9 @@
 // <-                 punctuation.section.embedded.begin.cshtml
 //  ^^^^              constant.language.processing-directive.cshtml
 //       ^^^^^        entity.other.attribute-name.cshtml
-//              ^^^^  string.quoted.double.cshtml
+//             ^^^^^^ string.quoted.double.cshtml
+//             ^      punctuation.definition.string.begin.cshtml
+//                  ^ punctuation.definition.string.end.cshtml
 <%@ Register TagPrefix="my" Namespace="Foo.Bar" Assembly="Solution.LinkLibrary" %>
 // <-                 punctuation.section.embedded.begin.cshtml
 //  ^^^^^^^^          constant.language.processing-directive.cshtml
@@ -14,6 +16,9 @@
 <script runat="server">
 // ^^^^                   entity.name.tag.script.html - source.cs.embedded.html
 //      ^^^^^             constant.language.processing-directive.cshtml
+//            ^^^^^^^^    string.quoted.double.cshtml
+//            ^           punctuation.definition.string.begin.cshtml
+//                   ^    punctuation.definition.string.end.cshtml
 //                      ^ source.cs.embedded.html
     var variable = "value";
     // <- source.cs.embedded.html

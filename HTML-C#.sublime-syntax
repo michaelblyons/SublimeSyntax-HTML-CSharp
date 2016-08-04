@@ -16,11 +16,13 @@ contexts:
     - match: '<%@' # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
       scope: punctuation.section.embedded.begin.cshtml
       push:
-        - match: '\b(\w+)\s*(=)\s*"([^"]+)"\s*'
+        - match: '\b(\w+)\s*(=)\s*((")[^"]+("))\s*'
           captures:
             1: entity.other.attribute-name.cshtml
             2: punctuation.separator.key-value.cshtml
             3: string.quoted.double.cshtml
+            4: punctuation.definition.string.begin.cshtml
+            5: punctuation.definition.string.end.cshtml
         - match: '\s*(Page|Control|Import|Implements|Register|Assembly|OutputCache|Reference|Master|PreviousPageType|MasterType|WebHandler)\b(?:(=)"([^"]+)")?'
           captures:
             1: constant.language.processing-directive.cshtml
@@ -55,13 +57,18 @@ contexts:
                pop: true
 
   script_tag_cs:
-    - match: "(<)((?i:script))[^>]+(runat)(=)['\"](server)['\"]"
+    - match: "(<)((?i:script))[^>]+(runat)(=)(?:((')server('))|((\")server(\")))"
       captures:
         1: punctuation.definition.tag.begin.html
         2: entity.name.tag.script.html
         3: constant.language.processing-directive.cshtml
         4: punctuation.separator.key-value.cshtml
-        5: string.quoted.double.cshtml
+        5: string.quoted.single.cshtml
+        6: punctuation.definition.string.begin.cshtml
+        7: punctuation.definition.string.end.cshtml
+        8: string.quoted.double.cshtml
+        9: punctuation.definition.string.begin.cshtml
+        10: punctuation.definition.string.end.cshtml
       push:
         - meta_content_scope: source.cs.embedded.html
         - match: (?i)(</)(script)(>)
@@ -71,6 +78,7 @@ contexts:
             3: punctuation.definition.tag.end.html
           pop: true
         - match: '>'
+          scope: punctuation.definition.tag.end.html
           push:
             - include: 'scope:source.cs'
           with_prototype:
