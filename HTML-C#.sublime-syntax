@@ -45,6 +45,7 @@ contexts:
     - match: '<%[=#:]?'
       scope: punctuation.section.embedded.begin.cshtml
       push:
+        - clear_scopes: true
         - meta_content_scope: source.cs.embedded.html
         - match: '%>'
           scope: punctuation.section.embedded.end.cshtml
