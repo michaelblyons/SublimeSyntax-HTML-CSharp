@@ -1,0 +1,8 @@
+<snippet>
+	<tabTrigger>directive</tabTrigger>
+	<scope>text.html.cshtml</scope>
+	<description>Directive Expression</description>
+	<content><![CDATA[
+<%@ ${1:Directive} %>
+]]></content>
+</snippet>

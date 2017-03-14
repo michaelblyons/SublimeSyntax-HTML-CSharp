@@ -1,0 +1,8 @@
+<snippet>
+	<tabTrigger>expb</tabTrigger>
+	<scope>text.html.cshtml</scope>
+	<description>Builder Expression</description>
+	<content><![CDATA[
+<%$ ${1:AppSettings}: ${2:key} %>
+]]></content>
+</snippet>

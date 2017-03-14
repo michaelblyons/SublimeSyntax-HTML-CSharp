@@ -1,0 +1,8 @@
+<snippet>
+	<tabTrigger>import</tabTrigger>
+	<scope>text.html.cshtml</scope>
+	<description>Import Directive</description>
+	<content><![CDATA[
+<%@ Import Namespace="${1:System.Net}" %>
+]]></content>
+</snippet>

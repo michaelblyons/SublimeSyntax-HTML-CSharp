@@ -2,16 +2,27 @@
 
 [Sublime Text 3][st3] [syntax highlighting][ss-docs] for `.cshtml`, `.aspx`, and similar files.
 
-### Current support for:
+## Current support
 
-- Blocks of `<script runat="server">`
-- Blocks of `<%` (including `<%=`, `<%#`, `<%:`, `<%--`)
+### Highlighting
 
-### Future support (maybe) for:
+- Embedded C# (`<script runat="server">`)
+- `<%` expressions (including `<%=`, `<%#`, `<%:`, `<%$`, `<%--`)
+
+### Functionality
+
+- Hotkey comment/uncomment server-side comments
+- Snippets for `<%` expressions (Try typing `exp`)
+    + These are subject to change.
+- Snippets for some directives (Try `page` or `import`)
+    + Default attributes are subject to change.
+
+## Future support (maybe)
 
 - Razor syntax
+- Identify all relevant attributes of directives
 
-### Known issues:
+## Known issues:
 
 - "Goto Anything" support is poor.
 

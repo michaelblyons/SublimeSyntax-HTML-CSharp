@@ -42,7 +42,7 @@ contexts:
         - include: block_cs
 
   block_cs:
-    - match: '<%[=#:]?'
+    - match: '<%[=#:$]?'
       scope: punctuation.section.embedded.begin.cshtml
       push:
         - clear_scopes: true
