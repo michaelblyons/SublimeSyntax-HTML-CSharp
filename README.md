@@ -11,7 +11,7 @@
 
 ### Functionality
 
-- Hotkey comment/uncomment server-side comments
+- Hotkey comment/uncomment server-side comments (`Ctrl`+`/` or `Cmd`+`/`)
 - Snippets for `<%` expressions (Try typing `exp`)
     + These are subject to change.
 - Snippets for some directives (Try `page` or `import`)
@@ -41,8 +41,6 @@
         var foo = "bar%>";
       %>
       ```
-
-- C# highlighting is only as good as the core C# definition.
 
 
 [st3]: https://www.sublimetext.com/
