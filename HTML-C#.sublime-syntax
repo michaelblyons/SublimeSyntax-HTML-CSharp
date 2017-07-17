@@ -16,7 +16,7 @@ contexts:
     - match: '<%@' # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
       scope: punctuation.section.embedded.begin.cshtml
       push:
-        - match: '\b(\w+)\s*(=)\s*((")[^"]+("))\s*'
+        - match: '\b(\w+)\s*(=)\s*((")[^"]*("))\s*'
           captures:
             1: entity.other.attribute-name.cshtml
             2: punctuation.separator.key-value.cshtml

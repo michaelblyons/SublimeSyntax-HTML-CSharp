@@ -1,12 +1,18 @@
 // SYNTAX TEST "Packages/HTML-C#/HTML-C#.sublime-syntax"
 
-<%@ Page Debug="true" AutoEventWireup="true" Inherits="System.Web.UI.Page" %>
+<%@ Page Debug="true" Title="" AutoEventWireup="true" Inherits="System.Web.UI.Page" %>
 // <-                 punctuation.section.embedded.begin.cshtml
 //  ^^^^              constant.language.processing-directive.cshtml
 //       ^^^^^        entity.other.attribute-name.cshtml
+//            ^       punctuation.separator.key-value.cshtml
 //             ^^^^^^ string.quoted.double.cshtml
 //             ^      punctuation.definition.string.begin.cshtml
 //                  ^ punctuation.definition.string.end.cshtml
+//                    ^^^^^    entity.other.attribute-name.cshtml
+//                         ^   punctuation.separator.key-value.cshtml
+//                          ^^ string.quoted.double.cshtml
+//                          ^  punctuation.definition.string.begin.cshtml
+//                           ^ punctuation.definition.string.end.cshtml
 <%@ Register TagPrefix="my" Namespace="Foo.Bar" Assembly="Solution.LinkLibrary" %>
 // <-                 punctuation.section.embedded.begin.cshtml
 //  ^^^^^^^^          constant.language.processing-directive.cshtml
@@ -26,9 +32,9 @@
     var bullion = true;
 
     protected void Page_Load(object sender, EventArgs args)
-    // ^^^^^^ storage.modifier.source.cs
-    //        ^^^^ storage.type.source.cs
-    //             ^^^^^^^^^ meta.method.source.cs
+    // ^^^^^^ storage.modifier.access
+    //        ^^^^ storage.type
+    //             ^^^^^^^^^ entity.name.function
     {
         var foo = "bar";
         for(int i = 0; i < 10; i++)
@@ -61,7 +67,7 @@
     // <-         punctuation.section.embedded.begin.cshtml - source.cs.embedded.html
     // ^^^^^^^^^^ source.cs.embedded.html
         { %>
-    //  ^         punctuation.section.block.begin.source.cs
+    //  ^         punctuation.section.block.begin
     //    ^^      punctuation.section.embedded.end.cshtml
     //    ^^^^^   - source.cs.embedded.html
     <p>Baz</p>
@@ -73,7 +79,7 @@
     // ^^^^       entity.other.attribute-name.html - source.cs.embedded.html
     //       ^^^  punctuation.section.embedded.begin.cshtml - source.cs.embedded.html
     //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^      source.cs.embedded.html
-    //                            ^^^^^^^^^^^^^^^^        string.quoted.double.source.cs
+    //                            ^^^^^^^^^^^^^^^^        string.quoted.double.cs
     //                                              ^^^^^ - source.cs.embedded.html
 
     <p><%= variable %></p>
