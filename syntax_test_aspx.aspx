@@ -19,13 +19,18 @@
 //                                              ^^^^^^^^         entity.other.attribute-name.cshtml - constant.language.processing-directive.cshtml
 //                                                         ^^^^  string.quoted.double.cshtml
 
-<script runat="server">
+<script runat="server" language="C#">
 // ^^^^                   entity.name.tag.script.html - source.cs.embedded.html
 //      ^^^^^             constant.language.processing-directive.cshtml
 //            ^^^^^^^^    string.quoted.double.cshtml
 //            ^           punctuation.definition.string.begin.cshtml
 //                   ^    punctuation.definition.string.end.cshtml
-//                      ^ source.cs.embedded.html
+//                     ^^^^^^^^        entity.other.attribute-name
+//                             ^       punctuation.separator.key-value
+//                              ^^^^   string.quoted.double
+//                              ^      punctuation.definition.string.begin
+//                                 ^   punctuation.definition.string.end
+//                                   ^ source.cs.embedded.html
     var variable = "value";
     // <- source.cs.embedded.html
     var url = "http://example.com";

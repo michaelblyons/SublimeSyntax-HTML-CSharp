@@ -85,6 +85,7 @@ contexts:
           with_prototype:
              - match: (?i)(?=</script)
                pop: true
+        - include: scope:text.html.basic#tag-stuff
 
   comments:
     - match: <%--
