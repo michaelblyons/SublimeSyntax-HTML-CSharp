@@ -58,7 +58,7 @@ contexts:
                pop: true
 
   script_tag_cs:
-    - match: "(<)((?i:script))[^>]+(runat)(=)(?:((')server('))|((\")server(\")))"
+    - match: (<)((?i:script))[^>]+(runat)(=)(?:((')server('))|((")server(")))
       captures:
         1: punctuation.definition.tag.begin.html
         2: entity.name.tag.script.html
@@ -81,7 +81,7 @@ contexts:
         - match: '>'
           scope: punctuation.definition.tag.end.html
           push:
-            - include: 'scope:source.cs'
+            - include: scope:source.cs
           with_prototype:
              - match: (?i)(?=</script)
                pop: true
@@ -91,6 +91,6 @@ contexts:
       scope: comment.block.begin.cshtml
       push:
         - meta_scope: comment.block.cshtml
-        - match: "--%>"
+        - match: '--%>'
           scope: comment.block.end.cshtml
           pop: true
