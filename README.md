@@ -30,15 +30,29 @@
 
 - Control structures in code blocks separated by HTML are not scoped correctly. For example, the `}` below does not know that it is a `punctuation.section.block.end.source.cs`, even though it is matched to the `{` above.
 
-      <% if(condition){ %>
-        <p>show me</p>
-      <% } %>
+    ```
+    <% if(condition){ %>
+      <p>show me</p>
+    <% } %>
+    ```
 
 - No recognition of excluded scopes to return to HTML. In the snippet below, the C# scope ends immediately after `"bar`.
 
-      <%
-        var foo = "bar%>";
-      %>
+    ```
+    <%
+      var foo = "bar%>";
+    %>
+    ```
+
+- Javascript does not always recognize that `Response.Write` output is coming. The `)` is marked as invalid and the conditional scopes are never terminated.
+
+    ```
+    <script type="text/javascript">
+    if (true && <%= list.Any() %>) {
+       doStuff();
+    }
+    </script>
+    ```
 
 [pkg]: https://packagecontrol.io/packages/HTML%20(C%23)
 [st3]: https://www.sublimetext.com/
