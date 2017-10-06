@@ -1,8 +1,0 @@
-<snippet>
-	<tabTrigger>exph</tabTrigger>
-	<scope>text.html.cshtml</scope>
-	<description>HTML-Escaped Expression</description>
-	<content><![CDATA[
-<%: ${1:Object} %>
-]]></content>
-</snippet>

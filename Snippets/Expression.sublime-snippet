@@ -1,8 +1,0 @@
-<snippet>
-	<tabTrigger>exp</tabTrigger>
-	<scope>text.html.cshtml</scope>
-	<description>Displaying Expression</description>
-	<content><![CDATA[
-<%= ${1:Object} %>
-]]></content>
-</snippet>

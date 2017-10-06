@@ -1,8 +1,0 @@
-<snippet>
-	<tabTrigger>control</tabTrigger>
-	<scope>text.html.cshtml</scope>
-	<description>Control Directive</description>
-	<content><![CDATA[
-<%@ Page${1: Language="C#"}${2: Inherits="${3:System.Web.UI.UserControl}"} %>
-]]></content>
-</snippet>

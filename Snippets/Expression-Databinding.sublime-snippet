@@ -1,8 +1,0 @@
-<snippet>
-	<tabTrigger>expd</tabTrigger>
-	<scope>text.html.cshtml</scope>
-	<description>Data-binding Expression</description>
-	<content><![CDATA[
-<%# Eval("${1:Property}") %>
-]]></content>
-</snippet>
