@@ -77,7 +77,8 @@
     //    ^^^^^   - source.cs.embedded.html
     <p>Baz</p>
     <% } %>
-    // ^          source.cs.embedded.html
+    //^^^         source.cs.embedded.html
+    // ^          punctuation.section.block.end
     //     ^^^    - source.cs.embedded.html
 
     <a href="<%= bullion ? url : "http://other.com" %>">link</a>

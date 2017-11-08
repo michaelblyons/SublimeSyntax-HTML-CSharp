@@ -28,11 +28,13 @@
 
 - "Goto Anything" support is poor.
 
-- Control structures in code blocks separated by HTML are not scoped correctly. For example, the `}` below does not know that it is a `punctuation.section.block.end.source.cs`, even though it is matched to the `{` above.
+- Control structures in code blocks separated by HTML are not scoped correctly. For example, the `else` below does not know that it is matched to the `if` above.
 
     ```
     <% if(condition){ %>
       <p>show me</p>
+    <% } else { %>
+      <p>me instead</p>
     <% } %>
     ```
 

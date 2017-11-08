@@ -52,6 +52,8 @@ contexts:
           pop: true
         - match: ''
           push:
+            - match: '}'
+              scope: punctuation.section.block.end.cs
             - include: 'scope:source.cs'
           with_prototype:
              - match: '(?=%>)'
