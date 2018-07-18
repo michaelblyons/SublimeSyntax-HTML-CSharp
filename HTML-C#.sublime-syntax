@@ -44,20 +44,16 @@ contexts:
   block_cs:
     - match: '<%[=#:$]?'
       scope: punctuation.section.embedded.begin.cshtml
-      push:
-        - clear_scopes: true
-        - meta_content_scope: source.cs.embedded.html
-        - match: '%>'
-          scope: punctuation.section.embedded.end.cshtml
-          pop: true
-        - match: ''
-          push:
-            - match: '}'
-              scope: punctuation.section.block.end.cs
-            - include: 'scope:source.cs'
-          with_prototype:
-             - match: '(?=%>)'
-               pop: true
+      embed: inside_block_cs
+      embed_scope: source.cs.embedded.html
+      escape: '%>'
+      escape_captures:
+        0: punctuation.section.embedded.end.cshtml
+
+  inside_block_cs:
+    - match: '}'
+      scope: punctuation.section.block.end.cs
+    - include: scope:source.cs
 
   script_tag_cs:
     - match: (<)((?i:script))[^>]+(runat)(=)(?:((')server('))|((")server(")))
@@ -82,11 +78,8 @@ contexts:
           pop: true
         - match: '>'
           scope: punctuation.definition.tag.end.html
-          push:
-            - include: scope:source.cs
-          with_prototype:
-             - match: (?i)(?=</script)
-               pop: true
+          embed: scope:source.cs
+          escape: (?i)(?=</script)
         - include: scope:text.html.basic#tag-stuff
 
   comments:
