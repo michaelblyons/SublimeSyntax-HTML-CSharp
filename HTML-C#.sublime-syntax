@@ -57,7 +57,7 @@ contexts:
     - include: scope:source.cs
 
   script_tag_cs:
-    - match: (<)((?i:script))[^>]+(runat)(=)(?:((')server('))|((")server(")))
+    - match: (?i)(<)(script)[^>]+(runat)(=)(?:((')server('))|((")server(")))
       captures:
         1: punctuation.definition.tag.begin.html
         2: entity.name.tag.script.html
