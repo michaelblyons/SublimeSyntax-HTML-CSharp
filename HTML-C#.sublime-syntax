@@ -5,6 +5,7 @@ name: HTML (C#)
 file_extensions:
   - aspx
   - ascx
+  - asax
   - cshtml
   - master
 scope: text.html.cshtml
@@ -23,7 +24,7 @@ contexts:
             3: string.quoted.double.cshtml
             4: punctuation.definition.string.begin.cshtml
             5: punctuation.definition.string.end.cshtml
-        - match: '\s*(Page|Control|Import|Implements|Register|Assembly|OutputCache|Reference|Master|PreviousPageType|MasterType|WebHandler)\b(?:(=)"([^"]+)")?'
+        - match: '\s*(Application|Page|Control|Import|Implements|Register|Assembly|OutputCache|Reference|Master|PreviousPageType|MasterType|WebHandler)\b(?:(=)"([^"]+)")?'
           captures:
             1: constant.language.processing-directive.cshtml
             2: punctuation.separator.key-value.cshtml
