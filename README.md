@@ -18,11 +18,13 @@
 - Snippets for some directives (Try `page` or `import`)
     + Default attributes are subject to change.
 - Snippets may require <kbd>Ctrl</kbd>+<kbd>space</kbd>, depending on your environment.
+- Some autocomplete within directives.
 
 ## Future support (maybe)
 
 - Razor syntax
-- Identify all relevant attributes of directives
+- Identify more attributes of directives
+- Autocomplete ASP builtins
 
 ## Known issues:
 
