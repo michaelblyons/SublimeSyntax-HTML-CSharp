@@ -1,0 +1,57 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: .Net Web Handler (ASHX)
+first_line_match: <%@\s*WebHandler
+file_extensions:
+  - ashx
+scope: source.cs.ashx
+contexts:
+  main:
+    - match: ''
+      set: scope:source.cs
+      with_prototype:
+        - include: directive-type
+        - include: directive
+
+  directive-generic-attribute:
+    - match: '\b(\w+)\s*(=)\s*((")[^"]*("))\s*'
+      captures:
+        1: entity.other.attribute-name.cshtml
+        2: punctuation.separator.key-value.cshtml
+        3: string.quoted.double.cshtml
+        4: punctuation.definition.string.begin.cshtml
+        5: punctuation.definition.string.end.cshtml
+
+  directive-end:
+    - match: '%>'
+      scope: punctuation.section.embedded.end.cshtml
+      pop: true
+
+  directive:
+    # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
+    - match: '<%@'
+      scope: punctuation.section.embedded.begin.cshtml
+      set:
+        - meta_scope: meta.block.processing-directive.cshtml
+        - include: directive-type
+        - include: directive-other
+        - include: directive-end
+
+  directive-type:
+    # https://msdn.microsoft.com/en-us/library/ms366713(v=vs.100).aspx
+    - match: '\b(?i:WebHandler)\b'
+      scope: constant.language.processing-directive.type.cshtml entity.name.class.cs
+      set:
+        - meta_scope: meta.block.processing-directive.contents.type.cshtml
+        - include: directive-generic-attribute
+        - include: directive-end
+
+  directive-other:
+    # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
+    - match: '\b(?i:Import|Implements|Assembly|OutputCache|Reference)\b'
+      scope: punctuation.section.embedded.begin.cshtml
+      push:
+        - meta_scope: meta.block.processing-directive.contents.cshtml
+        - include: directive-generic-attribute
+        - include: directive-end
