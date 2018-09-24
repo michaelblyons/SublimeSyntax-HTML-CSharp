@@ -2,7 +2,7 @@
 
 <%@ Page Debug="true" Title="" AutoEventWireup="true" Inherits="System.Web.UI.Page" %>
 // <-                 punctuation.section.embedded.begin.cshtml
-//  ^^^^              constant.language.processing-directive.cshtml
+//  ^^^^              constant.language.processing-directive.cshtml entity.name.class.cs
 //       ^^^^^        entity.other.attribute-name.cshtml
 //            ^       punctuation.separator.key-value.cshtml
 //             ^^^^^^ string.quoted.double.cshtml
@@ -13,11 +13,38 @@
 //                          ^^ string.quoted.double.cshtml
 //                          ^  punctuation.definition.string.begin.cshtml
 //                           ^ punctuation.definition.string.end.cshtml
+
+<%@ Import Namespace="System.Net" %>
+// <-                 punctuation.section.embedded.begin.cshtml
+//  ^^^^^^            constant.language.processing-directive.cshtml
+//         ^^^^^^^^^  entity.other.attribute-name.cshtml
+//                  ^ punctuation.separator.key-value.cshtml
+//                   ^^^^^^^^^^^^    string.quoted.double.cshtml
+//                   ^               punctuation.definition.string.begin.cshtml
+//                    ^^^^^^^^^^     meta.path.cs
+//                              ^    punctuation.definition.string.end.cshtml
+//                                ^^ punctuation.section.embedded.end.cshtml
+
 <%@ Register TagPrefix="my" Namespace="Foo.Bar" Assembly="Solution.LinkLibrary" %>
 // <-                 punctuation.section.embedded.begin.cshtml
 //  ^^^^^^^^          constant.language.processing-directive.cshtml
 //                                              ^^^^^^^^         entity.other.attribute-name.cshtml - constant.language.processing-directive.cshtml
 //                                                         ^^^^  string.quoted.double.cshtml
+
+<%@ Implements Interface="IFooPage" %>
+//  ^^^^^^^^^^                     constant.language.processing-directive.cshtml
+//             ^^^^^^^^^           entity.other.attribute-name.cshtml
+//                        ^^^^^^^^ entity.other.inherited-class.cs
+
+<%@ OutputCache Duration="120" VaryByControl="ControlName" NoStore="true" %>
+//  ^^^^^^^^^^^               constant.language.processing-directive.caching.cshtml
+//              ^^^^^^^^      entity.other.attribute-name.cshtml
+//                        ^^^ constant.numeric.integer.cshtml
+//                                                                  ^^^^ constant.language.boolean.cshtml
+
+<%@ Foo="bar" %>
+//  ^^^      entity.other.attribute-name.cshtml
+//       ^^^ string.quoted.double.cshtml
 
 <script runat="server" language="C#">
 // ^^^^                   entity.name.tag.script.html - source.cs.embedded.html

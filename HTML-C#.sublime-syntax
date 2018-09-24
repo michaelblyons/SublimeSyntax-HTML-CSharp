@@ -13,50 +13,165 @@ contexts:
   main:
     - include: html
 
+  directive-generic-attribute:
+    - match: '\b(\w+)\s*(?:(=)\s*((")[^"]*("))?)?\s*'
+      captures:
+        1: entity.other.attribute-name.cshtml
+        2: punctuation.separator.key-value.cshtml
+        3: string.quoted.double.cshtml
+        4: punctuation.definition.string.begin.cshtml
+        5: punctuation.definition.string.end.cshtml
+
+  directive-end:
+    - match: '%>'
+      scope: punctuation.section.embedded.end.cshtml
+      pop: true
+
   directive:
-    - match: '<%@' # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
+    # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
+    - match: '<%@'
       scope: punctuation.section.embedded.begin.cshtml
-      push:
-        - match: '\b(\w+)\s*(=)\s*((")[^"]*("))\s*'
+      set:
+        - meta_scope: meta.block.processing-directive.cshtml
+        - include: directive-type
+        - include: directive-import
+        - include: directive-implements
+        - include: directive-reference
+        - include: directive-outputcache
+        - include: directive-other
+        # Blank directives are considered to be "Page" or "Control" by .Net
+        - include: directive-generic-attribute
+        - include: directive-end
+
+  directive-type:
+    # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
+    - match: '\b(?i:Application|Page|Control|Master)\b'
+      scope: constant.language.processing-directive.cshtml entity.name.class.cs
+      set:
+        - meta_scope: meta.block.processing-directive.contents.type.cshtml
+        - include: directive-generic-attribute
+        - include: directive-end
+
+  directive-import:
+    # https://msdn.microsoft.com/en-us/library/eb44kack(v=vs.100).aspx
+    - match: '\b(?i:Import)\b'
+      scope: constant.language.processing-directive.cshtml
+      set:
+        - meta_scope: meta.block.processing-directive.contents.import.cshtml
+        - match: '\b(?i:(Namespace))\s*(=)\s*((")([^"]*)("))'
           captures:
             1: entity.other.attribute-name.cshtml
             2: punctuation.separator.key-value.cshtml
             3: string.quoted.double.cshtml
             4: punctuation.definition.string.begin.cshtml
-            5: punctuation.definition.string.end.cshtml
-        - match: '\s*(Application|Page|Control|Import|Implements|Register|Assembly|OutputCache|Reference|Master|PreviousPageType|MasterType|WebHandler)\b(?:(=)"([^"]+)")?'
+            5: meta.path.cs
+            6: punctuation.definition.string.end.cshtml
+        - include: directive-end
+
+  directive-implements:
+    # https://msdn.microsoft.com/en-us/library/cbsf6k72(v=vs.100).aspx
+    - match: '\b(?i:(Implements))\b'
+      scope: constant.language.processing-directive.cshtml
+      set:
+        - meta_scope: meta.block.processing-directive.contents.implements.cshtml
+        - match: '\b(?i:(Interface))\s*(=)\s*((")([^"]*)("))'
           captures:
-            1: constant.language.processing-directive.cshtml
+            1: entity.other.attribute-name.cshtml
             2: punctuation.separator.key-value.cshtml
             3: string.quoted.double.cshtml
-        - match: '%>'
-          scope: punctuation.section.embedded.end.cshtml
-          pop: true
+            4: punctuation.definition.string.begin.cshtml
+            5: entity.other.inherited-class.cs
+            6: punctuation.definition.string.end.cshtml
+        - include: directive-end
+
+  directive-reference:
+    # https://msdn.microsoft.com/en-us/library/w70c655a(v=vs.100).aspx
+    - match: '\b(?i:(Reference))\b'
+      scope: constant.language.processing-directive.reference.cshtml
+      set:
+        - meta_scope: meta.block.processing-directive.contents.reference.cshtml
+        - match: '\b(?i:(Page|Control|VirtualPath))\s*(=)\s*((")([^"]*)("))'
+          captures:
+            1: entity.other.attribute-name.cshtml
+            2: punctuation.separator.key-value.cshtml
+            3: string.quoted.double.cshtml
+            4: punctuation.definition.string.begin.cshtml
+            5: meta.path.cs
+            6: punctuation.definition.string.end.cshtml
+        - include: directive-end
+
+  directive-outputcache:
+    # https://msdn.microsoft.com/en-us/library/hdxfb6cy(v=vs.100).aspx
+    - match: '\b(?i:(OutputCache))\b'
+      scope: constant.language.processing-directive.caching.cshtml
+      set:
+        - meta_scope: meta.block.processing-directive.contents.outputcache.cshtml
+        - match: '\b(?i:(Duration))\s*(=)\s*((")(?:(\d+)|[^"]*)("))'
+          captures:
+            1: entity.other.attribute-name.cshtml
+            2: punctuation.separator.key-value.cshtml
+            3: string.quoted.double.cshtml
+            4: punctuation.definition.string.begin.cshtml
+            5: constant.numeric.integer.cshtml
+            6: punctuation.definition.string.end.cshtml
+        - match: '\b(?i:(NoStore|Shared))\s*(=)\s*((")(?i:(true|false)|[^"]*)("))'
+          captures:
+            1: entity.other.attribute-name.cshtml
+            2: punctuation.separator.key-value.cshtml
+            3: string.quoted.double.cshtml
+            4: punctuation.definition.string.begin.cshtml
+            5: constant.language.boolean.cshtml
+            6: punctuation.definition.string.end.cshtml
+        - match: '\b(?i:(Location))\s*(=)\s*((")(?i:(Any|Client|Downstream|Server|None|ServerAndClient)|[^"]*)("))'
+          captures:
+            1: entity.other.attribute-name.cshtml
+            2: punctuation.separator.key-value.cshtml
+            3: string.quoted.double.cshtml
+            4: punctuation.definition.string.begin.cshtml
+            5: meta.enum.cache-location.cshtml
+            6: punctuation.definition.string.end.cshtml
+        - match: '\b(?i:(CacheProfile|SqlDependency|ProviderName|VaryBy(?:Control|Custom|Header|Param|ContentEncoding)))\s*(=)\s*((")([^"]*)("))'
+          captures:
+            1: entity.other.attribute-name.cshtml
+            2: punctuation.separator.key-value.cshtml
+            3: string.quoted.double.cshtml
+            4: punctuation.definition.string.begin.cshtml
+            5: meta.path.cs
+            6: punctuation.definition.string.end.cshtml
+        - include: directive-end
+
+  directive-other:
+    # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
+    - match: '\b(Register|Assembly|PreviousPageType|MasterType)\b'
+      scope: constant.language.processing-directive.cshtml
+      set:
+        - include: directive-generic-attribute
+        - include: directive-end
 
   html:
     - match: ''
       set: scope:text.html.basic
       with_prototype:
         - include: comments
-        - include: script_tag_cs
+        - include: script-tag-cs
         - include: directive
-        - include: block_cs
+        - include: block-cs
 
-  block_cs:
+  block-cs:
     - match: '<%[=#:$]?'
       scope: punctuation.section.embedded.begin.cshtml
-      embed: inside_block_cs
+      embed: inside-block-cs
       embed_scope: source.cs.embedded.html
       escape: '%>'
       escape_captures:
         0: punctuation.section.embedded.end.cshtml
 
-  inside_block_cs:
+  inside-block-cs:
     - match: '}'
       scope: punctuation.section.block.end.cs
     - include: scope:source.cs
 
-  script_tag_cs:
+  script-tag-cs:
     - match: (?i)(<)(script)[^>]+(runat)(=)(?:((')server('))|((")server(")))
       captures:
         1: punctuation.definition.tag.begin.html
