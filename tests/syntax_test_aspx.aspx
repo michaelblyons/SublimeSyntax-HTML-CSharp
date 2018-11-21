@@ -52,6 +52,7 @@
 //            ^^^^^^^^    string.quoted.double.cshtml
 //            ^           punctuation.definition.string.begin.cshtml
 //                   ^    punctuation.definition.string.end.cshtml
+//                    ^^^^^^^^^^^^^^^  - source.cs.embedded.html
 //                     ^^^^^^^^        entity.other.attribute-name
 //                             ^       punctuation.separator.key-value
 //                              ^^^^   string.quoted.double
@@ -74,8 +75,12 @@
             foo += foo;
         }
     }
-</script>
-// ^^^^^^^^^ - source.cs.embedded.html
+   </script>
+// <- source.cs.embedded.html
+// ^^         punctuation.definition.tag.begin.html
+//   ^^^^^^   entity.name.tag.html
+//         ^  punctuation.definition.tag.end.html
+// ^^^^^^^^^^ - source.cs.embedded.html
 
 <!DOCTYPE html>
 <html>

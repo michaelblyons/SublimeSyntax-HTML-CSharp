@@ -1,6 +1,6 @@
 {
     // https://msdn.microsoft.com/en-us/library/hdxfb6cy(v=vs.100).aspx
-    "scope": "text.html.cshtml meta.block.processing-directive.contents.outputcache",
+    "scope": "embedding.cshtml meta.block.processing-directive.contents.outputcache",
     "completions": [
         { "trigger": "Duration\tOutputCache", "contents": "Duration=\"${1:120}\" " },
         { "trigger": "Location\tOutputCache", "contents": "Location=\"${1:Any | Client | Downstream | Server | None | ServerAndClient}\" " },
@@ -12,7 +12,7 @@
         { "trigger": "VaryByContentEncoding\tOutputCache", "contents": "VaryByContentEncoding=\"${1:Encoding}\" " },
         { "trigger": "CacheProfile\tOutputCache", "contents": "CacheProfile=\"${1:CacheProfileName}\" " },
         { "trigger": "NoStore\tOutputCache", "contents": "NoStore=\"${1:true}\" " },
-        { "trigger": "SqlDependency\tOutputCache", "contents": "SqlDependency=\"${1:${2:DatabaseName}:${2:TableName}\" " },
+        { "trigger": "SqlDependency\tOutputCache", "contents": "SqlDependency=\"${1:${2:DatabaseName}:${3:TableName}}\" " },
         { "trigger": "ProviderName\tOutputCache", "contents": "ProviderName=\"${1:ProviderName}\" " },
     ]
 }

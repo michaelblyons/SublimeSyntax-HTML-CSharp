@@ -1,5 +1,5 @@
 {
-    "scope": "text.html.cshtml - source.cs",
+    "scope": "embedding.cshtml - source.cs",
     "completions": [
         // Expressions
         { "trigger": "exp\t<%= … %>", "contents": "<%= ${1:Object} %>"},
