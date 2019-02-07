@@ -1,0 +1,210 @@
+<!-- SYNTAX TEST "Packages/HTML (C#)/razor.sublime-syntax" -->
+<!-- https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-2.1 -->
+@using Michael.Blyons.Example
+<!-- <- punctuation.section.embedded.line - source.cs.embedded -->
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded -->
+<!-- ^ keyword.other -->
+<!--                         ^ - source.cs.embedded -->
+@model IEnumerable<SomeNamespace.SomeType>
+<!-- <- punctuation.section.embedded.line - source.cs.embedded -->
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded -->
+<!-- ^ keyword.other -->
+<!--   ^^^^^^^^^^^ support.type -->
+<!--              ^ punctuation.definition.generic.begin -->
+<!--               ^^^^^^^^^^^^^ support.type -->
+<!--                            ^ punctuation.accessor.dot.namespace -->
+<!--                             ^^^^^^^^ support.type -->
+<!--                                     ^ punctuation.definition.generic.end -->
+<!--                                      ^ - source.cs.embedded -->
+
+     <p>@@Username</p>
+<!-- ^^^ meta.tag.block.any -->
+<!--    ^^ constant.character.escape -->
+<!--              ^^^^ meta.tag.block.any -->
+
+     <p>@Username</p>
+<!-- ^^^ meta.tag.block.any -->
+<!--    ^ punctuation.section.embedded.line -->
+<!--     ^^^^^^^^ source.cs.embedded variable.other -->
+<!--             ^^^^ meta.tag.block.any -->
+
+<a href="mailto:Support@contoso.com">Support@contoso.com</a>
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.inline.a - source.cs -->
+<!--                                 ^^^^^^^^^^^^^^^^^^^^^^^ - source.cs -->
+<!--                                                    ^^^^ meta.tag.inline.a -->
+
+<p>@DateTime.Now</p>
+<!-- ^^^^^^^ source.cs.embedded variable.other -->
+<!--        ^ source.cs.embedded punctuation.accessor.dot -->
+<!--         ^^^ source.cs.embedded variable.other -->
+<!--            ^^^ meta.tag.block.any -->
+<p>@DateTime.IsLeapYear(2016)</p>
+<!-- ^^^^^^^ source.cs.embedded variable.other -->
+<!--        ^ source.cs.embedded punctuation.accessor.dot -->
+<!--         ^^^^^^^^^^ source.cs.embedded meta.function-call variable.function -->
+<!--                   ^ punctuation.section.group.begin -->
+<!--                    ^^^^ constant.numeric.integer.decimal -->
+<!--                        ^ punctuation.section.group.end -->
+<!--                         ^^^ meta.tag.block.any -->
+
+     <p>@(GenericMethod<int>())</p>
+<!--    ^^ punctuation.section.embedded.begin -->
+<!--      ^^^^^^^^^^^^^ source.cs.embedded meta.function-call variable.function -->
+<!--                   ^ punctuation.definition.generic.begin -->
+<!--                    ^^^ storage.type -->
+<!--                       ^ punctuation.definition.generic.end -->
+<!--                        ^ punctuation.section.group.begin -->
+<!--                         ^ punctuation.section.group.end -->
+<!--                          ^ punctuation.section.embedded.end -->
+<!--                           ^^^ meta.tag.block.any -->
+
+@("<span>Hello World</span>")
+<!-- <- punctuation.section.embedded.begin -->
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double -->
+<!--                        ^ punctuation.section.embedded.end -->
+@Html.Raw("<span>Hello World</span>")
+<!--  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call -->
+<!--  ^^^ variable.function -->
+<!-- <- punctuation.section.embedded.line -->
+<!--      ^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double -->
+<!--                                ^ punctuation.section.group.end -->
+
+     @if (value % 2 == 0)
+<!-- ^ punctuation.section.embedded -->
+<!--  ^^ keyword.control.conditional.if -->
+{
+<!-- <- meta.block punctuation.section.block.begin -->
+    <p>The value was even.</p>
+<!--^^^ meta.tag.block.any -->
+}
+else if (value >= 1337)
+<!-- <- keyword.control.conditional.elseif -->
+{
+    <p>The value is large.</p>
+}
+else
+<!-- <- keyword.control.conditional.else -->
+{
+    <p>The value is odd and small.</p>
+}
+
+@switch (value)
+{
+    case 1:
+<!--^^^^ keyword.control.switch.case -->
+        <p>The value is 1!</p>
+        break;
+    case 1337:
+        <p>Your number is 1337!</p>
+        break;
+    default:
+        <p>Your number wasn't 1 or 1337.</p>
+        break;
+<!--    ^^^^^ keyword.control.flow.break -->
+}
+@*
+@for (var i = 0; i < people.Length; i++)
+<!-- <- comment.block - punctuation -->
+{
+    var person = people[i];
+    <text>Name: @person.Name</text>
+}
+
+@for (var i = 0; i < people.Length; i++)
+{
+    var person = people[i];
+    @:Name: @person.Name
+}     *@
+<!--  ^^ comment.block punctuation.definition.comment.end -->
+
+@{
+    var quote = "The future depends on what you do today. - Mahatma Gandhi";
+}
+
+<p>@quote</p>
+
+@{
+    quote = "Hate cannot drive out hate, only love can do that. - Martin Luther King, Jr.";
+}
+
+<p>@quote</p>
+
+@using (Html.BeginForm())
+{
+    <div>
+        email:
+<!-- TODO: what should the above be scoped as? -->
+        <input type="email" id="Email" value="">
+        <button>Register</button>
+    </div>
+}
+
+@try
+{
+    throw new InvalidOperationException("You did something invalid.");
+}
+catch (Exception ex)
+{
+    <p>The exception message: @ex.Message</p>
+}
+finally
+{
+    <p>The finally statement.</p>
+}
+
+@lock (SomeLock)
+{
+    // Do critical section work
+}
+
+@*
+    @{
+        /* C# comment */
+        // Another C# comment
+    }
+    <!-- HTML comment -->
+*@
+
+@functions {
+// <!-- ^^ keyword.other -->
+    public string GetHello()
+// <!-- ^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.functions -->
+// <!-- ^^ storage.modifier.access -->
+    {
+        return "Hello";
+    }
+}
+<!-- ^ - source.cs.embedded.functions -->
+
+<div>From method: @GetHello()</div>
+
+<form id="searchForm" action="@Url.Action("Search", "Controller")" method="post">
+<!-- TODO: scope @ constructs in HTML attribute values correctly -->
+    <div style="@(HtmlHelpers.DevModeEnabled(Request) ? "display: none;" : "")">
+    </div>
+</form>
+
+<article data-example="@example.ID">
+</article>
+
+@foreach (var item in Model)
+{
+    if (item.ShouldBeDisplayed)
+    {
+        <article data-id="@item.ID">
+        <!-- TODO: scope at constructs in HTML attribute values correctly even when inside a razor code block -->
+        </article>
+    }
+}
+
+@section Scripts {
+<!--     ^^^^^^^ entity.name.section -->
+    <script type="text/javascript" src="/scripts/main.js"></script>
+<!-- ^^^^^^ entity.name.tag.script -->
+
+    <script type="text/javascript">
+        function find() {
+            var val = $('@HtmlHelpers.Something').val();
+        }
+    </script>
+}

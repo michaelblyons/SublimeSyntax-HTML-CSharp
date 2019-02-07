@@ -1,0 +1,136 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: HTML Razor (C#)
+file_extensions:
+  - cshtml
+scope: embedding.cshtml.razor
+contexts:
+  main:
+    - include: html
+
+  html:
+    - match: ''
+      set: razor_html
+
+  razor-comments:
+    - match: '@\*'
+      scope: punctuation.definition.comment.begin.cshtml
+      push:
+        - meta_scope: comment.block.cshtml
+        - match: '\*@'
+          scope: punctuation.definition.comment.end.cshtml
+          pop: true
+
+  razor:
+    - include: razor-comments
+    - match: (@)(model)\b
+      captures:
+        1: punctuation.section.embedded.line.cshtml
+        2: source.cs.embedded.html keyword.other.cshtml
+      embed: scope:source.cs
+      embed_scope: source.cs.embedded.html
+      escape: $
+    - match: (@)(section)\b(?:\s+(\w+))?
+      captures:
+        1: punctuation.section.embedded.line.cshtml
+        2: source.cs.embedded.html keyword.other.cshtml
+        3: entity.name.section.cshtml
+      push:
+        - match: \{
+          scope: punctuation.section.block.begin.cshtml
+          set:
+            - match: \}
+              scope: punctuation.section.block.end.cshtml
+              pop: true
+            - include: razor_html
+    - match: (@)(functions)\b
+      captures:
+        1: punctuation.section.embedded.line.cshtml
+        2: source.cs.embedded.html keyword.other.cshtml
+      push:
+        - match: \{
+          scope: punctuation.section.block.begin.cshtml
+          set:
+            - meta_scope: source.cs.embedded.functions.cshtml
+            - match: \}
+              scope: punctuation.section.block.end.cshtml
+              pop: true
+            - include: scope:source.cs#code_block_in
+        - match: \s*(?!\{)(?=\S)
+          scope: invalid.illegal.expected-block.cshtml
+          pop: true
+    - match: (@)(using)\b(?!\s*\()
+      captures:
+        1: punctuation.section.embedded.line.cshtml
+        2: source.cs.embedded.html keyword.other.cshtml
+      embed: scope:source.cs
+      embed_scope: source.cs.embedded.html
+      escape: $
+    - match: '@@'
+      scope: constant.character.escape.cshtml
+    - match: (@)(?=(?:if|switch|for|foreach|using|try|lock)\b)
+      captures:
+        1: punctuation.section.embedded.cshtml
+      push:
+        - meta_content_scope: source.cs.embedded.html
+        - include: scope:source.cs#line_of_code
+        - match: ''
+          pop: true
+      with_prototype:
+        - include: razor_block_prototype
+    - match: '[\w-+]+@\w+' # ignore email addresses
+    - match: '@(?=(?:\w+\.)*\w+(?:[<\s]|$))'
+      scope: punctuation.section.embedded.line.cshtml
+      embed: scope:source.cs#line_of_code_in
+      embed_scope: source.cs.embedded.html
+      escape: $|(?=[<\s])
+    - match: '@(?=(?:\w+\.)*\w+\()'
+      scope: punctuation.section.embedded.line.cshtml
+      push:
+        - meta_content_scope: source.cs.embedded.html
+        - match: (?=[<\s])
+          pop: true
+        - include: scope:source.cs#line_of_code_in
+    - match: '@\('
+      scope: punctuation.section.embedded.begin.cshtml
+      push:
+        - meta_content_scope: source.cs.embedded.html
+        - match: \)
+          scope: punctuation.section.embedded.end.cshtml
+          pop: true
+        - include: scope:source.cs#line_of_code_in
+    #- match: '@(?=\w+(?:\.\w+)*)(?!\s*[+=|(])' # TODO: support a.b[2] etc.
+    #  comment: property/variable access
+    #  scope: punctuation.section.embedded.line.cshtml
+    #  #push: razor_block # TODO: stop at closing " etc.
+    - match: '@'
+      scope: punctuation.section.embedded.line.cshtml
+      push: razor_block
+
+  razor_block_prototype:
+    - match: (?=[<&])
+      embed: scope:text.html.basic
+      escape: (?=[@}]|$)
+    - match: '@:'
+      scope: punctuation.section.embedded.html.cshtml
+      embed: scope:text.html.basic
+      escape: $
+
+  eat_whitespace:
+    - match: (?=\S)
+      pop: true
+
+  razor_block:
+    - meta_content_scope: source.cs.embedded.html
+    - match: (?=[<\s])
+      pop: true
+    - match: (?=\S)(?!@)
+      push:
+        - include: scope:source.cs#line_of_code
+      with_prototype:
+        - include: razor_block_prototype
+
+  razor_html:
+    - include: razor
+    - include: scope:text.html.basic
