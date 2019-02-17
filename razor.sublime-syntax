@@ -11,7 +11,7 @@ contexts:
 
   html:
     - match: ''
-      set: razor_html
+      set: razor-html
 
   razor-comments:
     - match: '@\*'
@@ -43,7 +43,7 @@ contexts:
             - match: \}
               scope: punctuation.section.block.end.cshtml
               pop: true
-            - include: razor_html
+            - include: razor-html
     - match: (@)(functions)\b
       captures:
         1: punctuation.section.embedded.line.cshtml
@@ -78,7 +78,7 @@ contexts:
         - match: ''
           pop: true
       with_prototype:
-        - include: razor_block_prototype
+        - include: razor-block-prototype
     - match: '[\w-+]+@\w+' # ignore email addresses
     - match: '@(?=(?:\w+\.)*\w+(?:[<\s]|$))'
       scope: punctuation.section.embedded.line.cshtml
@@ -103,12 +103,12 @@ contexts:
     #- match: '@(?=\w+(?:\.\w+)*)(?!\s*[+=|(])' # TODO: support a.b[2] etc.
     #  comment: property/variable access
     #  scope: punctuation.section.embedded.line.cshtml
-    #  #push: razor_block # TODO: stop at closing " etc.
+    #  #push: razor-block # TODO: stop at closing " etc.
     - match: '@'
       scope: punctuation.section.embedded.line.cshtml
-      push: razor_block
+      push: razor-block
 
-  razor_block_prototype:
+  razor-block-prototype:
     - match: (?=[<&])
       embed: scope:text.html.basic
       escape: (?=[@}]|$)
@@ -117,11 +117,11 @@ contexts:
       embed: scope:text.html.basic
       escape: $
 
-  eat_whitespace:
+  eat-whitespace:
     - match: (?=\S)
       pop: true
 
-  razor_block:
+  razor-block:
     - meta_content_scope: source.cs.embedded.html
     - match: (?=[<\s])
       pop: true
@@ -129,8 +129,8 @@ contexts:
       push:
         - include: scope:source.cs#line_of_code
       with_prototype:
-        - include: razor_block_prototype
+        - include: razor-block-prototype
 
-  razor_html:
+  razor-html:
     - include: razor
     - include: scope:text.html.basic
