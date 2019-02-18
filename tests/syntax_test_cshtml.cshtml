@@ -18,8 +18,9 @@
 <!--                                      ^ - source.cs.embedded -->
 
      <p>@@Username</p>
-<!-- ^^^ meta.tag.block.any -->
+<!-- ^^^ text.html meta.tag.block.any -->
 <!--    ^^ constant.character.escape -->
+<!--      ^^^^^^^^^^^^^ text.html -->
 <!--              ^^^^ meta.tag.block.any -->
 
      <p>@Username</p>
@@ -31,6 +32,7 @@
 <a href="mailto:Support@contoso.com">Support@contoso.com</a>
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.inline.a - source.cs -->
 <!--                                 ^^^^^^^^^^^^^^^^^^^^^^^ - source.cs -->
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html -->
 <!--                                                    ^^^^ meta.tag.inline.a -->
 
 <p>@DateTime.Now</p>
@@ -49,7 +51,8 @@
 
      <p>@(GenericMethod<int>())</p>
 <!--    ^^ punctuation.section.embedded.begin -->
-<!--      ^^^^^^^^^^^^^ source.cs.embedded meta.function-call variable.function -->
+<!--      ^^^^^^^^^^^^^^^^^^^^ source.cs.embedded - text.html -->
+<!--      ^^^^^^^^^^^^^ meta.function-call variable.function -->
 <!--                   ^ punctuation.definition.generic.begin -->
 <!--                    ^^^ storage.type -->
 <!--                       ^ punctuation.definition.generic.end -->
@@ -60,7 +63,7 @@
 
 @("<span>Hello World</span>")
 <!-- <- punctuation.section.embedded.begin -->
-<!-- ^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double -->
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^ source.cs string.quoted.double - text.html -->
 <!--                        ^ punctuation.section.embedded.end -->
 @Html.Raw("<span>Hello World</span>")
 <!--  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call -->
@@ -70,8 +73,8 @@
 <!--                                ^ punctuation.section.group.end -->
 
      @if (value % 2 == 0)
-<!-- ^ punctuation.section.embedded -->
-<!--  ^^ keyword.control.conditional.if -->
+<!-- ^ punctuation.section.embedded - source.cs -->
+<!--  ^^ source.cs keyword.control.conditional.if - text.html -->
 {
 <!-- <- meta.block punctuation.section.block.begin -->
     <p>The value was even.</p>
@@ -119,7 +122,9 @@ else
 
 @{
     var quote = "The future depends on what you do today. - Mahatma Gandhi";
+<!-- ^^ source.cs.embedded - text.html -->
 }
+<!-- ^ text.html - source -->
 
 <p>@quote</p>
 

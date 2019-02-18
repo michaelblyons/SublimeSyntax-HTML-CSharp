@@ -52,6 +52,7 @@ contexts:
         - match: \{
           scope: punctuation.section.block.begin.cshtml
           set:
+            - clear_scopes: 1
             - meta_scope: source.cs.embedded.functions.cshtml
             - match: \}
               scope: punctuation.section.block.end.cshtml
@@ -73,6 +74,7 @@ contexts:
       captures:
         1: punctuation.section.embedded.cshtml
       push:
+        - clear_scopes: 1
         - meta_content_scope: source.cs.embedded.html
         - include: scope:source.cs#line_of_code
         - match: ''
@@ -95,6 +97,7 @@ contexts:
     - match: '@\('
       scope: punctuation.section.embedded.begin.cshtml
       push:
+        - clear_scopes: 1
         - meta_content_scope: source.cs.embedded.html
         - match: \)
           scope: punctuation.section.embedded.end.cshtml
@@ -122,6 +125,7 @@ contexts:
       pop: true
 
   razor-block:
+    - clear_scopes: 1
     - meta_content_scope: source.cs.embedded.html
     - match: (?=[<\s])
       pop: true
@@ -132,5 +136,6 @@ contexts:
         - include: razor-block-prototype
 
   razor-html:
+    - meta_content_scope: text.html.basic
     - include: razor
     - include: scope:text.html.basic
