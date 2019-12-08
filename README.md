@@ -20,9 +20,12 @@
 - Snippets may require <kbd>Ctrl</kbd>+<kbd>space</kbd>, depending on your environment.
 - Some autocomplete within directives.
 
+### Razor syntax
+
+Huge thank-you to @keith-hall for this!
+
 ## Future support (maybe)
 
-- Razor syntax
 - Identify more attributes of directives
 - Autocomplete ASP builtins
 
