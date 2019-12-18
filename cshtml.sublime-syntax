@@ -14,7 +14,7 @@ contexts:
     - include: html
 
   directive-generic-attribute:
-    - match: '\b(\w+)\s*(?:(=)\s*((")[^"]*("))?)?\s*'
+    - match: \b(\w+)\s*(?:(=)\s*((")[^"]*("))?)?\s*
       captures:
         1: entity.other.attribute-name.cshtml
         2: punctuation.separator.key-value.cshtml
@@ -29,7 +29,7 @@ contexts:
 
   directive:
     # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
-    - match: '<%@'
+    - match: <%@
       scope: punctuation.section.embedded.begin.cshtml
       set:
         - meta_scope: meta.block.processing-directive.cshtml
@@ -45,7 +45,7 @@ contexts:
 
   directive-type:
     # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
-    - match: '\b(?i:Application|Page|Control|Master)\b'
+    - match: \b(?i:Application|Page|Control|Master)\b
       scope: constant.language.processing-directive.cshtml entity.name.class.cs
       set:
         - meta_scope: meta.block.processing-directive.contents.type.cshtml
@@ -54,11 +54,11 @@ contexts:
 
   directive-import:
     # https://msdn.microsoft.com/en-us/library/eb44kack(v=vs.100).aspx
-    - match: '\b(?i:Import)\b'
+    - match: \b(?i:Import)\b
       scope: constant.language.processing-directive.cshtml
       set:
         - meta_scope: meta.block.processing-directive.contents.import.cshtml
-        - match: '\b(?i:(Namespace))\s*(=)\s*((")([^"]*)("))'
+        - match: \b(?i:(Namespace))\s*(=)\s*((")([^"]*)("))
           captures:
             1: entity.other.attribute-name.cshtml
             2: punctuation.separator.key-value.cshtml
@@ -70,11 +70,11 @@ contexts:
 
   directive-implements:
     # https://msdn.microsoft.com/en-us/library/cbsf6k72(v=vs.100).aspx
-    - match: '\b(?i:(Implements))\b'
+    - match: \b(?i:Implements)\b
       scope: constant.language.processing-directive.cshtml
       set:
         - meta_scope: meta.block.processing-directive.contents.implements.cshtml
-        - match: '\b(?i:(Interface))\s*(=)\s*((")([^"]*)("))'
+        - match: \b(?i:(Interface))\s*(=)\s*((")([^"]*)("))
           captures:
             1: entity.other.attribute-name.cshtml
             2: punctuation.separator.key-value.cshtml
@@ -86,11 +86,11 @@ contexts:
 
   directive-reference:
     # https://msdn.microsoft.com/en-us/library/w70c655a(v=vs.100).aspx
-    - match: '\b(?i:(Reference))\b'
+    - match: \b(?i:Reference)\b
       scope: constant.language.processing-directive.reference.cshtml
       set:
         - meta_scope: meta.block.processing-directive.contents.reference.cshtml
-        - match: '\b(?i:(Page|Control|VirtualPath))\s*(=)\s*((")([^"]*)("))'
+        - match: \b(?i:(Page|Control|VirtualPath))\s*(=)\s*((")([^"]*)("))
           captures:
             1: entity.other.attribute-name.cshtml
             2: punctuation.separator.key-value.cshtml
@@ -102,11 +102,11 @@ contexts:
 
   directive-outputcache:
     # https://msdn.microsoft.com/en-us/library/hdxfb6cy(v=vs.100).aspx
-    - match: '\b(?i:(OutputCache))\b'
+    - match: \b(?i:OutputCache)\b
       scope: constant.language.processing-directive.caching.cshtml
       set:
         - meta_scope: meta.block.processing-directive.contents.outputcache.cshtml
-        - match: '\b(?i:(Duration))\s*(=)\s*((")(?:(\d+)|[^"]*)("))'
+        - match: \b(?i:(Duration))\s*(=)\s*((")(?:(\d+)|[^"]*)("))
           captures:
             1: entity.other.attribute-name.cshtml
             2: punctuation.separator.key-value.cshtml
@@ -114,7 +114,7 @@ contexts:
             4: punctuation.definition.string.begin.cshtml
             5: constant.numeric.integer.cshtml
             6: punctuation.definition.string.end.cshtml
-        - match: '\b(?i:(NoStore|Shared))\s*(=)\s*((")(?i:(true|false)|[^"]*)("))'
+        - match: \b(?i:(NoStore|Shared))\s*(=)\s*((")(?i:(true|false)|[^"]*)("))
           captures:
             1: entity.other.attribute-name.cshtml
             2: punctuation.separator.key-value.cshtml
@@ -122,7 +122,7 @@ contexts:
             4: punctuation.definition.string.begin.cshtml
             5: constant.language.boolean.cshtml
             6: punctuation.definition.string.end.cshtml
-        - match: '\b(?i:(Location))\s*(=)\s*((")(?i:(Any|Client|Downstream|Server|None|ServerAndClient)|[^"]*)("))'
+        - match: \b(?i:(Location))\s*(=)\s*((")(?i:(Any|Client|Downstream|Server|None|ServerAndClient)|[^"]*)("))
           captures:
             1: entity.other.attribute-name.cshtml
             2: punctuation.separator.key-value.cshtml
@@ -130,7 +130,7 @@ contexts:
             4: punctuation.definition.string.begin.cshtml
             5: meta.enum.cache-location.cshtml
             6: punctuation.definition.string.end.cshtml
-        - match: '\b(?i:(CacheProfile|SqlDependency|ProviderName|VaryBy(?:Control|Custom|Header|Param|ContentEncoding)))\s*(=)\s*((")([^"]*)("))'
+        - match: \b(?i:(CacheProfile|SqlDependency|ProviderName|VaryBy(?:Control|Custom|Header|Param|ContentEncoding)))\s*(=)\s*((")([^"]*)("))
           captures:
             1: entity.other.attribute-name.cshtml
             2: punctuation.separator.key-value.cshtml
@@ -142,7 +142,7 @@ contexts:
 
   directive-other:
     # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
-    - match: '\b(Register|Assembly|PreviousPageType|MasterType)\b'
+    - match: \b(Register|Assembly|PreviousPageType|MasterType)\b
       scope: constant.language.processing-directive.cshtml
       set:
         - include: directive-generic-attribute
@@ -158,7 +158,7 @@ contexts:
         - include: block-cs
 
   block-cs:
-    - match: '<%[=#:$]?'
+    - match: <%[=#:$]?
       scope: punctuation.section.embedded.begin.cshtml
       embed: inside-block-cs
       embed_scope: source.cs.embedded.html
