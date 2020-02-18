@@ -34,16 +34,6 @@ Huge thank-you to @keith-hall for this!
 
 - "Goto Anything" support is poor.
 
-- Control structures in code blocks separated by HTML are not scoped correctly. For example, the `else` below does not know that it is matched to the `if` above.
-
-    ```
-    <% if(condition){ %>
-      <p>show me</p>
-    <% } else { %>
-      <p>me instead</p>
-    <% } %>
-    ```
-
 - No recognition of excluded scopes to return to HTML. In the snippet below, the C# scope ends immediately after `"bar`.
 
     ```
