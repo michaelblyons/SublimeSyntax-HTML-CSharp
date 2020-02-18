@@ -167,8 +167,14 @@ contexts:
         0: punctuation.section.embedded.end.cshtml
 
   inside-block-cs:
-    - match: '}'
+    - match: \}
       scope: punctuation.section.block.end.cs
+      push:
+        - match: \belse\b
+          scope: keyword.control.conditional.else.cs
+          pop: true
+        - match: (?=\S)
+          pop: true
     - include: scope:source.cs
 
   script-tag-cs:
