@@ -12,7 +12,8 @@
 
 ### Functionality
 
-- Hotkey comment/uncomment server-side comments (`Ctrl`+`/` or `Cmd`+`/`)
+- Hotkey comment/uncomment server-side comments (<kbd>Ctrl</kbd>+<kbd>/</kbd> or <kbd>Cmd</kbd>+<kbd>/</kbd>)
+
 - Snippets for `<%` expressions (Try typing `exp`)
     + These are subject to change.
 - Snippets for some directives (Try `page` or `import`)

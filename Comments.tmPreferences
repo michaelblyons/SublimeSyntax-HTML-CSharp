@@ -4,7 +4,10 @@
     <key>name</key>
     <string>Comments</string>
     <key>scope</key>
-    <string>embedding.cshtml</string>
+    <string>
+        embedding.cshtml,
+        embedding.cshtml text.html
+    </string>
     <key>settings</key>
     <dict>
         <key>shellVariables</key>
