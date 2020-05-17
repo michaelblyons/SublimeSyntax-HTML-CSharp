@@ -1,0 +1,8 @@
+<snippet>
+    <scope>embedding.cshtml.aspnet - source.cs</scope>
+    <tabTrigger>if</tabTrigger>
+    <content><![CDATA[<% if (${1:true}) { %>
+    ${2}
+<% } %>]]></content>
+    <description>&lt;% if (…) { %&gt;</description>
+</snippet>

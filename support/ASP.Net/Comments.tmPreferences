@@ -5,8 +5,8 @@
     <string>Comments</string>
     <key>scope</key>
     <string>
-        embedding.cshtml,
-        embedding.cshtml text.html
+        embedding.cshtml.aspnet,
+        embedding.cshtml.aspnet text.html
     </string>
     <key>settings</key>
     <dict>

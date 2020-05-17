@@ -1,0 +1,6 @@
+<snippet>
+    <scope>embedding.cshtml.aspnet - source.cs</scope>
+    <tabTrigger>&lt;%:</tabTrigger>
+    <content><![CDATA[<%: ${1:Object} %>]]></content>
+    <description>&lt;%: … %&gt;</description>
+</snippet>

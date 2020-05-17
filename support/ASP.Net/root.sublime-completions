@@ -1,0 +1,26 @@
+{
+    "scope": "embedding.cshtml.aspnet - source.cs",
+    "completions": [
+        // Directives
+        {
+            "trigger": "directive\t<%@ … %>",
+            "contents": "<%@ ${1:Directive} %>",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "page\t<%@ Page … %>",
+            "contents": "<%@ Page${1: Language=\"C#\"}${2: Inherits=\"${3:System.Web.UI.Page}\"} %>",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "control\t<%@ Control … %>",
+            "contents": "<%@ Control${1: Language=\"C#\"}${2: Inherits=\"${3:System.Web.UI.UserControl}\"} %>",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "import\t<%@ Import … %>",
+            "contents": "<%@ Import Namespace=\"${1:System.Net}\" %>",
+            "kind": "snippet",
+        },
+    ]
+}

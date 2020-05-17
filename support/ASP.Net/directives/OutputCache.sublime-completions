@@ -1,6 +1,6 @@
 {
     // https://msdn.microsoft.com/en-us/library/hdxfb6cy(v=vs.100).aspx
-    "scope": "embedding.cshtml meta.block.processing-directive.contents.outputcache",
+    "scope": "embedding.cshtml.aspnet meta.block.processing-directive.contents.outputcache",
     "completions": [
         { "trigger": "Duration\tOutputCache", "contents": "Duration=\"${1:120}\" " },
         { "trigger": "Location\tOutputCache", "contents": "Location=\"${1:Any | Client | Downstream | Server | None | ServerAndClient}\" " },

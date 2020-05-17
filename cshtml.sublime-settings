@@ -1,0 +1,9 @@
+{
+    "auto_complete_selector": "embedding.cshtml.aspnet - comment",
+    "auto_complete_triggers": [
+        {
+            "characters": "@",
+            "selector": "embedding.cshtml.razor",
+        }
+    ]
+}

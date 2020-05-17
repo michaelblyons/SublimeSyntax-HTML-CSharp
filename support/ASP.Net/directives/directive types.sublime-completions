@@ -1,0 +1,92 @@
+{
+    // https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
+    "scope": "embedding.cshtml.aspnet meta.block.processing-directive - meta.block.processing-directive.contents",
+    "completions": [
+        {
+            "trigger": "Application\tDirective",
+            "contents": "Application",
+            "annotation": "Directive",
+            "kind": "keyword",
+            "details": "Define file as <code>Application</code>",
+        },
+        {
+            "trigger": "Page\tDirective",
+            "contents": "Page",
+            "annotation": "Directive",
+            "kind": "keyword",
+            "details": "Define file as <code>Page</code>",
+        },
+        {
+            "trigger": "Control\tDirective",
+            "contents": "Control",
+            "annotation": "Directive",
+            "kind": "keyword",
+            "details": "Define file as <code>UserControl</code>",
+        },
+        {
+            "trigger": "Import\tDirective",
+            "contents": "Import Namespace=\"${1:System.Net}\" ",
+            "annotation": "Directive",
+            "kind": "snippet",
+            "details": "Import a namespace for use in this file",
+        },
+        {
+            "trigger": "Implements\tDirective",
+            "contents": "Implements Interface=\"${1:IFoo}\" ",
+            "annotation": "Directive",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "Register\tDirective",
+            "contents": "Register",
+            "annotation": "Directive",
+            "kind": "keyword",
+            "details": "Register a tag prefix",
+        },
+        {
+            "trigger": "Assembly\tDirective",
+            "contents": "Assembly",
+            "annotation": "Directive",
+            "kind": "keyword",
+        },
+        {
+            "trigger": "OutputCache\tDirective",
+            "contents": "OutputCache Duration=\"${1:120}\" ",
+            "annotation": "Directive",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "Reference\tDirective",
+            "contents": "Reference",
+            "annotation": "Directive",
+            "kind": "keyword",
+        },
+        {
+            "trigger": "Master\tDirective",
+            "contents": "Master",
+            "annotation": "Directive",
+            "kind": "keyword",
+            "details": "Define file as a <code>Master</code> page",
+
+        },
+        {
+            "trigger": "PreviousPageType\tDirective",
+            "contents": "PreviousPageType",
+            "annotation": "Directive",
+            "kind": "keyword",
+        },
+        {
+            "trigger": "MasterType\tDirective",
+            "contents": "MasterType",
+            "annotation": "Directive",
+            "kind": "keyword",
+        },
+        // // Web Handlers are their own kind of file
+        // {
+        //     "trigger": "WebHandler\tDirective",
+        //     "contents": "WebHandler",
+        //     "annotation": "Directive",
+        //     "kind": "keyword",
+        // },
+    ]
+}

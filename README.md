@@ -1,6 +1,6 @@
 # [HTML (C#)][pkg]
 
-[Sublime Text 3][st3] [syntax highlighting][ss-docs] for `.cshtml`, `.aspx`, and similar files.
+[Sublime Text][st] [syntax highlighting][ss-docs] for `.cshtml`, `.aspx`, and similar files.
 
 ## Current support
 
@@ -14,8 +14,7 @@
 
 - Hotkey comment/uncomment server-side comments (<kbd>Ctrl</kbd>+<kbd>/</kbd> or <kbd>Cmd</kbd>+<kbd>/</kbd>)
 
-- Snippets for `<%` expressions (Try typing `exp`)
-    + These are subject to change.
+- Snippets for `<%`-ish expressions
 - Snippets for some directives (Try `page` or `import`)
     + Default attributes are subject to change.
 - Snippets may require <kbd>Ctrl</kbd>+<kbd>space</kbd>, depending on your environment.
@@ -23,7 +22,7 @@
 
 ### Razor syntax
 
-Huge thank-you to @keith-hall for this!
+A huge thank-you to [@keith-hall][keith] for this!
 
 ## Future support (maybe)
 
@@ -53,5 +52,6 @@ Huge thank-you to @keith-hall for this!
     ```
 
 [pkg]: https://packagecontrol.io/packages/HTML%20(C%23)
-[st3]: https://www.sublimetext.com/
-[ss-docs]: https://www.sublimetext.com/docs/3/syntax.html
+[st]: https://www.sublimetext.com/
+[ss-docs]: https://www.sublimetext.com/docs/syntax.html
+[keith]: https://github.com/keith-hall

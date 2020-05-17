@@ -6,9 +6,8 @@ file_extensions:
   - aspx
   - ascx
   - asax
-  - cshtml
   - master
-scope: embedding.cshtml
+scope: embedding.cshtml.aspnet
 contexts:
   main:
     - include: html
@@ -152,6 +151,8 @@ contexts:
     - match: ''
       set: scope:text.html.basic
       with_prototype:
+        - match: <(?=<)
+          scope: invalid.illegal.cshtml
         - include: comments
         - include: script-tag-cs
         - include: directive

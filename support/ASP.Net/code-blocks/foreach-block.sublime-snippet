@@ -1,0 +1,8 @@
+<snippet>
+    <scope>embedding.cshtml.aspnet - source.cs</scope>
+    <tabTrigger>foreach</tabTrigger>
+    <content><![CDATA[<% foreach (var ${1:item} in ${2:Enumerable}) { %>
+    ${3}
+<% } %>]]></content>
+    <description>&lt;% foreach (…) { %&gt;</description>
+</snippet>
