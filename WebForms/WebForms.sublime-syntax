@@ -1,0 +1,362 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/syntax.html
+name: HTML (C# WebForms)
+scope: text.html.cs.webforms
+version: 2
+
+extends: Packages/HTML/HTML.sublime-syntax
+hidden: true
+file_extensions: []
+
+variables:
+  csharp_tag: (?:<%(?![=#:$@-]))
+  csharp_tag_interpolation: (?:<%[=#:$])
+  csharp_tag_end: (?:%>)
+
+contexts:
+  prototype:
+    - meta_prepend: true
+    - include: comments
+    - include: csharp-embedded
+
+  main:
+    - meta_include_prototype: false
+    - match: ''
+      push: [webforms, directives]
+
+  webforms:
+    # This is the main ASP.Net context.
+    # It includes `csharp-tags` which are allowed to be closed by %> tags at any
+    # level of code-block on stack resuming with the next top-level <% tag.
+    - meta_include_prototype: false
+    # - meta_scope: text.html.php
+    - include: csharp-tags
+    - include: html
+
+  comments:
+    - match: <%--
+      scope: punctuation.definition.comment.block.begin.cs-webforms
+      push:
+        - meta_scope: comment.block.cs-webforms
+        - match: '--%>'
+          scope: punctuation.definition.comment.block.end.cs-webforms
+          pop: true
+
+###[ DIRECTIVES ]################################################################
+
+  directives:
+    - meta_include_prototype: false
+    - include: comments
+    - include: directive
+    - match: (?=\S)
+      pop: 1
+
+  directive-generic-attribute:
+    - match: \b(\w+)\s*(?:(=)\s*((")[^"]*("))?)?\s*
+      captures:
+        1: entity.other.attribute-name.cs-webforms
+        2: punctuation.separator.key-value.cs-webforms
+        3: string.quoted.double.cs-webforms
+        4: punctuation.definition.string.begin.cs-webforms
+        5: punctuation.definition.string.end.cs-webforms
+
+  directive-end:
+    - match: '{{csharp_tag_end}}'
+      scope: punctuation.section.embedded.end.cs-webforms
+      pop: 1
+
+  directive:
+    # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
+    - match: <%@
+      scope: punctuation.section.embedded.begin.cs-webforms
+      push:
+        - meta_scope: meta.block.processing-directive.cs-webforms
+        - include: directive-type
+        - include: directive-import
+        - include: directive-implements
+        - include: directive-reference
+        - include: directive-outputcache
+        - include: directive-other
+        # Blank directives are considered to be "Page" or "Control" by .Net
+        - include: directive-generic-attribute
+        - include: directive-end
+
+  directive-type: []
+
+  directive-import:
+    # https://msdn.microsoft.com/en-us/library/eb44kack(v=vs.100).aspx
+    - match: \b(?i:Import)\b
+      scope: constant.language.processing-directive.cs-webforms
+      set:
+        - meta_scope: meta.block.processing-directive.contents.import.cs-webforms
+        - match: \b(?i:(Namespace))\s*(=)\s*((")([^"]*)("))
+          captures:
+            1: entity.other.attribute-name.cs-webforms
+            2: punctuation.separator.key-value.cs-webforms
+            3: string.quoted.double.cs-webforms
+            4: punctuation.definition.string.begin.cs-webforms
+            5: meta.path.cs
+            6: punctuation.definition.string.end.cs-webforms
+        - include: directive-end
+
+  directive-implements:
+    # https://msdn.microsoft.com/en-us/library/cbsf6k72(v=vs.100).aspx
+    - match: \b(?i:Implements)\b
+      scope: constant.language.processing-directive.cs-webforms
+      set:
+        - meta_scope: meta.block.processing-directive.contents.implements.cs-webforms
+        - match: \b(?i:(Interface))\s*(=)\s*((")([^"]*)("))
+          captures:
+            1: entity.other.attribute-name.cs-webforms
+            2: punctuation.separator.key-value.cs-webforms
+            3: string.quoted.double.cs-webforms
+            4: punctuation.definition.string.begin.cs-webforms
+            5: entity.other.inherited-class.cs
+            6: punctuation.definition.string.end.cs-webforms
+        - include: directive-end
+
+  directive-reference:
+    # https://msdn.microsoft.com/en-us/library/w70c655a(v=vs.100).aspx
+    - match: \b(?i:Reference)\b
+      scope: constant.language.processing-directive.reference.cs-webforms
+      set:
+        - meta_scope: meta.block.processing-directive.contents.reference.cs-webforms
+        - match: \b(?i:(Page|Control|VirtualPath))\s*(=)\s*((")([^"]*)("))
+          captures:
+            1: entity.other.attribute-name.cs-webforms
+            2: punctuation.separator.key-value.cs-webforms
+            3: string.quoted.double.cs-webforms
+            4: punctuation.definition.string.begin.cs-webforms
+            5: meta.path.cs
+            6: punctuation.definition.string.end.cs-webforms
+        - include: directive-end
+
+  directive-outputcache:
+    # https://msdn.microsoft.com/en-us/library/hdxfb6cy(v=vs.100).aspx
+    - match: \b(?i:OutputCache)\b
+      scope: constant.language.processing-directive.caching.cs-webforms
+      set:
+        - meta_scope: meta.block.processing-directive.contents.outputcache.cs-webforms
+        - match: \b(?i:(Duration))\s*(=)\s*((")(?:(\d+)|[^"]*)("))
+          captures:
+            1: entity.other.attribute-name.cs-webforms
+            2: punctuation.separator.key-value.cs-webforms
+            3: string.quoted.double.cs-webforms
+            4: punctuation.definition.string.begin.cs-webforms
+            5: constant.numeric.integer.cs-webforms
+            6: punctuation.definition.string.end.cs-webforms
+        - match: \b(?i:(NoStore|Shared))\s*(=)\s*((")(?i:(true|false)|[^"]*)("))
+          captures:
+            1: entity.other.attribute-name.cs-webforms
+            2: punctuation.separator.key-value.cs-webforms
+            3: string.quoted.double.cs-webforms
+            4: punctuation.definition.string.begin.cs-webforms
+            5: constant.language.boolean.cs-webforms
+            6: punctuation.definition.string.end.cs-webforms
+        - match: \b(?i:(Location))\s*(=)\s*((")(?i:(Any|Client|Downstream|Server|None|ServerAndClient)|[^"]*)("))
+          captures:
+            1: entity.other.attribute-name.cs-webforms
+            2: punctuation.separator.key-value.cs-webforms
+            3: string.quoted.double.cs-webforms
+            4: punctuation.definition.string.begin.cs-webforms
+            5: meta.enum.cache-location.cs-webforms
+            6: punctuation.definition.string.end.cs-webforms
+        - match: \b(?i:(CacheProfile|SqlDependency|ProviderName|VaryBy(?:Control|Custom|Header|Param|ContentEncoding)))\s*(=)\s*((")([^"]*)("))
+          captures:
+            1: entity.other.attribute-name.cs-webforms
+            2: punctuation.separator.key-value.cs-webforms
+            3: string.quoted.double.cs-webforms
+            4: punctuation.definition.string.begin.cs-webforms
+            5: meta.path.cs
+            6: punctuation.definition.string.end.cs-webforms
+        - include: directive-end
+
+  directive-other:
+    # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
+    - match: \b(Register|Assembly|PreviousPageType|MasterType)\b
+      scope: constant.language.processing-directive.cs-webforms
+      set:
+        - include: directive-generic-attribute
+        - include: directive-end
+
+
+###[ HTML CONTENT ]###########################################################
+
+  script-tag-csharp:
+    - match: (?i)(<)(script)[^>]+(runat)(=)(?:((')server('))|((")server(")))
+      captures:
+        1: punctuation.definition.tag.begin.html
+        2: entity.name.tag.script.html
+        3: constant.language.processing-directive.cshtml
+        4: punctuation.separator.key-value.cshtml
+        5: string.quoted.single.cshtml
+        6: punctuation.definition.string.begin.cshtml
+        7: punctuation.definition.string.end.cshtml
+        8: string.quoted.double.cshtml
+        9: punctuation.definition.string.begin.cshtml
+        10: punctuation.definition.string.end.cshtml
+      push:
+        - match: (?i)(</)(script)(>)
+          captures:
+            1: punctuation.definition.tag.begin.html
+            2: entity.name.tag.html
+            3: punctuation.definition.tag.end.html
+          pop: 1
+        - match: '>'
+          scope: punctuation.definition.tag.end.html
+          embed: Packages/C#/C#.sublime-syntax
+          embed_scope: source.cs.embedded.html
+          escape: (?i)(?=</script)
+        - include: scope:text.html.basic#tag-stuff
+
+  tag-html:
+    - meta_prepend: true
+    - include: script-tag-csharp
+    - include: csharp-interpolations
+
+  cdata-content:
+    - meta_prepend: true
+    - meta_include_prototype: false
+    - include: csharp-interpolations
+
+  script-javascript-content:
+    - meta_include_prototype: false
+    - match: \s*((<!\[)(CDATA)(\[))
+      captures:
+        1: meta.tag.sgml.cdata.html
+        2: punctuation.definition.tag.begin.html
+        3: keyword.declaration.cdata.html
+        4: punctuation.definition.tag.begin.html
+      pop: 1  # make sure to match only once
+      embed: scope:source.js.cs.webforms
+      embed_scope: meta.tag.sgml.cdata.html source.js.embedded.html
+      escape: \]\]>
+      escape_captures:
+        0: meta.tag.sgml.cdata.html punctuation.definition.tag.end.html
+    - match: '{{script_content_begin}}'
+      captures:
+        1: comment.block.html punctuation.definition.comment.begin.html
+      pop: 1  # make sure to match only once
+      embed: scope:source.js.cs.webforms
+      embed_scope: source.js.embedded.html
+      escape: '{{script_content_end}}'
+      escape_captures:
+        1: source.js.embedded.html
+        2: comment.block.html punctuation.definition.comment.end.html
+        3: source.js.embedded.html
+        4: comment.block.html punctuation.definition.comment.end.html
+
+  style-css-content:
+    - meta_include_prototype: false
+    - match: \s*((<!\[)(CDATA)(\[))
+      captures:
+        1: meta.tag.sgml.cdata.html
+        2: punctuation.definition.tag.begin.html
+        3: keyword.declaration.cdata.html
+        4: punctuation.definition.tag.begin.html
+      pop: 1  # make sure to match only once
+      embed: scope:source.css.cs.webforms
+      embed_scope: meta.tag.sgml.cdata.html source.css.embedded.html
+      escape: \]\]>
+      escape_captures:
+        0: meta.tag.sgml.cdata.html punctuation.definition.tag.end.html
+    - match: '{{style_content_begin}}'
+      captures:
+        1: comment.block.html punctuation.definition.comment.begin.html
+      pop: 1  # make sure to match only once
+      embed: scope:source.css.cs.webforms
+      embed_scope: source.css.embedded.html
+      escape: '{{style_content_end}}'
+      escape_captures:
+        1: source.css.embedded.html
+        2: comment.block.html punctuation.definition.comment.end.html
+        3: source.css.embedded.html
+        4: comment.block.html punctuation.definition.comment.end.html
+
+  tag-event-attribute-value:
+    - match: \"
+      scope: meta.string.html string.quoted.double.html punctuation.definition.string.begin.html
+      embed: scope:source.js.cs.webforms
+      embed_scope: meta.string.html meta.interpolation.html source.js.embedded.html
+      escape: \"
+      escape_captures:
+        0: meta.string.html string.quoted.double.html punctuation.definition.string.end.html
+    - match: \'
+      scope: meta.string.html string.quoted.single.html punctuation.definition.string.begin.html
+      embed: scope:source.js.cs.webforms
+      embed_scope: meta.string.html meta.interpolation.html source.js.embedded.html
+      escape: \'
+      escape_captures:
+        0: meta.string.html string.quoted.single.html punctuation.definition.string.end.html
+    - include: else-pop
+
+  tag-style-attribute-value:
+    - match: \"
+      scope: meta.string.html string.quoted.double.html punctuation.definition.string.begin.html
+      embed: scope:source.css.cs.webforms#rule-list-body
+      embed_scope: meta.string.html meta.interpolation.html source.css.embedded.html
+      escape: \"
+      escape_captures:
+        0: meta.string.html string.quoted.double.html punctuation.definition.string.end.html
+    - match: \'
+      scope: meta.string.html string.quoted.single.html punctuation.definition.string.begin.html
+      embed: scope:source.css.cs.webforms#rule-list-body
+      embed_scope: meta.string.html meta.interpolation.html source.css.embedded.html
+      escape: \'
+      escape_captures:
+        0: meta.string.html string.quoted.single.html punctuation.definition.string.end.html
+    - include: else-pop
+
+  tag-attribute-value-content:
+    - meta_prepend: true
+    - include: csharp-interpolations
+
+  strings-common-content:
+    - meta_prepend: true
+    - include: csharp-interpolations
+
+###[ C# TAGS ]###############################################################
+
+  csharp-tags:
+    # - include: php-tag-incomplete
+    - include: comments
+    - match: '{{csharp_tag}}'
+      scope: punctuation.section.embedded.begin.cs-webforms
+      push: csharp-tag-content
+
+  csharp-tag-content:
+    - meta_include_prototype: false
+    - meta_scope: meta.embedded.cs
+    - meta_content_scope: source.cs.embedded.html
+    - match: ({{csharp_tag_end}})(\s*\n)?
+      captures:
+        1: punctuation.section.embedded.end.cs-webforms
+        2: meta.html-newline-after-csharp.cs-webforms  # used by indentation rules
+      pop: 1
+    - include: Packages/HTML (C#)/WebForms/C# (WebForms).sublime-syntax
+      apply_prototype: true
+
+  csharp-interpolations:
+    - meta_include_prototype: false
+    - match: (?={{csharp_tag_interpolation}})
+      push: csharp-interpolation-body
+
+  csharp-interpolation-body:
+    # - clear_scopes: 1
+    - meta_include_prototype: false
+    - include: csharp-embedded
+    - include: immediately-pop
+
+  csharp-embedded:
+    - meta_include_prototype: false
+    - match: '{{csharp_tag_interpolation}}'
+      scope: meta.embedded.cs punctuation.section.embedded.begin.cs-webforms
+      embed: Packages/C#/C#.sublime-syntax
+      embed_scope: meta.embedded.cs source.cs.embedded.html
+      escape: ({{csharp_tag_end}})(\s*\n)?
+      escape_captures:
+        0: meta.embedded.cs
+        1: punctuation.section.embedded.end.cs-webforms
+        2: meta.html-newline-after-csharp.cs-webforms
+
