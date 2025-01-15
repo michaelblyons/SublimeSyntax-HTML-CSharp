@@ -1,0 +1,46 @@
+%YAML 1.2
+---
+scope: source.cs.embedded.html
+hidden: true
+# version: 2
+
+extends: Packages/C#/C#.sublime-syntax
+
+##############################################################################
+
+contexts:
+  # code_block_in:
+  #   - meta_prepend: true
+  #   - match: (%>)(\s*\n)?
+  #     scope: meta.embedded.cs
+  #     captures:
+  #       1: punctuation.section.embedded.end.cs-razor
+  #       2: meta.html-newline-after-csharp.cs-razor  # used by indentation rules
+  #     push: embedding-syntax
+
+  embedding-syntax:
+    - clear_scopes: true
+    - meta_scope: embedding.cs text.html.cs.razor
+    - meta_include_prototype: false
+    - match: <%(?![=#:$@-])
+      scope: meta.embedded.cs punctuation.section.embedded.begin.cs-razor
+      pop: 1
+    - include: Packages/HTML (C#)/Razor/Razor.sublime-syntax#comments
+    - include: Packages/HTML (C#)/Razor/Razor.sublime-syntax#html
+
+  stray-braces:
+    - match: (\})(\s*\n)?
+      scope: meta.embedded.cs
+      captures:
+        1: punctuation.section.embedded.end.cs-razor
+        2: meta.html-newline-after-csharp.cs-razor  # used by indentation rules
+    # - match: \}
+    #   scope: invalid.illegal.stray.cs
+
+  stray-brackets:
+    - match: \]
+      scope: invalid.illegal.stray.cs
+
+  stray-parens:
+    - match: \)
+      scope: invalid.illegal.stray.cs

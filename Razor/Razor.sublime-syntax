@@ -1,0 +1,334 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/syntax.html
+name: HTML (C# Razor)
+scope: text.html.cs.razor
+version: 2
+
+extends: Packages/HTML/HTML.sublime-syntax
+
+file_extensions:
+  - cshtml
+
+variables:
+  csharp_tag: '@{'
+  csharp_tag_end: '}'
+  csharp_tag_interpolation_paren: '@\('
+  csharp_tag_interpolation_bare: '@(?=\w)'
+
+contexts:
+  prototype:
+    - meta_prepend: true
+    - include: comments
+    - include: csharp-embedded
+
+  main:
+    - meta_include_prototype: false
+    - match: ''
+      push: [razor, directives]
+
+  razor:
+    # This is the main Razor context.
+    # It includes `csharp-tags` which are allowed to be closed by } tags at any
+    # level of code-block on stack resuming with the next top-level @{ tag.
+    - meta_include_prototype: false
+    - include: csharp-tags
+    - include: html
+
+  comments:
+    - match: '@\*'
+      scope: punctuation.definition.comment.block.begin.cs-razor
+      push:
+        - meta_scope: comment.block.cs-razor
+        - match: '\*@'
+          scope: punctuation.definition.comment.block.end.cs-razor
+          pop: 1
+
+###[ DIRECTIVES ]################################################################
+
+  directives:
+    - meta_include_prototype: false
+    - include: comments
+    - include: directive
+    - include: Packages/HTML/HTML (Plain).sublime-syntax#comment
+    - match: (?=\S)
+      pop: 1
+
+  directive:
+    - match: (@)(model)\b
+      captures:
+        1: punctuation.section.embedded.line.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: scope:source.cs#type
+      embed_scope: source.cs.embedded.html
+      escape: $
+    - match: (@)(using)\b(?!\s*\()
+      captures:
+        1: punctuation.section.embedded.line.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: scope:source.cs#line_of_code_in
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+###[ RAZOR CONSTRUCTS ]#######################################################
+
+  razor-constructs:
+    - match: (@)(section)\b(?:\s+(\w+))?
+      captures:
+        1: punctuation.section.embedded.line.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+        3: entity.name.section.cs-razor
+      push:
+        - match: \{
+          scope: punctuation.section.block.begin.cs-razor
+          set:
+            - match: \}
+              scope: punctuation.section.block.end.cs-razor
+              pop: true
+            - include: razor
+    - match: (@)(functions)\b
+      captures:
+        1: punctuation.section.embedded.line.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      push:
+        - match: \{
+          scope: punctuation.section.block.begin.cs-razor
+          set:
+            - clear_scopes: 1
+            - meta_scope: source.cs.embedded.functions.cs-razor
+            - match: \}
+              scope: punctuation.section.block.end.cs-razor
+              pop: true
+            - include: scope:source.cs#code_block_in
+        - match: \s*(?!\{)(?=\S)
+          scope: invalid.illegal.expected-block.cs-razor
+          pop: true
+    - match: '@@'
+      scope: constant.character.escape.cs-razor
+    - match: (@)(?=(?:if|switch|for|foreach|using|try|lock)\b)
+      captures:
+        1: punctuation.section.embedded.cs-razor
+      push:
+        - clear_scopes: 1
+        - meta_content_scope: source.cs.embedded.html
+        - include: scope:source.cs#line_of_code
+        - match: ''
+          pop: true
+      with_prototype:
+        - include: razor-block-prototype
+    - match: '[\w-+]+@\w+' # ignore email addresses
+    - match: '@(?=(?:\w+\.)*\w+(?:[<\s]|$))'
+      scope: punctuation.section.embedded.line.cs-razor
+      embed: scope:source.cs#line_of_code_in
+      embed_scope: source.cs.embedded.html
+      escape: $|(?=[<\s])
+    - match: '@(?=(?:\w+\.)*\w+\()'
+      scope: punctuation.section.embedded.line.cs-razor
+      push:
+        - meta_content_scope: source.cs.embedded.html
+        - match: (?=[<\s])
+          pop: true
+        - include: scope:source.cs#line_of_code_in
+    - match: '@\('
+      scope: punctuation.section.embedded.begin.cs-razor
+      push:
+        - clear_scopes: 1
+        - meta_content_scope: source.cs.embedded.html
+        - match: \)
+          scope: punctuation.section.embedded.end.cs-razor
+          pop: true
+        - include: scope:source.cs#line_of_code_in
+    #- match: '@(?=\w+(?:\.\w+)*)(?!\s*[+=|(])' # TODO: support a.b[2] etc.
+    #  comment: property/variable access
+    #  scope: punctuation.section.embedded.line.cs-razor
+    #  #push: razor-block # TODO: stop at closing " etc.
+    - match: '@'
+      scope: punctuation.section.embedded.line.cs-razor
+      push: razor-block
+
+  razor-block-prototype:
+    - match: (?=[<&])
+      embed: scope:text.html.basic
+      escape: (?=[@}]|$)
+    - match: '@:'
+      scope: punctuation.section.embedded.html.cs-razor
+      embed: scope:text.html.basic
+      escape: $
+
+  eat-whitespace:
+    - match: (?=\S)
+      pop: true
+
+  razor-block:
+    - clear_scopes: 1
+    - meta_content_scope: source.cs.embedded.html
+    - match: (?=[<\s])
+      pop: true
+    - match: (?=\S)(?!@)
+      push:
+        - include: scope:source.cs#line_of_code
+      with_prototype:
+        - include: razor-block-prototype
+
+###[ HTML CONTENT ]###########################################################
+
+  tag-html:
+    - meta_prepend: true
+    - include: razor-constructs
+    - include: csharp-interpolations
+
+  cdata-content:
+    - meta_prepend: true
+    - meta_include_prototype: false
+    - include: csharp-interpolations
+
+  script-javascript-content:
+    - meta_include_prototype: false
+    - match: \s*((<!\[)(CDATA)(\[))
+      captures:
+        1: meta.tag.sgml.cdata.html
+        2: punctuation.definition.tag.begin.html
+        3: keyword.declaration.cdata.html
+        4: punctuation.definition.tag.begin.html
+      pop: 1  # make sure to match only once
+      embed: scope:source.js.cs.razor
+      embed_scope: meta.tag.sgml.cdata.html source.js.embedded.html
+      escape: \]\]>
+      escape_captures:
+        0: meta.tag.sgml.cdata.html punctuation.definition.tag.end.html
+    - match: '{{script_content_begin}}'
+      captures:
+        1: comment.block.html punctuation.definition.comment.begin.html
+      pop: 1  # make sure to match only once
+      embed: scope:source.js.cs.razor
+      embed_scope: source.js.embedded.html
+      escape: '{{script_content_end}}'
+      escape_captures:
+        1: source.js.embedded.html
+        2: comment.block.html punctuation.definition.comment.end.html
+        3: source.js.embedded.html
+        4: comment.block.html punctuation.definition.comment.end.html
+
+  style-css-content:
+    - meta_include_prototype: false
+    - match: \s*((<!\[)(CDATA)(\[))
+      captures:
+        1: meta.tag.sgml.cdata.html
+        2: punctuation.definition.tag.begin.html
+        3: keyword.declaration.cdata.html
+        4: punctuation.definition.tag.begin.html
+      pop: 1  # make sure to match only once
+      embed: scope:source.css.cs.razor
+      embed_scope: meta.tag.sgml.cdata.html source.css.embedded.html
+      escape: \]\]>
+      escape_captures:
+        0: meta.tag.sgml.cdata.html punctuation.definition.tag.end.html
+    - match: '{{style_content_begin}}'
+      captures:
+        1: comment.block.html punctuation.definition.comment.begin.html
+      pop: 1  # make sure to match only once
+      embed: scope:source.css.cs.razor
+      embed_scope: source.css.embedded.html
+      escape: '{{style_content_end}}'
+      escape_captures:
+        1: source.css.embedded.html
+        2: comment.block.html punctuation.definition.comment.end.html
+        3: source.css.embedded.html
+        4: comment.block.html punctuation.definition.comment.end.html
+
+  tag-event-attribute-value:
+    - match: \"
+      scope: meta.string.html string.quoted.double.html punctuation.definition.string.begin.html
+      embed: scope:source.js.cs.razor
+      embed_scope: meta.string.html meta.interpolation.html source.js.embedded.html
+      escape: \"
+      escape_captures:
+        0: meta.string.html string.quoted.double.html punctuation.definition.string.end.html
+    - match: \'
+      scope: meta.string.html string.quoted.single.html punctuation.definition.string.begin.html
+      embed: scope:source.js.cs.razor
+      embed_scope: meta.string.html meta.interpolation.html source.js.embedded.html
+      escape: \'
+      escape_captures:
+        0: meta.string.html string.quoted.single.html punctuation.definition.string.end.html
+    - include: else-pop
+
+  tag-style-attribute-value:
+    - match: \"
+      scope: meta.string.html string.quoted.double.html punctuation.definition.string.begin.html
+      embed: scope:source.css.cs.razor#rule-list-body
+      embed_scope: meta.string.html meta.interpolation.html source.css.embedded.html
+      escape: \"
+      escape_captures:
+        0: meta.string.html string.quoted.double.html punctuation.definition.string.end.html
+    - match: \'
+      scope: meta.string.html string.quoted.single.html punctuation.definition.string.begin.html
+      embed: scope:source.css.cs.razor#rule-list-body
+      embed_scope: meta.string.html meta.interpolation.html source.css.embedded.html
+      escape: \'
+      escape_captures:
+        0: meta.string.html string.quoted.single.html punctuation.definition.string.end.html
+    - include: else-pop
+
+  tag-attribute-value-content:
+    - meta_prepend: true
+    - include: csharp-interpolations
+
+  strings-common-content:
+    - meta_prepend: true
+    - include: csharp-interpolations
+
+###[ C# TAGS ]###############################################################
+
+  csharp-tags:
+    # - include: php-tag-incomplete
+    - include: comments
+    - match: '{{csharp_tag}}'
+      scope: punctuation.section.embedded.begin.cs-razor
+      push: csharp-tag-content
+
+  csharp-tag-content:
+    - meta_include_prototype: false
+    - meta_scope: meta.embedded.cs
+    - meta_content_scope: source.cs.embedded.html
+    - match: ({{csharp_tag_end}})(\s*\n)?
+      captures:
+        1: punctuation.section.embedded.end.cs-razor
+        2: meta.html-newline-after-csharp.cs-razor  # used by indentation rules
+      pop: 1
+    - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax
+      apply_prototype: true
+
+  csharp-interpolations:
+    - meta_include_prototype: false
+    - match: '@@'
+      scope: constant.character.escape.cs-razor
+    - match: (?={{csharp_tag_interpolation_bare}})
+      push: csharp-interpolation-body
+
+  csharp-interpolation-body:
+    # - clear_scopes: 1
+    - meta_include_prototype: false
+    - include: csharp-embedded
+    - include: immediately-pop
+
+  csharp-embedded:
+    - meta_include_prototype: false
+    - match: '{{csharp_tag_interpolation_bare}}'
+      scope: meta.embedded.cs punctuation.section.embedded.begin.cs-razor
+      embed: Packages/C#/C#.sublime-syntax
+      embed_scope: meta.embedded.cs source.cs.embedded.html
+      escape: ((?=")|\s*\n)?
+      escape_captures:
+        0: meta.embedded.cs
+        # 1: punctuation.section.embedded.end.cs-razor
+        1: meta.html-newline-after-csharp.cs-razor
+    - match: '{{csharp_tag_interpolation_paren}}'
+      scope: meta.embedded.cs punctuation.section.embedded.begin.cs-razor
+      embed: Packages/C#/C#.sublime-syntax
+      embed_scope: meta.embedded.cs source.cs.embedded.html
+      escape: (\))(\s*\n)?
+      escape_captures:
+        0: meta.embedded.cs
+        1: punctuation.section.embedded.end.cs-razor
+        2: meta.html-newline-after-csharp.cs-razor
