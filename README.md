@@ -32,12 +32,7 @@ The old ASP.Net style pages that necessitated creation of this package. Post-Vis
 
 ### Known issues
 
-- Code blocks in CSS and JavaScript attributes that contain the opening attribute delimiter are prematurely terminated.
-
-    ```
-    <p style="color: <%= "red" %>" ></p>
-    <p onclick="<%= "alert('hi!')" %>"></p>
-    ```
+- Nothing yet? &#x1f91e;
 
 
 ## Razor

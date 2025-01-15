@@ -1,0 +1,14 @@
+%YAML 1.2
+---
+scope: source.js.embedded.string.quoted.single.cs.webforms
+version: 2
+hidden: true
+
+extends: Packages/HTML (C#)/WebForms/JavaScript (WebForms).sublime-syntax
+
+contexts:
+
+  prototype:
+    - meta_prepend: true
+    - match: (?=')
+      pop: 1
