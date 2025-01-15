@@ -1,4 +1,4 @@
-// SYNTAX TEST "Packages/HTML (C#)/ashx.sublime-syntax"
+// SYNTAX TEST "Packages/HTML (C#)/WebForms/ashx.sublime-syntax"
 
 <%@ WebHandler Language="C#" Class="Handler" %>
 
