@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 # http://www.sublimetext.com/docs/3/syntax.html
-name: HTML Razor (C#)
+name: HTML (C# Razor) OLD
 file_extensions:
   - cshtml
 scope: embedding.cshtml.razor

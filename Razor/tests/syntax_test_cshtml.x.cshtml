@@ -1,4 +1,4 @@
-<!-- SYNTAX TEST "Packages/HTML (C#)/Razor/Razor.sublime-syntax" -->
+<!-- SYNTAX TEST "Packages/HTML (C#)/Razor/Razor.x.sublime-syntax" -->
 <!-- https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-2.1 -->
 @using System.Collections.Generic
 <!-- <- punctuation.section.embedded.line - source.cs.embedded -->
@@ -30,10 +30,10 @@
 <!--             ^^^^ meta.tag.block.any -->
 
 <a href="mailto:Support@contoso.com">Support@contoso.com</a>
-<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.inline - source.cs -->
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.inline.a - source.cs -->
 <!--                                 ^^^^^^^^^^^^^^^^^^^^^^^ - source.cs -->
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html -->
-<!--                                                    ^^^^ meta.tag.inline -->
+<!--                                                    ^^^^ meta.tag.inline.a -->
 
 <p>@DateTime.Now</p>
 <!-- ^^^^^^^ source.cs.embedded variable.other -->
@@ -45,7 +45,7 @@
 <!--        ^ source.cs.embedded punctuation.accessor.dot -->
 <!--         ^^^^^^^^^^ source.cs.embedded meta.function-call variable.function -->
 <!--                   ^ punctuation.section.group.begin -->
-<!--                    ^^^^ constant.numeric -->
+<!--                    ^^^^ constant.numeric.integer.decimal -->
 <!--                        ^ punctuation.section.group.end -->
 <!--                         ^^^ meta.tag.block.any -->
 
@@ -74,7 +74,7 @@
 
      @if (value % 2 == 0)
 <!-- ^ punctuation.section.embedded - source.cs -->
-<!--  ^^ keyword.control.conditional.if -->
+<!--  ^^ source.cs keyword.control.conditional.if - text.html -->
 {
 <!-- <- meta.block punctuation.section.block.begin -->
     <p>The value was even.</p>
@@ -118,11 +118,11 @@ else
     var person = people[i];
     @:Name: @person.Name
 }     *@
-<!--  ^^ comment.block punctuation.definition.comment -->
+<!--  ^^ comment.block punctuation.definition.comment.end -->
 
 @{
     var quote = "The future depends on what you do today. - Mahatma Gandhi";
-<!-- ^^ source.cs.embedded -->
+<!-- ^^ source.cs.embedded - text.html -->
 }
 <!-- ^ text.html - source -->
 
@@ -162,13 +162,13 @@ finally
     // Do critical section work
 }
 
-
-@{
-    /* C# comment */
-    // Another C# comment
-}
-<!-- HTML comment -->
-
+@*
+    @{
+        /* C# comment */
+        // Another C# comment
+    }
+    <!-- HTML comment -->
+*@
 
 @functions {
 // <!-- ^^ keyword.other -->
