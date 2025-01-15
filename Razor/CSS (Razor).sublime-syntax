@@ -1,0 +1,44 @@
+%YAML 1.2
+---
+name: CSS (WebForms)
+scope: source.css.cs.razor
+version: 2
+
+extends: Packages/CSS/CSS.sublime-syntax
+hidden: true
+
+contexts:
+
+  prototype:
+    - meta_prepend: true
+    - include: Razor.sublime-syntax#comments
+    - include: csharp-embedded
+
+  string-content:
+    - meta_prepend: true
+    - include: Razor.sublime-syntax#csharp-interpolations
+
+  csharp-interpolations:
+    - meta_include_prototype: false
+    # - match: (?=@)
+    #   push: csharp-interpolation-body
+    - include: Razor.sublime-syntax#csharp-interpolations
+
+  csharp-interpolation-body:
+    - clear_scopes: 1
+    - meta_include_prototype: false
+    - include: csharp-embedded
+    - include: immediately-pop
+
+  csharp-embedded:
+    - meta_include_prototype: false
+    - include: Razor.sublime-syntax#razor-constructs
+    # - match: <%[=#:$]
+    #   scope: meta.embedded.cs punctuation.section.embedded.begin.cs-webforms
+    #   embed: Packages/C#/C#.sublime-syntax
+    #   embed_scope: meta.embedded.cs source.cs.embedded.css
+    #   escape: (%>)(\s*\n)?
+    #   escape_captures:
+    #     0: meta.embedded.cs
+    #     1: punctuation.section.embedded.end.cs-webforms
+    #     2: meta.html-newline-after-csharp.cs-webforms
