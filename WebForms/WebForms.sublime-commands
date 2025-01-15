@@ -1,6 +1,10 @@
 [
     {
-        "caption": "C# WebForms: Open CodeBehind/CodeFile",
+        "caption": "C# WebForms: Open CodeBehind / CodeFile",
         "command": "open_code_file_from_front_end",
+    },
+    {
+        "caption": "C# WebForms: Open Front End",
+        "command": "open_front_end_from_code_file",
     },
 ]
