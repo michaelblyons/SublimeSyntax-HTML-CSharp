@@ -2,15 +2,19 @@
 
 [Sublime Text][st] [syntax highlighting][ss-docs] for `.cshtml`, `.aspx`, and similar files.
 
-## Current support
+## WebForms
 
-### Highlighting
+The old ASP.Net style pages that necessitated creation of this package. Post-Visual Basic ASP, but pre-Razor.
+
+### Current support
+
+#### Highlighting
 
 - Embedded C# (`<script runat="server">`)
     + The `runat="server"` must immediately follow the tag opening.
 - `<%` expressions (including `<%=`, `<%#`, `<%:`, `<%$`, `<%--`)
 
-### Functionality
+#### Functionality
 
 - Hotkey comment/uncomment server-side comments (<kbd>Ctrl</kbd>+<kbd>/</kbd> or <kbd>Cmd</kbd>+<kbd>/</kbd>)
 
@@ -19,37 +23,39 @@
     + Default attributes are subject to change.
 - Snippets may require <kbd>Ctrl</kbd>+<kbd>space</kbd>, depending on your environment.
 - Some autocomplete within directives.
+- Basic "Open `CodeBehind`" shortcut for frontend pages.
 
-### Razor syntax
-
-A huge thank-you to [@keith-hall][keith] for this!
-
-## Future support (maybe)
+### Future support (maybe)
 
 - Identify more attributes of directives
 - Autocomplete ASP builtins
 
-## Known issues:
+### Known issues
 
-- "Goto Anything" support is poor.
-
-- No recognition of excluded scopes to return to HTML. In the snippet below, the C# scope ends immediately after `"bar`.
+- Code blocks in CSS and JavaScript attributes that contain the opening attribute delimiter are prematurely terminated.
 
     ```
-    <%
-      var foo = "bar%>";
-    %>
+    <p style="color: <%= "red" %>" ></p>
+    <p onclick="<%= "alert('hi!')" %>"></p>
     ```
 
-- Javascript does not always recognize that `Response.Write` output is coming. The `)` is marked as invalid and the conditional scopes are never terminated.
 
-    ```
-    <script type="text/javascript">
-    if (true && <%= list.Any() %>) {
-       doStuff();
-    }
-    </script>
-    ```
+## Razor
+
+The simplified, less-intrusive frontend templating syntax that supplanted WebForms.
+
+A huge thank-you to [@keith-hall][keith] for his work on this.
+
+### Current Support
+
+#### Highlighting
+
+The highlighting is not exhaustive, nor is it perfect. Expect some problems.
+
+#### Functionality
+
+- Hotkey comment/uncomment server-side comments (<kbd>Ctrl</kbd>+<kbd>/</kbd> or <kbd>Cmd</kbd>+<kbd>/</kbd>)
+
 
 [pkg]: https://packagecontrol.io/packages/HTML%20(C%23)
 [st]: https://www.sublimetext.com/
