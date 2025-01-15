@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "C# WebForms: Open CodeBehind/CodeFile",
+        "command": "open_code_file_from_front_end",
+    },
+]

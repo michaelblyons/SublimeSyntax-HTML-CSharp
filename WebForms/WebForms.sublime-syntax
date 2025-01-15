@@ -61,6 +61,16 @@ contexts:
         4: punctuation.definition.string.begin.cs-webforms
         5: punctuation.definition.string.end.cs-webforms
 
+  directive-codefile-attribute:
+    - match: \b(CodeBehind|CodeFile)\s*(?:(=)\s*((")([^"]*)("))?)?\s*
+      captures:
+        1: entity.other.attribute-name.cs-webforms
+        2: punctuation.separator.key-value.cs-webforms
+        3: string.quoted.double.cs-webforms
+        4: punctuation.definition.string.begin.cs-webforms
+        5: meta.path.codefile.cs-webforms
+        6: punctuation.definition.string.end.cs-webforms
+
   directive-end:
     - match: '{{csharp_tag_end}}'
       scope: punctuation.section.embedded.end.cs-webforms
