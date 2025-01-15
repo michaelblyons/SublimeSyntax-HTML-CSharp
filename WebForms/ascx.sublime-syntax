@@ -1,0 +1,23 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/syntax.html
+name: HTML (C#) Control
+scope: text.html.cs.webforms.ascx
+version: 2
+
+extends: WebForms.sublime-syntax
+
+first_line_match: <%@\s*Control\b
+
+file_extensions:
+  - ascx
+
+contexts:
+  directive-type:
+    # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
+    - match: \b(?i:Control)\b
+      scope: constant.language.processing-directive.cs-webforms entity.name.class.cs
+      set:
+        - meta_scope: meta.block.processing-directive.contents.type.cs-webforms
+        - include: directive-generic-attribute
+        - include: directive-end
