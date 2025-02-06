@@ -25,7 +25,7 @@ jobs:
         include:
           - build: latest
             packages: master
-          - build: 4075
+          - build: 4077  # Supported in Package Control and contains test binary
             packages: binary
     steps:
       - uses: actions/checkout@v4
