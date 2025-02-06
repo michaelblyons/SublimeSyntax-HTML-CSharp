@@ -5,7 +5,7 @@ name: HTML (C#) Master
 scope: text.html.cs.webforms.master
 version: 2
 
-extends: WebForms.sublime-syntax
+extends: Packages/HTML (C#)/WebForms/WebForms.sublime-syntax
 
 first_line_match: <%@\s*Master\b
 

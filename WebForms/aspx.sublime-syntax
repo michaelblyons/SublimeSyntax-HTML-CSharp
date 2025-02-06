@@ -5,7 +5,7 @@ name: HTML (C#) Page
 scope: text.html.cs.webforms.aspx
 version: 2
 
-extends: WebForms.sublime-syntax
+extends: Packages/HTML (C#)/WebForms/WebForms.sublime-syntax
 
 first_line_match: <%@\s*Page\b
 

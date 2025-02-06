@@ -3,9 +3,9 @@
 name: CSS (WebForms)
 scope: source.css.cs.webforms
 version: 2
+hidden: true
 
 extends: Packages/CSS/CSS.sublime-syntax
-hidden: true
 
 contexts:
 
