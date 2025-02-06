@@ -27,7 +27,7 @@ jobs:
             packages: master
           - build: stable
             packages: master
-          - build: 4114  # Need HTML with `script_content_begin` for override
+          - build: 4134  # Need HTML with `html` context for inclusion
             packages: binary
     steps:
       - uses: actions/checkout@v4
