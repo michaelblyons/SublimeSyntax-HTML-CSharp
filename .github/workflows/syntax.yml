@@ -25,7 +25,9 @@ jobs:
         include:
           - build: latest
             packages: master
-          - build: 4077  # Supported in Package Control and contains test binary
+          - build: stable
+            packages: master
+          - build: 4095  # Need HTML at syntax version 2
             packages: binary
     steps:
       - uses: actions/checkout@v4
