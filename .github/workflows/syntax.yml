@@ -27,7 +27,7 @@ jobs:
             packages: master
           - build: stable
             packages: master
-          - build: 4095  # Need HTML at syntax version 2
+          - build: 4114  # Need HTML with `script_content_begin` for override
             packages: binary
     steps:
       - uses: actions/checkout@v4
