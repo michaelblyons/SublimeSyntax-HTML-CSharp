@@ -5,7 +5,7 @@ name: HTML (C#) Control
 scope: text.html.cs.webforms.ascx
 version: 2
 
-extends: WebForms.sublime-syntax
+extends: Packages/HTML (C#)/WebForms/WebForms.sublime-syntax
 
 first_line_match: <%@\s*Control\b
 

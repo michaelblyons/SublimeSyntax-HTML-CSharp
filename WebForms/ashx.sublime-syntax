@@ -1,11 +1,15 @@
 %YAML 1.2
 ---
-# http://www.sublimetext.com/docs/3/syntax.html
+# http://www.sublimetext.com/docs/syntax.html
 name: .Net Web Handler (ASHX)
+scope: source.cs.webforms.ashx
+version: 2
+
 first_line_match: <%@\s*WebHandler
+
 file_extensions:
   - ashx
-scope: embedding.ashx
+
 contexts:
   main:
     - match: ''
