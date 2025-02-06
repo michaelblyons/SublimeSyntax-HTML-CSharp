@@ -30,7 +30,6 @@ contexts:
     # It includes `csharp-tags` which are allowed to be closed by %> tags at any
     # level of code-block on stack resuming with the next top-level <% tag.
     - meta_include_prototype: false
-    # - meta_scope: text.html.php
     - include: csharp-tags
     - include: html
 
