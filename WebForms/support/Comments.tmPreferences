@@ -4,10 +4,7 @@
     <key>name</key>
     <string>Comments</string>
     <key>scope</key>
-    <string>
-        embedding.cshtml.aspnet,
-        embedding.cshtml.aspnet text.html
-    </string>
+    <string>text.html.cs.webforms</string>
     <key>settings</key>
     <dict>
         <key>shellVariables</key>

@@ -1,6 +1,6 @@
 {
     // https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
-    "scope": "embedding.cshtml.aspnet meta.block.processing-directive - meta.block.processing-directive.contents",
+    "scope": "text.html.cs.webforms meta.block.processing-directive - meta.block.processing-directive.contents",
     "completions": [
         {
             "trigger": "Application\tDirective",

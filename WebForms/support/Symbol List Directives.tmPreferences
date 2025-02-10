@@ -4,7 +4,7 @@
 	<key>name</key>
 	<string>Symbol List: .Net Directives</string>
 	<key>scope</key>
-	<string>text.html constant.language.processing-directive</string>
+	<string>text.html.cs constant.language.processing-directive</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>

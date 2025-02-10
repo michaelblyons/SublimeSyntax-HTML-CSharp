@@ -1,5 +1,5 @@
 {
-    "scope": "embedding.cshtml.aspnet - source.cs",
+    "scope": "text.html.cs.webforms - source.cs - comment",
     "completions": [
         // Directives
         {

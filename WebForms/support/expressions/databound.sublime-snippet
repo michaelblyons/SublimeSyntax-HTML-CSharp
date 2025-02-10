@@ -1,5 +1,5 @@
 <snippet>
-    <scope>embedding.cshtml.aspnet - source.cs</scope>
+    <scope>text.html.cs.webforms - source.cs - comment</scope>
     <tabTrigger>&lt;%#</tabTrigger>
     <content><![CDATA[<%# Eval("${1:Property}") %>]]></content>
     <description>&lt;%# Eval(…) %&gt;</description>
