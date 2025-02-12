@@ -274,6 +274,10 @@ contexts:
     - meta_prepend: true
     - include: csharp-interpolations
 
+  tag-generic-attribute-value-content:
+    - meta_prepend: true
+    - include: csharp-interpolations
+
   strings-common-content:
     - meta_prepend: true
     - include: csharp-interpolations
@@ -303,8 +307,11 @@ contexts:
     - meta_include_prototype: false
     - match: '@@'
       scope: constant.character.escape.cs-razor
-    - match: (?={{csharp_tag_interpolation_bare}})
-      push: csharp-interpolation-body
+    - match: '\w+@\w+' # prevent email addresses being caught etc
+    - match: '{{csharp_tag_interpolation_bare}}'
+      scope: punctuation.section.interpolation.begin.razor
+      push: Packages/HTML (C#)/Razor/embeddings/C# (for C# Razor HTML attribute).sublime-syntax
+      #push: csharp-interpolation-body
 
   csharp-interpolation-body:
     # - clear_scopes: 1

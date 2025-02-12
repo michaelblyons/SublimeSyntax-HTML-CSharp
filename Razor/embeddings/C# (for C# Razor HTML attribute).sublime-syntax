@@ -1,0 +1,18 @@
+%YAML 1.2
+---
+scope: source.cs.embedded.html-attribute-string.razor
+version: 1
+hidden: true
+
+extends: Packages/C#/C#.sublime-syntax
+
+contexts:
+  main:
+    - meta_prepend: true
+    - match: (?=")
+      pop: 1
+
+  line_of_code_in:
+    - meta_prepend: true
+    - match: (?=")
+      pop: 1
