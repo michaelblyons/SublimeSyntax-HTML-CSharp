@@ -157,6 +157,145 @@ else
 
 <p>@quote</p>
 
+<div class="grid-mvc" data-lang="@Model.Language" data-gridname="@Model.RenderOptions.GridName" data-selectable="@Model.RenderOptions.Selectable.ToString().ToLower()" data-multiplefilters ="@Model.RenderOptions.AllowMultipleFilters.ToString().ToLower()">
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html -->
+<!-- ^^^^^^^^^^^^^^^^ meta.attribute-with-value.class.html -->
+<!-- ^^^^^ entity.other.attribute-name.class.html -->
+<!--      ^ punctuation.separator.key-value.html -->
+<!--       ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html -->
+<!--        ^^^^^^^^ meta.class-name.html meta.string.html string.quoted.double.html -->
+<!--                ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html -->
+<!--                  ^^^^^^^^^ entity.other.attribute-name.html -->
+<!--                           ^ punctuation.separator.key-value.html -->
+<!--                            ^^^^^^^^^^^^^^^^^ meta.string.html string.quoted.double.html -->
+<!--                            ^ punctuation.definition.string.begin.html -->
+<!--                             ^ punctuation.section.interpolation.begin.razor -->
+<!--                              ^^^^^^^^^^^^^^ source.cs.embedded.html-attribute-string.razor -->
+<!--                              ^^^^^ variable.other.cs -->
+<!--                                   ^ punctuation.accessor.dot.cs -->
+<!--                                    ^^^^^^^^ variable.other.cs -->
+<!--                                            ^ punctuation.definition.string.end.html -->
+<!--                                              ^^^^^^^^^^^^^ entity.other.attribute-name.html -->
+<!--                                                           ^ punctuation.separator.key-value.html -->
+<!--                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.html string.quoted.double.html -->
+<!--                                                            ^ punctuation.definition.string.begin.html -->
+<!--                                                             ^ punctuation.section.interpolation.begin.razor -->
+<!--                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html-attribute-string.razor -->
+<!--                                                              ^^^^^ variable.other.cs -->
+<!--                                                                   ^ punctuation.accessor.dot.cs -->
+<!--                                                                    ^^^^^^^^^^^^^ variable.other.cs -->
+<!--                                                                                 ^ punctuation.accessor.dot.cs -->
+<!--                                                                                  ^^^^^^^^ variable.other.cs -->
+<!--                                                                                          ^ punctuation.definition.string.end.html -->
+<!--                                                                                            ^^^^^^^^^^^^^^^ entity.other.attribute-name.html -->
+<!--                                                                                                           ^ punctuation.separator.key-value.html -->
+<!--                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.html string.quoted.double.html -->
+<!--                                                                                                            ^ punctuation.definition.string.begin.html -->
+<!--                                                                                                             ^ punctuation.section.interpolation.begin.razor -->
+<!--                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html-attribute-string.razor -->
+<!--                                                                                                              ^^^^^ variable.other.cs -->
+<!--                                                                                                                   ^ punctuation.accessor.dot.cs -->
+<!--                                                                                                                    ^^^^^^^^^^^^^ variable.other.cs -->
+<!--                                                                                                                                 ^ punctuation.accessor.dot.cs -->
+<!--                                                                                                                                  ^^^^^^^^^^ variable.other.cs -->
+<!--                                                                                                                                            ^ punctuation.accessor.dot.cs -->
+<!--                                                                                                                                             ^^^^^^^^^^ meta.function-call.cs -->
+<!--                                                                                                                                             ^^^^^^^^ variable.function.cs -->
+<!--                                                                                                                                                     ^^ meta.group.cs -->
+<!--                                                                                                                                                     ^ punctuation.section.group.begin.cs -->
+<!--                                                                                                                                                      ^ punctuation.section.group.end.cs -->
+<!--                                                                                                                                                       ^ punctuation.accessor.dot.cs -->
+<!--                                                                                                                                                        ^^^^^^^^^ meta.function-call.cs -->
+<!--                                                                                                                                                        ^^^^^^^ variable.function.cs -->
+<!--                                                                                                                                                               ^^ meta.group.cs -->
+<!--                                                                                                                                                               ^ punctuation.section.group.begin.cs -->
+<!--                                                                                                                                                                ^ punctuation.section.group.end.cs -->
+<!--                                                                                                                                                                 ^ punctuation.definition.string.end.html -->
+<!--                                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^ entity.other.attribute-name.html -->
+<!--                                                                                                                                                                                        ^ punctuation.separator.key-value.html -->
+<!--                                                                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.html string.quoted.double.html -->
+<!--                                                                                                                                                                                         ^ punctuation.definition.string.begin.html -->
+<!--                                                                                                                                                                                          ^ punctuation.section.interpolation.begin.razor -->
+<!--                                                                                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html-attribute-string.razor -->
+<!--                                                                                                                                                                                           ^^^^^ variable.other.cs -->
+<!--                                                                                                                                                                                                ^ punctuation.accessor.dot.cs -->
+<!--                                                                                                                                                                                                 ^^^^^^^^^^^^^ variable.other.cs -->
+<!--                                                                                                                                                                                                              ^ punctuation.accessor.dot.cs -->
+<!--                                                                                                                                                                                                               ^^^^^^^^^^^^^^^^^^^^ variable.other.cs -->
+<!--                                                                                                                                                                                                                                   ^ punctuation.accessor.dot.cs -->
+<!--                                                                                                                                                                                                                                    ^^^^^^^^^^ meta.function-call.cs -->
+<!--                                                                                                                                                                                                                                    ^^^^^^^^ variable.function.cs -->
+<!--                                                                                                                                                                                                                                            ^^ meta.group.cs -->
+<!--                                                                                                                                                                                                                                            ^ punctuation.section.group.begin.cs -->
+<!--                                                                                                                                                                                                                                             ^ punctuation.section.group.end.cs -->
+<!--                                                                                                                                                                                                                                              ^ punctuation.accessor.dot.cs -->
+<!--                                                                                                                                                                                                                                               ^^^^^^^^^ meta.function-call.cs -->
+<!--                                                                                                                                                                                                                                               ^^^^^^^ variable.function.cs -->
+<!--                                                                                                                                                                                                                                                      ^^ meta.group.cs -->
+<!--                                                                                                                                                                                                                                                      ^ punctuation.section.group.begin.cs -->
+<!--                                                                                                                                                                                                                                                       ^ punctuation.section.group.end.cs -->
+<!--                                                                                                                                                                                                                                                        ^ punctuation.definition.string.end.html -->
+<!--                                                                                                                                                                                                                                                         ^ punctuation.definition.tag.end.html -->
+
+<li>
+    <a href="@Model.GetLinkForPage(Model.CurrentPage - 1)">«</a>
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.inline.any.html -->
+<!--^ punctuation.definition.tag.begin.html -->
+<!-- ^ entity.name.tag.inline.any.html -->
+<!--   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.href.html -->
+<!--   ^^^^ entity.other.attribute-name.href.html -->
+<!--       ^ punctuation.separator.key-value.html -->
+<!--        ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html -->
+<!--         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.path.url.html meta.string.html string.quoted.double.html -->
+<!--         ^ punctuation.section.interpolation.begin.razor -->
+<!--          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html-attribute-string.razor -->
+<!--          ^^^^^ variable.other.cs -->
+<!--               ^ punctuation.accessor.dot.cs -->
+<!--                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.cs -->
+<!--                ^^^^^^^^^^^^^^ variable.function.cs -->
+<!--                              ^^^^^^^^^^^^^^^^^^^^^^^ meta.group.cs -->
+<!--                              ^ punctuation.section.group.begin.cs -->
+<!--                               ^^^^^ variable.other.cs -->
+<!--                                    ^ punctuation.accessor.dot.cs -->
+<!--                                     ^^^^^^^^^^^ variable.other.cs -->
+<!--                                                 ^ keyword.operator.cs -->
+<!--                                                   ^ meta.number.integer.decimal.cs constant.numeric.value.cs -->
+<!--                                                    ^ punctuation.section.group.end.cs -->
+<!--                                                     ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html -->
+<!--                                                      ^ punctuation.definition.tag.end.html -->
+<!--                                                        ^^ punctuation.definition.tag.begin.html -->
+<!--                                                          ^ entity.name.tag.inline.any.html -->
+<!--                                                           ^ punctuation.definition.tag.end.html -->
+</li>
+<li>
+    <a href="@Model.FunctionCall("embedded string")">"quotes" everywhere</a>
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.inline.any.html -->
+<!--^ punctuation.definition.tag.begin.html -->
+<!-- ^ entity.name.tag.inline.any.html -->
+<!--   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.href.html -->
+<!--   ^^^^ entity.other.attribute-name.href.html -->
+<!--       ^ punctuation.separator.key-value.html -->
+<!--        ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html -->
+<!--         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.path.url.html meta.string.html string.quoted.double.html -->
+<!--         ^ punctuation.section.interpolation.begin.razor -->
+<!--          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html-attribute-string.razor -->
+<!--          ^^^^^ variable.other.cs -->
+<!--               ^ punctuation.accessor.dot.cs -->
+<!--                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.cs -->
+<!--                ^^^^^^^^^^^^ variable.function.cs -->
+<!--                            ^^^^^^^^^^^^^^^^^^^ meta.group.cs -->
+<!--                            ^ punctuation.section.group.begin.cs -->
+<!--                             ^^^^^^^^^^^^^^^^^ meta.string.cs string.quoted.double.cs -->
+<!--                             ^ punctuation.definition.string.begin.cs -->
+<!--                                             ^ punctuation.definition.string.end.cs -->
+<!--                                              ^ punctuation.section.group.end.cs -->
+<!--                                               ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html -->
+<!--                                                ^ punctuation.definition.tag.end.html -->
+<!--                                                                    ^^ punctuation.definition.tag.begin.html -->
+<!--                                                                      ^ entity.name.tag.inline.any.html -->
+<!--                                                                       ^ punctuation.definition.tag.end.html -->
+</li>
+
 @using (Html.BeginForm())
 {
     <div>
