@@ -21,13 +21,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
+      fail-fast: false
       matrix:
         include:
           - build: latest
             packages: master
           - build: stable
             packages: master
-          - build: 4134  # Need HTML with `html` context for inclusion
+          - build: 4149
             packages: binary
     steps:
       - uses: actions/checkout@v4

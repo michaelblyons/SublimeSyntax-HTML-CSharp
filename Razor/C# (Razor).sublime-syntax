@@ -28,19 +28,8 @@ contexts:
     - include: Packages/HTML (C#)/Razor/Razor.sublime-syntax#comments
     - include: Packages/HTML (C#)/Razor/Razor.sublime-syntax#html
 
-  stray-braces:
-    - match: (\})(\s*\n)?
-      scope: meta.embedded.cs
-      captures:
-        1: punctuation.section.embedded.end.cs-razor
-        2: meta.html-newline-after-csharp.cs-razor  # used by indentation rules
-    # - match: \}
-    #   scope: invalid.illegal.stray.cs
-
-  stray-brackets:
-    - match: \]
+  stray_close_bracket:
+    - match: \]|\)
       scope: invalid.illegal.stray.cs
-
-  stray-parens:
-    - match: \)
-      scope: invalid.illegal.stray.cs
+    - match: (?=})
+      pop: 1

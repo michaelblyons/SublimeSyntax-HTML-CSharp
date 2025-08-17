@@ -102,22 +102,45 @@
 <body>
     <my:Bar runat="server" />
 
+    <% %>
+<%--^^^^^ meta.embedded.cs --%>
+<%--^^ punctuation.section.embedded.begin.cs-webforms --%>
+<%--  ^ source.cs.embedded.html --%>
+<%--   ^^ punctuation.section.embedded.end.cs-webforms - source --%>
+
+    <% } %>
+<%--^^^^^^^ meta.embedded.cs --%>
+<%--^^ punctuation.section.embedded.begin.cs-webforms --%>
+<%--  ^^^ source.cs.embedded.html --%>
+<%--   ^ invalid.illegal.stray.brace.cs --%>
+<%--     ^^ punctuation.section.embedded.end.cs-webforms - source --%>
+
     <% if(3 > 10)
 <%--^^         punctuation.section.embedded.begin - source.cs --%>
 <%--   ^^^^^^^^^^ source.cs.embedded.html --%>
         { %>
-<%--    ^         punctuation.section.block.begin --%>
-<%--      ^^      punctuation.section.embedded.end --%>
-<%--      ^^^^^   - source.cs.embedded.html --%>
+<%--^^^^^^ meta.embedded.cs source.cs.embedded.html --%>
+<%--    ^ punctuation.section.block.begin.cs --%>
+<%--      ^^ text.html.cs.webforms meta.embedded.cs punctuation.section.embedded.end.cs-webforms - source --%>
     <p>Baz</p>
     <% } else { %>
-<%--  ^^^^^^^^^^         source.cs.embedded.html --%>
-<%--   ^          punctuation.section.block.end --%>
-<%--     ^^^^ keyword.control.conditional.else --%>
-<%--          ^         punctuation.section.block.begin --%>
-<%--            ^^^    - source.cs.embedded.html --%>
+<%--^^ text.html.cs.webforms --%>
+<%--^^ meta.embedded.cs punctuation.section.embedded.begin.cs-webforms --%>
+<%--  ^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html --%>
+<%--   ^ punctuation.section.block.end.cs --%>
+<%--     ^^^^^ keyword.control.conditional.else.cs --%>
+<%--          ^^ meta.block.cs --%>
+<%--          ^ punctuation.section.block.begin.cs --%>
+<%--            ^^ text.html.cs.webforms meta.embedded.cs punctuation.section.embedded.end.cs-webforms - source --%>
     <p>Biff</p>
     <% } %>
+<%--^^ text.html.cs.webforms --%>
+<%--^^ meta.embedded.cs punctuation.section.embedded.begin.cs-webforms --%>
+<%--  ^^^^^ meta.embedded.cs --%>
+<%--  ^^^ source.cs.embedded.html --%>
+<%--  ^^ meta.block.cs --%>
+<%--   ^ punctuation.section.block.end.cs --%>
+<%--     ^^ punctuation.section.embedded.end.cs-webforms - source --%>
 
     <p><%: variable %></p>
 <%--   ^^^                 punctuation.section.embedded.begin --%>
