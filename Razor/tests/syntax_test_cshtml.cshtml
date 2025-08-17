@@ -120,13 +120,36 @@ else
 }     *@
 <!--  ^^ comment.block punctuation.definition.comment -->
 
+    @{ }  
+<!--^^^^^^ meta.embedded.cs -->
+<!--^^ punctuation.section.embedded.begin.cs-razor - source -->
+<!--  ^ source.cs.embedded.html -->
+<!--   ^ punctuation.section.embedded.end.cs-razor - source -->
+<!--    ^^ meta.html-newline-after-csharp.cs-razor - source -->
+
 @{
     var quote = "The future depends on what you do today. - Mahatma Gandhi";
-<!-- ^^ source.cs.embedded -->
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html -->
+<!--    ^^^^^ variable.other.cs -->
+<!--          ^ keyword.operator.assignment.variable.cs -->
+<!--            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.cs string.quoted.double.cs -->
+<!--            ^ punctuation.definition.string.begin.cs -->
+<!--                                                                      ^ punctuation.definition.string.end.cs -->
+<!--                                                                       ^ punctuation.terminator.statement.cs -->
 }
 <!-- ^ text.html - source -->
 
-<p>@quote</p>
+    <p>@quote</p>
+<!--^^^ meta.tag.block.any.html -->
+<!--^ punctuation.definition.tag.begin.html -->
+<!-- ^ entity.name.tag.block.any.html -->
+<!--  ^ punctuation.definition.tag.end.html -->
+<!--   ^ punctuation.section.embedded.line.cs-razor -->
+<!--    ^^^^^ source.cs.embedded.html variable.other.cs -->
+<!--         ^^^^ meta.tag.block.any.html -->
+<!--         ^^ punctuation.definition.tag.begin.html -->
+<!--           ^ entity.name.tag.block.any.html -->
+<!--            ^ punctuation.definition.tag.end.html -->
 
 @{
     quote = "Hate cannot drive out hate, only love can do that. - Martin Luther King, Jr.";
@@ -165,9 +188,17 @@ finally
 
 @{
     /* C# comment */
+<!--^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html -->
+<!--^^^^^^^^^^^^^^^^ comment.block.cs -->
+<!--^^ punctuation.definition.comment.begin.cs -->
+<!--              ^^ punctuation.definition.comment.end.cs -->
     // Another C# comment
+<!--^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html -->
+<!--^^^^^^^^^^^^^^^^^^^^^ comment.line.double-slash.cs -->
+<!--^^ punctuation.definition.comment.cs -->
 }
 <!-- HTML comment -->
+<!-- ^^^^^^^^^^^^^^^^ comment.block.html -->
 
 
 @functions {
