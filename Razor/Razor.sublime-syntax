@@ -307,17 +307,9 @@ contexts:
     - meta_include_prototype: false
     - match: '@@'
       scope: constant.character.escape.cs-razor
-    - match: '\w+@\w+' # prevent email addresses being caught etc
-    - match: '{{csharp_tag_interpolation_bare}}'
+    - match: '\B{{csharp_tag_interpolation_bare}}'
       scope: punctuation.section.interpolation.begin.razor
       push: Packages/HTML (C#)/Razor/embeddings/C# (for C# Razor HTML attribute).sublime-syntax
-      #push: csharp-interpolation-body
-
-  csharp-interpolation-body:
-    # - clear_scopes: 1
-    - meta_include_prototype: false
-    - include: csharp-embedded
-    - include: immediately-pop
 
   csharp-embedded:
     - meta_include_prototype: false
