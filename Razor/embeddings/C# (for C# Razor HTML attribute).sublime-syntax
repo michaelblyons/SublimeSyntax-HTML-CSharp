@@ -10,9 +10,9 @@ contexts:
   main:
     - meta_prepend: true
     - match: (?=")
-      pop: 3
+      pop: 1
 
   line_of_code_in:
     - meta_prepend: true
     - match: (?=")
-      pop: 3
+      pop: 1
