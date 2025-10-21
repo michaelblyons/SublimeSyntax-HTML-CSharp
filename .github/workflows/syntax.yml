@@ -24,11 +24,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - build: latest
-            packages: master
-          - build: stable
-            packages: master
-          - build: 4149
+          - build: 4200
+            packages: binary
+          - build: 4157
             packages: binary
     steps:
       - uses: actions/checkout@v4
