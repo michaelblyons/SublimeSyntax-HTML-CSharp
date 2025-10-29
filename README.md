@@ -48,7 +48,6 @@ only supports Visual Basic.
 
 - Identify more attributes of directives
 - Snippets and/or completions for ASP.Net builtins
-- Refactor C# Handler syntax (*.ashx*)
 
 ### Known issues
 

@@ -3,19 +3,17 @@
 # http://www.sublimetext.com/docs/syntax.html
 name: .Net Web Handler (ASHX)
 scope: source.cs.webforms.ashx
-version: 2
 
-first_line_match: <%@\s*WebHandler
+extends: Packages/C#/C#.sublime-syntax
 
 file_extensions:
   - ashx
 
+first_line_match: <%@\s*WebHandler
+
 contexts:
-  main:
-    - match: ''
-      set: scope:source.cs
-      with_prototype:
-        - include: directive
+  shebang:
+    - include: directives
 
   directive-generic-attribute:
     - match: '\b(\w+)\s*(=)\s*((")[^"]*("))\s*'
@@ -31,7 +29,7 @@ contexts:
       scope: punctuation.section.embedded.end.cshtml
       pop: true
 
-  directive:
+  directives:
     # https://msdn.microsoft.com/en-us/library/xz702w3e(v=vs.100).aspx
     - match: '<%@'
       scope: punctuation.section.embedded.begin.cshtml
