@@ -166,5 +166,37 @@
 <%--      ^^^^^^^^^^       source.cs.embedded.html --%>
 <%--                ^^     punctuation.section.embedded.end --%>
 <%--                ^^^^^^ - source.cs.embedded.html --%>
+
+<asp:Repeater runat="server">
+    <ItemTemplate>
+        <%# Eval("Property") %>
+<%--    ^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs --%>
+<%--    ^^^ punctuation.section.embedded.begin.cs-webforms --%>
+<%--       ^^^^^^^^^^^^^^^^^^ source.cs.embedded.html --%>
+<%--        ^^^^^^^^^^^^^^^^ meta.function-call.cs --%>
+<%--        ^^^^ variable.function.cs --%>
+<%--            ^^^^^^^^^^^^ meta.group.cs --%>
+<%--            ^ punctuation.section.group.begin.cs --%>
+<%--             ^^^^^^^^^^ meta.string.cs string.quoted.double.cs --%>
+<%--             ^ punctuation.definition.string.begin.cs --%>
+<%--                      ^ punctuation.definition.string.end.cs --%>
+<%--                       ^ punctuation.section.group.end.cs --%>
+<%--                         ^^ punctuation.section.embedded.end.cs-webforms --%>
+        <%#: Eval("Property") %>
+<%--    ^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs --%>
+<%--    ^^^^ punctuation.section.embedded.begin.cs-webforms --%>
+<%--        ^^^^^^^^^^^^^^^^^^ source.cs.embedded.html --%>
+<%--         ^^^^^^^^^^^^^^^^ meta.function-call.cs --%>
+<%--         ^^^^ variable.function.cs --%>
+<%--             ^^^^^^^^^^^^ meta.group.cs --%>
+<%--             ^ punctuation.section.group.begin.cs --%>
+<%--              ^^^^^^^^^^ meta.string.cs string.quoted.double.cs --%>
+<%--              ^ punctuation.definition.string.begin.cs --%>
+<%--                       ^ punctuation.definition.string.end.cs --%>
+<%--                        ^ punctuation.section.group.end.cs --%>
+<%--                          ^^ punctuation.section.embedded.end.cs-webforms --%>
+    </ItemTemplate>
+</asp:Repeater>
+
 </body>
 </html>
