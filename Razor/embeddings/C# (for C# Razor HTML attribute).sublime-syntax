@@ -16,3 +16,15 @@ contexts:
     - meta_prepend: true
     - match: (?=")
       pop: 3
+
+  inside_triple_quoted_raw_string_syntax:
+    - meta_include_prototype: false
+    - include: immediately_pop
+
+  inside_verbatim_string_syntax:
+    - meta_include_prototype: false
+    - include: immediately_pop
+
+  inside_verbatim_format_string_syntax:
+    - meta_include_prototype: false
+    - include: immediately_pop
