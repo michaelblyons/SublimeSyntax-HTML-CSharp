@@ -309,7 +309,7 @@ contexts:
       scope: constant.character.escape.cs-razor
     - match: '\B{{csharp_tag_interpolation_bare}}'
       scope: punctuation.section.interpolation.begin.razor
-      push: Packages/HTML (C#)/Razor/embeddings/C# (for C# Razor HTML attribute).sublime-syntax
+      push: Packages/HTML (C#)/Razor/embeddings/C# (for C# Razor HTML attribute).sublime-syntax#line_of_code_in
 
   csharp-embedded:
     - meta_include_prototype: false

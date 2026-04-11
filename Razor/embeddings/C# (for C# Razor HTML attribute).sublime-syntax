@@ -7,15 +7,11 @@ hidden: true
 extends: Packages/C#/C#.sublime-syntax
 
 contexts:
-  main:
-    - meta_prepend: true
-    - match: (?=")
-      pop: 3
 
   line_of_code_in:
     - meta_prepend: true
     - match: (?=")
-      pop: 3
+      pop: 1
 
   inside_triple_quoted_raw_string_syntax:
     - meta_include_prototype: false
