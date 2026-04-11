@@ -34,7 +34,3 @@ contexts:
   inside_verbatim_format_string_syntax:
     - meta_include_prototype: false
     - include: immediately_pop
-
-  immediately_pop:
-    - match: ''
-      pop: 1

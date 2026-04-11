@@ -7,14 +7,15 @@
 <!--                             ^ - source.cs.embedded -->
 @model IEnumerable<SomeNamespace.SomeType>
 <!-- <- punctuation.section.embedded.line - source.cs.embedded -->
-<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded -->
-<!-- ^ keyword.other -->
-<!--   ^^^^^^^^^^^ support.type -->
-<!--              ^ punctuation.definition.generic.begin -->
-<!--               ^^^^^^^^^^^^^ support.type -->
-<!--                            ^ punctuation.accessor.dot.namespace -->
-<!--                             ^^^^^^^^ support.type -->
-<!--                                     ^ punctuation.definition.generic.end -->
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html -->
+<!--^^ keyword.other.cs-razor -->
+<!--   ^^^^^^^^^^^ support.type.cs -->
+<!--              ^^^^^^^^^^^^^^^^^^^^^^^^ meta.generic.cs -->
+<!--              ^ punctuation.definition.generic.begin.cs -->
+<!--               ^^^^^^^^^^^^^ support.type.cs -->
+<!--                            ^ punctuation.accessor.dot.cs -->
+<!--                             ^^^^^^^^ support.type.cs -->
+<!--                                     ^ punctuation.definition.generic.end.cs -->
 <!--                                      ^ - source.cs.embedded -->
 
      <p>@@Username</p>
@@ -41,18 +42,28 @@
 <!--    ^^ punctuation.definition.comment.block.end.cs-razor -->
 
 <p>@DateTime.Now</p>
-<!-- ^^^^^^^ source.cs.embedded variable.other -->
-<!--        ^ source.cs.embedded punctuation.accessor.dot -->
-<!--         ^^^ source.cs.embedded variable.other -->
-<!--            ^^^ meta.tag.block.any -->
+<!--^^^^^^^^^^^^ source.cs.embedded.html -->
+<!--^^^^^^^^ variable.other.cs -->
+<!--        ^ punctuation.accessor.dot.cs -->
+<!--         ^^^ variable.other.cs -->
+<!--            ^^^^ meta.tag.block.any.html -->
+<!--            ^^ punctuation.definition.tag.begin.html -->
+<!--              ^ entity.name.tag.block.any.html -->
+<!--               ^ punctuation.definition.tag.end.html -->
 <p>@DateTime.IsLeapYear(2016)</p>
-<!-- ^^^^^^^ source.cs.embedded variable.other -->
-<!--        ^ source.cs.embedded punctuation.accessor.dot -->
-<!--         ^^^^^^^^^^ source.cs.embedded meta.function-call variable.function -->
-<!--                   ^ punctuation.section.group.begin -->
-<!--                    ^^^^ constant.numeric -->
-<!--                        ^ punctuation.section.group.end -->
-<!--                         ^^^ meta.tag.block.any -->
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html -->
+<!--^^^^^^^^ variable.other.cs -->
+<!--        ^ punctuation.accessor.dot.cs -->
+<!--         ^^^^^^^^^^^^^^^^ meta.function-call.cs -->
+<!--         ^^^^^^^^^^ variable.function.cs -->
+<!--                   ^^^^^^ meta.group.cs -->
+<!--                   ^ punctuation.section.group.begin.cs -->
+<!--                    ^^^^ meta.number.integer.decimal.cs constant.numeric.value.cs -->
+<!--                        ^ punctuation.section.group.end.cs -->
+<!--                         ^^^^ meta.tag.block.any.html -->
+<!--                         ^^ punctuation.definition.tag.begin.html -->
+<!--                           ^ entity.name.tag.block.any.html -->
+<!--                            ^ punctuation.definition.tag.end.html -->
 
      <p>@(GenericMethod<int>())</p>
 <!--    ^^ punctuation.section.embedded.begin -->
@@ -99,7 +110,10 @@ else
 @switch (value)
 {
     case 1:
-<!--^^^^ keyword.control.switch.case -->
+<!--^^^^^^^^ meta.block.cs -->
+<!--^^^^ keyword.control.conditional.case.cs -->
+<!--     ^ meta.number.integer.decimal.cs constant.numeric.value.cs -->
+<!--      ^ punctuation.separator.case-statement.cs -->
         <p>The value is 1!</p>
         break;
     case 1337:
@@ -134,9 +148,10 @@ else
 
 @{
     var quote = "The future depends on what you do today. - Mahatma Gandhi";
-<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html -->
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html -->
+<!--^^^ storage.type.variable.cs -->
 <!--    ^^^^^ variable.other.cs -->
-<!--          ^ keyword.operator.assignment.variable.cs -->
+<!--          ^ keyword.operator.assignment.cs -->
 <!--            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.cs string.quoted.double.cs -->
 <!--            ^ punctuation.definition.string.begin.cs -->
 <!--                                                                      ^ punctuation.definition.string.end.cs -->
@@ -262,7 +277,7 @@ else
 <!--                               ^^^^^ variable.language.this.razor -->
 <!--                                    ^ punctuation.accessor.dot.cs -->
 <!--                                     ^^^^^^^^^^^ variable.other.cs -->
-<!--                                                 ^ keyword.operator.cs -->
+<!--                                                 ^ keyword.operator.arithmetic.cs -->
 <!--                                                   ^ meta.number.integer.decimal.cs constant.numeric.value.cs -->
 <!--                                                    ^ punctuation.section.group.end.cs -->
 <!--                                                     ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html -->
@@ -271,6 +286,7 @@ else
 <!--                                                        ^^ punctuation.definition.tag.begin.html -->
 <!--                                                          ^ entity.name.tag.inline.any.html -->
 <!--                                                           ^ punctuation.definition.tag.end.html -->
+
 </li>
 <li>
     <a href="@Model.FunctionCall("embedded string")">"quotes" everywhere</a>
