@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-scope: source.cs.embedded.html
+scope: source.cs.embedded.html.cs.webforms
 hidden: true
 # version: 2
 

@@ -99,7 +99,7 @@ contexts:
             - match: \}
               scope: punctuation.section.block.end.cs-razor
               pop: true
-            - include: scope:source.cs#code_block_in
+            - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#code_block_in
         - match: \s*(?!\{)(?=\S)
           scope: invalid.illegal.expected-block.cs-razor
           pop: true
@@ -111,7 +111,7 @@ contexts:
       push:
         - clear_scopes: 1
         - meta_content_scope: source.cs.embedded.html
-        - include: scope:source.cs#line_of_code
+        - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#line_of_code
         - match: ''
           pop: true
       with_prototype:
@@ -119,7 +119,7 @@ contexts:
     - match: '[\w-+]+@\w+' # ignore email addresses
     - match: '@(?=(?:\w+\.)*\w+(?:[<\s]|$))'
       scope: punctuation.section.embedded.line.cs-razor
-      embed: scope:source.cs#line_of_code_in
+      embed: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#line_of_code_in
       embed_scope: source.cs.embedded.html
       escape: $|(?=[<\s])
     - match: '@(?=(?:\w+\.)*\w+\()'
@@ -128,7 +128,7 @@ contexts:
         - meta_content_scope: source.cs.embedded.html
         - match: (?=[<\s])
           pop: true
-        - include: scope:source.cs#line_of_code_in
+        - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#line_of_code_in
     - match: '@\('
       scope: punctuation.section.embedded.begin.cs-razor
       push:
@@ -137,7 +137,7 @@ contexts:
         - match: \)
           scope: punctuation.section.embedded.end.cs-razor
           pop: true
-        - include: scope:source.cs#line_of_code_in
+        - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#line_of_code_in
     #- match: '@(?=\w+(?:\.\w+)*)(?!\s*[+=|(])' # TODO: support a.b[2] etc.
     #  comment: property/variable access
     #  scope: punctuation.section.embedded.line.cs-razor
