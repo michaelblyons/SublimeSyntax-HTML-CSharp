@@ -3,6 +3,7 @@
 # http://www.sublimetext.com/docs/syntax.html
 name: .Net Web Handler (ASHX)
 scope: source.cs.webforms.ashx
+version: 2
 
 extends: Packages/C#/C#.sublime-syntax
 

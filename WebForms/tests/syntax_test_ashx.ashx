@@ -21,7 +21,7 @@ using System;
 using System.Web;
 //^^^ keyword.control.import.cs
 //    ^^^^^^^^^^ meta.path.cs
-//          ^ punctuation.separator.namespace.cs
+//          ^ punctuation.accessor.dot.cs
 //              ^ punctuation.terminator.statement.cs
 
 public class Handler : IHttpHandler

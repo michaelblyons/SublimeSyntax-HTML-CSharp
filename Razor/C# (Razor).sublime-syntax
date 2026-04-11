@@ -2,7 +2,7 @@
 ---
 scope: source.cs.embedded.html.cs.razor
 hidden: true
-# version: 2
+version: 2
 
 extends: Packages/C#/C#.sublime-syntax
 
