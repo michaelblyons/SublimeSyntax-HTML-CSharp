@@ -35,6 +35,11 @@
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html -->
 <!--                                                    ^^^^ meta.tag.inline -->
 
+    @*  *@
+<!--^^^^^^ comment.block.cs-razor -->
+<!--^^ punctuation.definition.comment.block.begin.cs-razor -->
+<!--    ^^ punctuation.definition.comment.block.end.cs-razor -->
+
 <p>@DateTime.Now</p>
 <!-- ^^^^^^^ source.cs.embedded variable.other -->
 <!--        ^ source.cs.embedded punctuation.accessor.dot -->
@@ -105,6 +110,7 @@ else
         break;
 <!--    ^^^^^ keyword.control.flow.break -->
 }
+
 @*
 @for (var i = 0; i < people.Length; i++)
 <!-- <- comment.block - punctuation -->
@@ -118,7 +124,6 @@ else
     var person = people[i];
     @:Name: @person.Name
 }     *@
-<!--  ^^ comment.block punctuation.definition.comment -->
 
     @{ }  
 <!--^^^^^^ meta.embedded.cs -->
