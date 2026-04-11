@@ -128,7 +128,7 @@
 <%--^^ meta.embedded.cs punctuation.section.embedded.begin.cs-webforms --%>
 <%--  ^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html --%>
 <%--   ^ punctuation.section.block.end.cs --%>
-<%--     ^^^^^ keyword.control.conditional.else.cs --%>
+<%--     ^^^^ keyword.control.conditional.else.cs --%>
 <%--          ^^ meta.block.cs --%>
 <%--          ^ punctuation.section.block.begin.cs --%>
 <%--            ^^ text.html.cs.webforms meta.embedded.cs punctuation.section.embedded.end.cs-webforms - source --%>
