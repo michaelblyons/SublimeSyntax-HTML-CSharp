@@ -28,7 +28,7 @@ jobs:
             packages: master
           - build: stable
             packages: master
-          - build: 4201
+          - build: 4204
             packages: binary
     steps:
       - uses: actions/checkout@v6
