@@ -105,7 +105,7 @@ contexts:
           pop: true
     - match: '@@'
       scope: constant.character.escape.cs-razor
-    - match: (@)(?=(?:if|switch|for|foreach|using|try|lock)\b)
+    - match: (@)(?=(?:if|switch|for|foreach|using|try|lock|do)\b)
       captures:
         1: punctuation.section.embedded.cs-razor
       push:
@@ -147,13 +147,15 @@ contexts:
       push: razor-block
 
   razor-block-prototype:
-    - match: (?=[<&])
-      embed: scope:text.html.basic
+    - match: (?=&\w{1,8};|<[\w/!])
+      embed: razor
       escape: (?=[@}]|$)
     - match: '@:'
       scope: punctuation.section.embedded.html.cs-razor
       embed: scope:text.html.basic
       escape: $
+    - match: '@'
+      scope: punctuation.section.embedded.line.cs-razor
 
   eat-whitespace:
     - match: (?=\S)
