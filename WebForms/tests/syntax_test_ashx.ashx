@@ -19,17 +19,20 @@
 
 using System;
 using System.Web;
-//^^^ keyword.control.import.cs
-//    ^^^^^^^^^^ meta.path.cs
+//^^^^^^^^^^^^^^ meta.using.cs
+//^^^ keyword.declaration.using.cs
+//    ^^^^^^ variable.namespace.cs
 //          ^ punctuation.accessor.dot.cs
+//           ^^^ variable.namespace.cs
 //              ^ punctuation.terminator.statement.cs
 
 public class Handler : IHttpHandler
 //^^^^ storage.modifier.access.cs
-//     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.cs
+//     ^^^^^^^^^^^^^^ meta.class.cs
 //     ^^^^^ keyword.declaration.class.cs
 //           ^^^^^^^ entity.name.class.cs
-//                   ^ punctuation.separator.type.cs
+//                   ^^^^^^^^^^^^^^^ meta.class.base.cs
+//                   ^ punctuation.separator.colon.cs
 //                     ^^^^^^^^^^^^ entity.other.inherited-class.cs
 {
     public void ProcessRequest(HttpContext context)
@@ -45,14 +48,13 @@ public class Handler : IHttpHandler
     {
         context.Response.ContentType = "text/plain";
         context.Response.Write("Hello World");
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.body.cs meta.block.cs meta.method.body.cs meta.block.cs
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.body.cs meta.block.cs meta.method.body.cs meta.block.cs
 //      ^^^^^^^ variable.other.cs
 //             ^ punctuation.accessor.dot.cs
 //              ^^^^^^^^ variable.other.cs
 //                      ^ punctuation.accessor.dot.cs
-//                       ^^^^^^^^^^^^^^^^^^^^ meta.function-call.cs
-//                       ^^^^^ variable.function.cs
-//                            ^^^^^^^^^^^^^^^ meta.group.cs
+//                       ^^^^^ meta.function-call.identifier.cs variable.function.cs
+//                            ^^^^^^^^^^^^^^^ meta.function-call.arguments.cs meta.group.cs
 //                            ^ punctuation.section.group.begin.cs
 //                             ^^^^^^^^^^^^^ meta.string.cs string.quoted.double.cs
 //                             ^ punctuation.definition.string.begin.cs

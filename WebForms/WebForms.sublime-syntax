@@ -9,11 +9,6 @@ extends: Packages/HTML/HTML.sublime-syntax
 hidden: true
 file_extensions: []
 
-variables:
-  csharp_tag: (?:<%(?![=#:$@-]))
-  csharp_tag_interpolation: (?:<%(?:=|:|#:?|\$))
-  csharp_tag_end: (?:%>)
-
 contexts:
   prototype:
     - meta_prepend: true
@@ -214,7 +209,7 @@ contexts:
           pop: 1
         - match: '>'
           scope: punctuation.definition.tag.end.html
-          embed: Packages/C#/C#.sublime-syntax
+          embed: Packages/C#/C#.sublime-syntax#csharp
           embed_scope: source.cs.embedded.html
           escape: (?i)(?=</script)
         - include: scope:text.html.basic#tag-stuff
@@ -377,7 +372,7 @@ contexts:
     - meta_include_prototype: false
     - match: '{{csharp_tag_interpolation}}'
       scope: meta.embedded.cs punctuation.section.embedded.begin.cs-webforms
-      embed: Packages/C#/C#.sublime-syntax
+      embed: Packages/C#/C#.sublime-syntax#expression
       embed_scope: meta.embedded.cs source.cs.embedded.html
       escape: ({{csharp_tag_end}})(\s*\n)?
       escape_captures:
@@ -385,3 +380,9 @@ contexts:
         1: punctuation.section.embedded.end.cs-webforms
         2: meta.html-newline-after-csharp.cs-webforms
 
+###[ VARIABLES ]###############################################################
+
+variables:
+  csharp_tag: (?:<%(?![=#:$@-]))
+  csharp_tag_interpolation: (?:<%(?:=|:|#:?|\$))
+  csharp_tag_end: (?:%>)

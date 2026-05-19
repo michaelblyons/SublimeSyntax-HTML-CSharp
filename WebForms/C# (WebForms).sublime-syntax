@@ -14,7 +14,7 @@ contexts:
     - match: (?=%>)
       pop: 1
 
-  code_block_in:
+  csharp:
     - meta_prepend: true
     - match: (%>)(\s*\n)?
       scope: meta.embedded.cs
@@ -25,7 +25,7 @@ contexts:
 
   embedding-syntax:
     - clear_scopes: true
-    - meta_scope: embedding.cs text.html.cs.webforms
+    - meta_scope: text.html.cs.webforms
     - meta_include_prototype: false
     - match: <%(?![=#:$@-])
       scope: meta.embedded.cs punctuation.section.embedded.begin.cs-webforms
