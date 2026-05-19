@@ -1,0 +1,18 @@
+name: Package Review
+# https://github.com/kaste/st_package_reviewer/tree/main/gh_action_package
+
+on:
+    workflow_dispatch:
+
+jobs:
+  package-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Review artifact for Package Control
+        uses: kaste/st_package_reviewer/gh_action_package@ad89510c574e97d92cfd4d9e0f5c9029394f5c94
+        with:
+          package-name: 'HTML (C#)'
+          st-build: 4204
+          repo: ''  # Skip tags check
