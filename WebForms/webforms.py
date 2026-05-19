@@ -4,7 +4,7 @@ from re import search
 from os.path import isfile
 
 
-class OpenCodeFileFromFrontEndCommand(sublime_plugin.TextCommand):
+class CshtmlWebformsOpenPairedCodeFileCommand(sublime_plugin.TextCommand):
     """Open foo.ascx.cs from foo.ascx"""
 
     def is_enabled(self):
@@ -19,7 +19,7 @@ class OpenCodeFileFromFrontEndCommand(sublime_plugin.TextCommand):
         self.view.window().open_file(str(codefile))
 
 
-class OpenFrontEndFromCodeFileCommand(sublime_plugin.TextCommand):
+class CshtmlWebformsOpenPairedFrontEndCommand(sublime_plugin.TextCommand):
     """Naively open foo.ascx from foo.ascx.cs"""
 
     def is_enabled(self):
