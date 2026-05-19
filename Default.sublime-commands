@@ -1,0 +1,18 @@
+[
+    {
+        "caption": "HTML (C#) WebForms: Open CodeBehind / CodeFile",
+        "command": "cshtml_webforms_open_paired_code_file",
+    },
+    {
+        "caption": "HTML (C#) WebForms: Open Front End",
+        "command": "cshtml_webforms_open_paired_front_end",
+    },
+    {
+        "caption": "Preferences: HTML (C#) Settings",
+        "command": "edit_settings",
+        "args": {
+            "base_file": "${packages}/HTML (C#)/HTML (C#).sublime-settings",
+            "default": "{\n\t// Add your overrides here for settings on the left\n\t$0\n}\n",
+        }
+    },
+]

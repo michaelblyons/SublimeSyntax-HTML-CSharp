@@ -1,0 +1,24 @@
+[{
+    "id": "preferences",
+    "children": [
+        {
+            "id": "package-settings",
+            "children": [
+                {
+                    "caption": "HTML (C#)",
+                    "children": [
+                        {
+                            "caption": "Settings",
+                            "id": "cshtml-settings",
+                            "command": "edit_settings",
+                            "args": {
+                                "base_file": "${packages}/HTML (C#)/HTML (C#).sublime-settings",
+                                "default": "/* See the left pane for the list of settings and valid values. */\n{\n\t$0\n}\n",
+                            },
+                        },
+                    ]
+                },
+            ]
+        },
+    ]
+}]
