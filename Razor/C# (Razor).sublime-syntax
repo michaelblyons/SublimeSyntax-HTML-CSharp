@@ -10,7 +10,12 @@ extends: Packages/C#/C#.sublime-syntax
 
 contexts:
 
-  stray_close_bracket:
+  comments:
+    - meta_prepend: true
+    - include: Packages/HTML/HTML (Plain).sublime-syntax#comment
+    - include: Razor.sublime-syntax#comments
+
+  stray-punctuations:
     - match: \]|\)
       scope: invalid.illegal.stray.cs
     - match: (?=})
@@ -23,14 +28,36 @@ contexts:
     - match: \bHtml\b
       scope: variable.language.this.razor
 
-  inside_triple_quoted_raw_string_syntax:
-    - meta_include_prototype: false
-    - include: immediately_pop
+  razor-functions-block:
+    - include: visibility
+    - include: modifiers
+    - include: local-declarations
 
-  inside_verbatim_string_syntax:
-    - meta_include_prototype: false
-    - include: immediately_pop
+  inside-statement-block:
+    - meta_prepend: true
+    - include: Razor.sublime-syntax#razor-block-prototype
 
-  inside_verbatim_format_string_syntax:
+  embedded-statement-pop:
+    - include: embedded-statements
+    - include: statement-blocks
+    - include: else-pop
+
+  html-attribute-single-expression:
+    - include: Razor.sublime-syntax#razor-groups
+    - match: (?=")
+      pop: 1
+    - include: expression
+
+  # Don't let C# embed extra syntaxes in strings
+
+  inside-triple-quoted-raw-string-syntax:
     - meta_include_prototype: false
-    - include: immediately_pop
+    - include: immediately-pop
+
+  inside-verbatim-string-syntax:
+    - meta_include_prototype: false
+    - include: immediately-pop
+
+  inside-verbatim-format-string-syntax:
+    - meta_include_prototype: false
+    - include: immediately-pop
