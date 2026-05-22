@@ -11,7 +11,7 @@ contexts:
 
   prototype:
     - meta_prepend: true
-    - include: csharp-embedded
+    - include: Razor.sublime-syntax#expressions
 
   comments:
     - meta_prepend: true
@@ -19,8 +19,4 @@ contexts:
 
   string-content:
     - meta_prepend: true
-    - include: Razor.sublime-syntax#csharp-interpolations
-
-  csharp-embedded:
-    - meta_include_prototype: false
-    - include: Razor.sublime-syntax#razor-constructs
+    - include: Razor.sublime-syntax#expressions

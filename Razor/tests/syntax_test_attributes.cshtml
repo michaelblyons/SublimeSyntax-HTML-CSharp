@@ -17,7 +17,7 @@
 @*                                     ^ punctuation.separator.key-value.html *@
 @*                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.html string.quoted.double.html *@
 @*                                      ^ punctuation.definition.string.begin.html *@
-@*                                       ^ punctuation.section.interpolation.begin.razor *@
+@*                                       ^ punctuation.section.embedded.begin.cs-razor *@
 @*                                        ^^^^^ variable.language.this.razor *@
 @*                                             ^ punctuation.accessor.dot.cs *@
 @*                                              ^^^^^^^^^^^^^ variable.other.cs *@
@@ -29,7 +29,7 @@
 @*                                                                                     ^ punctuation.separator.key-value.html *@
 @*                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.html string.quoted.double.html *@
 @*                                                                                      ^ punctuation.definition.string.begin.html *@
-@*                                                                                       ^ punctuation.section.interpolation.begin.razor *@
+@*                                                                                       ^ punctuation.section.embedded.begin.cs-razor *@
 @*                                                                                        ^^^^^ variable.language.this.razor *@
 @*                                                                                             ^ punctuation.accessor.dot.cs *@
 @*                                                                                              ^^^^^^^^^^^^^ variable.other.cs *@
@@ -58,7 +58,7 @@
 @*             ^ punctuation.separator.key-value.html *@
 @*              ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html *@
 @*               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.path.url.html meta.string.html string.quoted.double.html *@
-@*               ^ punctuation.section.interpolation.begin.razor *@
+@*               ^ punctuation.section.embedded.begin.cs-razor *@
 @*                ^^^^^ variable.language.this.razor *@
 @*                     ^ punctuation.accessor.dot.cs *@
 @*                      ^^^^^^^^^^^^^^ meta.function-call.identifier.cs variable.function.cs *@
@@ -88,7 +88,7 @@
 @*             ^ punctuation.separator.key-value.html *@
 @*              ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html *@
 @*               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.path.url.html meta.string.html string.quoted.double.html *@
-@*               ^ punctuation.section.interpolation.begin.razor *@
+@*               ^ punctuation.section.embedded.begin.cs-razor *@
 @*                ^^^^^ variable.language.this.razor *@
 @*                     ^ punctuation.accessor.dot.cs *@
 @*                      ^^^^^^^^^^^^ meta.function-call.identifier.cs variable.function.cs *@
@@ -112,7 +112,7 @@
 @*                              ^ punctuation.separator.key-value.html *@
 @*                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.html string.quoted.double.html *@
 @*                               ^ punctuation.definition.string.begin.html *@
-@*                                ^ punctuation.section.interpolation.begin.razor *@
+@*                                ^ punctuation.section.embedded.begin.cs-razor *@
 @*                                 ^^^ variable.other.cs *@
 @*                                    ^ punctuation.accessor.dot.cs *@
 @*                                     ^^^^^^ meta.function-call.identifier.cs variable.function.cs *@
@@ -129,11 +129,46 @@
 @*                                                                   ^ punctuation.definition.string.end.html *@
 @*                                                                     ^^^^^^^^^^^^^ meta.attribute-with-value.html *@
 
-        @* TODO: scope @ constructs in HTML attribute values correctly *@
         <div class="@(HtmlHelpers.DevModeEnabled(Request) ? "foo" : "bar")"></div>
+@*      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
+@*      ^ punctuation.definition.tag.begin.html *@
+@*       ^^^ entity.name.tag.block.any.html *@
+@*           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.class.html *@
+@*           ^^^^^ entity.other.attribute-name.class.html *@
+@*                ^ punctuation.separator.key-value.html *@
+@*                 ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html *@
+@*                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class-name.html meta.string.html string.quoted.double.html *@
+@*                  ^^ punctuation.section.embedded.begin.cs-razor *@
+@*                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
+@*                    ^^^^^^^^^^^ variable.other.cs *@
+@*                               ^ punctuation.accessor.dot.cs *@
+@*                                ^^^^^^^^^^^^^^ meta.function-call.identifier.cs variable.function.cs *@
+@*                                              ^^^^^^^^^ meta.function-call.arguments.cs meta.group.cs *@
+@*                                              ^ punctuation.section.group.begin.cs *@
+@*                                               ^^^^^^^ variable.other.cs *@
+@*                                                      ^ punctuation.section.group.end.cs *@
+@*                                                        ^ keyword.operator.ternary.cs *@
+@*                                                          ^^^^^ meta.string.cs string.quoted.double.cs *@
+@*                                                          ^ punctuation.definition.string.begin.cs *@
+@*                                                              ^ punctuation.definition.string.end.cs *@
+@*                                                                ^ keyword.operator.ternary.cs *@
+@*                                                                  ^^^^^ meta.string.cs string.quoted.double.cs *@
+@*                                                                  ^ punctuation.definition.string.begin.cs *@
+@*                                                                      ^ punctuation.definition.string.end.cs *@
+@*                                                                       ^ punctuation.section.embedded.end.cs-razor *@
+@*                                                                        ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html *@
+@*                                                                         ^ punctuation.definition.tag.end.html *@
+@*                                                                          ^^ punctuation.definition.tag.begin.html *@
+@*                                                                            ^^^ entity.name.tag.block.any.html *@
+@*                                                                               ^ punctuation.definition.tag.end.html *@
+
+        @* TODO: scope @ constructs in HTML attribute values correctly *@
         <div style="@(HtmlHelpers.DevModeEnabled(Request) ? "display: none;" : "")"></div>
+
+        @* TODO: scope @ constructs in HTML attribute values correctly *@
         <div onclick="@(HtmlHelpers.DevModeEnabled(Request) ? "display: none;" : "")"></div>
 
+        @* TODO: scope @ constructs in HTML attribute values correctly *@
         <div class='@(HtmlHelpers.DevModeEnabled(Request) ? "foo" : "bar")'></div>
 @*      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
 @*      ^ punctuation.definition.tag.begin.html *@
@@ -143,7 +178,7 @@
 @*                ^ punctuation.separator.key-value.html *@
 @*                 ^ meta.string.html string.quoted.single.html punctuation.definition.string.begin.html *@
 @*                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class-name.html meta.string.html string.quoted.single.html *@
-@*                  ^^ punctuation.section.interpolation.begin.razor *@
+@*                  ^^ punctuation.section.embedded.begin.cs-razor *@
 @*                    ^^^^^^^^^^^ variable.other.cs *@
 @*                               ^ punctuation.accessor.dot.cs *@
 @*                                ^^^^^^^^^^^^^^ meta.function-call.identifier.cs variable.function.cs *@
@@ -205,7 +240,7 @@
 @*                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.html *@
 @*                   ^ string.quoted.single.html punctuation.definition.string.begin.html *@
 @*                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.interpolation.html source.js.embedded.html *@
-@*                    ^^ punctuation.section.interpolation.begin.razor *@
+@*                    ^^ punctuation.section.embedded.begin.cs-razor *@
 @*                      ^^^^^^^^^^^ variable.other.cs *@
 @*                                 ^ punctuation.accessor.dot.cs *@
 @*                                  ^^^^^^^^^^^^^^ meta.function-call.identifier.cs variable.function.cs *@
@@ -243,7 +278,7 @@
 @*         ^^^^^^^^ entity.other.attribute-name.html *@
 @*                 ^ punctuation.separator.key-value.html *@
 @*                  ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html *@
-@*                   ^ punctuation.section.embedded.line.cs-razor *@
+@*                   ^ punctuation.section.embedded.begin.cs-razor *@
 @*                    ^^^^^^^^^^^^^^^ source.cs.embedded.html *@
 @*                    ^^^^ variable.other.cs *@
 @*                        ^ punctuation.accessor.dot.cs *@
@@ -269,14 +304,12 @@
 @*                   ^^^^^^^ entity.other.attribute-name.html *@
 @*                          ^ punctuation.separator.key-value.html *@
 @*                           ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html *@
-@*                            ^ punctuation.section.embedded.line.cs-razor *@
+@*                            ^ punctuation.section.embedded.begin.cs-razor *@
 @*                             ^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
 @*                             ^^^^ variable.other.cs *@
 @*                                 ^ punctuation.accessor.dot.cs *@
 @*                                  ^^ variable.other.cs *@
 
             <p></p>
-@*^^^^^^^^^^^^^^^^^^ meta.block.cs meta.block.cs *@
-@*          ^^^^^^^ meta.tag.block.any.html *@
         }
     }

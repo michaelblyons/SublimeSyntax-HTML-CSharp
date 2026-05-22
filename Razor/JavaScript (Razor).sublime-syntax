@@ -15,8 +15,8 @@ contexts:
 
   statement:
     - meta_prepend: true
-    - include: Razor.sublime-syntax#csharp-interpolations
+    - include: Razor.sublime-syntax#expressions
 
   string-content:
     - meta_prepend: true
-    - include: Razor.sublime-syntax#csharp-interpolations
+    - include: Razor.sublime-syntax#expressions

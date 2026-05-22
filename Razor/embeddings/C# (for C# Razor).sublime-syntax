@@ -1,0 +1,29 @@
+%YAML 1.2
+---
+scope: source.cs.embedded.cs.razor
+version: 2
+hidden: true
+
+extends: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax
+
+contexts:
+
+  prototype:
+    - meta_prepend: true
+    - include: comments
+
+  expression:
+    - meta_prepend: true
+    - include: at-strings
+    - include: Packages/HTML (C#)/Razor/Razor.sublime-syntax#razor-transitions
+
+  at-strings:
+    - match: '@(?=<)'
+      scope: punctuation.definition.string.begin.razor
+      push: at-string-body
+  at-string-body:
+    - meta_scope: string.unquoted.cs-razor
+    - match: (?=;|$)
+      pop: 1
+    - include: Packages/HTML (C#)/Razor/Razor.sublime-syntax#razor-transitions
+

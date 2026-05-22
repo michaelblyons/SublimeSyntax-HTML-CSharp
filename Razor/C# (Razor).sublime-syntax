@@ -6,14 +6,13 @@ version: 2
 
 extends: Packages/C#/C#.sublime-syntax
 
-##############################################################################
-
 contexts:
+
+###[ CSHARP OVERRIDES ]########################################################
 
   comments:
     - meta_prepend: true
-    - include: Packages/HTML/HTML (Plain).sublime-syntax#comment
-    - include: Razor.sublime-syntax#comments
+    - include: Razor.sublime-syntax#comment
 
   stray-punctuations:
     - match: \]|\)
@@ -28,25 +27,9 @@ contexts:
     - match: \bHtml\b
       scope: variable.language.this.razor
 
-  razor-functions-block:
-    - include: visibility
-    - include: modifiers
-    - include: local-declarations
-
   inside-statement-block:
     - meta_prepend: true
-    - include: Razor.sublime-syntax#razor-block-prototype
-
-  embedded-statement-pop:
-    - include: embedded-statements
-    - include: statement-blocks
-    - include: else-pop
-
-  html-attribute-single-expression:
-    - include: Razor.sublime-syntax#razor-groups
-    - match: (?=")
-      pop: 1
-    - include: expression
+    - include: Razor.sublime-syntax#razor-transitions
 
   # Don't let C# embed extra syntaxes in strings
 
@@ -61,3 +44,33 @@ contexts:
   inside-verbatim-format-string-syntax:
     - meta_include_prototype: false
     - include: immediately-pop
+
+###[ UTILITY ]#################################################################
+
+  razor-functions-block:
+    - include: visibility
+    - include: modifiers
+    - include: local-declarations
+
+  embedded-statement-pop:
+    - include: embedded-statements
+    - include: statement-blocks
+    - include: else-pop
+
+  html-attribute-expression:
+    - include: Razor.sublime-syntax#expressions-explicit
+    - match: (?=["'\s])
+      pop: 1
+    - include: Razor.sublime-syntax#expressions
+
+  html-attribute-expression-double-quoted:
+    - include: Razor.sublime-syntax#expressions-explicit
+    - match: (?=["\s])
+      pop: 1
+    - include: Razor.sublime-syntax#expressions
+
+  html-attribute-expression-single-quoted:
+    - include: Razor.sublime-syntax#expressions-explicit
+    - match: (?=['\s])
+      pop: 1
+    - include: Razor.sublime-syntax#expressions

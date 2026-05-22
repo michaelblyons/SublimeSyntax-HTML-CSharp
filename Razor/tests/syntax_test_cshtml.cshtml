@@ -2,7 +2,7 @@
 @* https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-2.1 *@
 
     @using System.Collections.Generic
-@*  ^ punctuation.section.embedded.line.cs-razor *@
+@*  ^ punctuation.section.embedded.begin.cs-razor *@
 @*   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
 @*   ^^^^^ keyword.other.cs-razor *@
 @*         ^^^^^^ variable.namespace.cs *@
@@ -13,7 +13,7 @@
 @*                                   ^ - source.cs *@
 
     @model IEnumerable<SomeNamespace.SomeType>
-@*  ^ punctuation.section.embedded.line.cs-razor *@
+@*  ^ punctuation.section.embedded.begin.cs-razor *@
 @*   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
 @*   ^^^^^ keyword.other.cs-razor *@
 @*         ^^^^^^^^^^^ entity.other.inherited-class.cs *@
@@ -41,7 +41,7 @@
 @*  ^ punctuation.definition.tag.begin.html *@
 @*   ^ entity.name.tag.block.any.html *@
 @*    ^ punctuation.definition.tag.end.html *@
-@*     ^ punctuation.section.embedded.line.cs-razor *@
+@*     ^ punctuation.section.embedded.begin.cs-razor *@
 @*      ^^^^^^^^ source.cs.embedded.html variable.other.cs *@
 @*              ^^^^ meta.tag.block.any.html *@
 @*              ^^ punctuation.definition.tag.begin.html *@
@@ -75,7 +75,7 @@
 @*  ^ punctuation.definition.tag.begin.html *@
 @*   ^ entity.name.tag.block.any.html *@
 @*    ^ punctuation.definition.tag.end.html *@
-@*     ^ punctuation.section.embedded.line.cs-razor *@
+@*     ^ punctuation.section.embedded.begin.cs-razor *@
 @*      ^^^^^^^^^^^^ source.cs.embedded.html *@
 @*      ^^^^^^^^ variable.other.cs *@
 @*              ^ punctuation.accessor.dot.cs *@
@@ -90,7 +90,7 @@
 @*  ^ punctuation.definition.tag.begin.html *@
 @*   ^ entity.name.tag.block.any.html *@
 @*    ^ punctuation.definition.tag.end.html *@
-@*     ^ punctuation.section.embedded.line.cs-razor *@
+@*     ^ punctuation.section.embedded.begin.cs-razor *@
 @*      ^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
 @*      ^^^^^^^^ variable.other.cs *@
 @*              ^ punctuation.accessor.dot.cs *@
@@ -126,13 +126,15 @@
 @*                              ^ entity.name.tag.block.any.html *@
 @*                               ^ punctuation.definition.tag.end.html *@
 
+    @* This expands to &lt;span&gt;Hello World&lt;/span&gt; *@
     @("<span>Hello World</span>")
 @*    ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.cs string.quoted.double.cs *@
 @*    ^ punctuation.definition.string.begin.cs *@
 @*                             ^ punctuation.definition.string.end.cs *@
 
+    @* This expands to <span>Hello World</span> *@
     @Html.Raw("<span>Hello World</span>")
-@*  ^ punctuation.section.embedded.line.cs-razor *@
+@*  ^ punctuation.section.embedded.begin.cs-razor *@
 @*   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
 @*   ^^^^ variable.language.this.razor *@
 @*       ^ punctuation.accessor.dot.cs *@
@@ -145,7 +147,7 @@
 @*                                      ^ punctuation.section.group.end.cs *@
 
      @if (val % 2 == 0) { <p>The value was even.</p> } else { <p>The value was odd.</p> }
-@*   ^ punctuation.section.embedded.cs-razor *@
+@*   ^ punctuation.section.embedded.begin.cs-razor *@
 @*    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
 @*    ^^ keyword.control.conditional.if.cs *@
 @*       ^^^^^^^^^^^^^^ meta.group.cs *@
@@ -181,7 +183,7 @@
 @*                                                                                      ^ punctuation.section.block.end.cs *@
 
     @if (val % 2 == 0)
-@*  ^ meta.embedded.cs punctuation.section.embedded.begin.cs-razor *@
+@*  ^ punctuation.section.embedded.begin.cs-razor *@
 @*   ^^ keyword.control.conditional.if.cs *@
 @*      ^^^^^^^^^^^^^^ meta.group.cs *@
 @*      ^ punctuation.section.group.begin.cs *@
@@ -241,7 +243,7 @@
 @*  ^ punctuation.section.block.end.cs *@
 
     @switch (val)
-@*  ^ meta.embedded.cs punctuation.section.embedded.begin.cs-razor *@
+@*  ^ punctuation.section.embedded.begin.cs-razor *@
 @*   ^^^^^^ keyword.control.conditional.switch.cs *@
 @*          ^^^^^ meta.group.cs *@
 @*          ^ punctuation.section.group.begin.cs *@
@@ -277,7 +279,7 @@
     }
 
     @do {
-@*  ^ meta.embedded.cs punctuation.section.embedded.begin.cs-razor *@
+@*  ^ punctuation.section.embedded.begin.cs-razor *@
 @*   ^^ keyword.control.loop.do.cs *@
 @*      ^^ meta.block.cs *@
 @*      ^ punctuation.section.block.begin.cs *@
@@ -287,7 +289,7 @@
 @*      ^ punctuation.definition.tag.begin.html *@
 @*       ^ entity.name.tag.block.any.html *@
 @*        ^ punctuation.definition.tag.end.html *@
-@*         ^ punctuation.section.embedded.line.cs-razor *@
+@*         ^ punctuation.section.embedded.begin.cs-razor *@
 @*          ^^^ source.cs.embedded.html variable.other.cs *@
 @*             ^^^^ meta.tag.block.any.html *@
 @*             ^^ punctuation.definition.tag.begin.html *@
@@ -305,7 +307,7 @@
 
 
     @for (var i = 0; i < people.Length; i++)
-@*  ^ meta.embedded.cs punctuation.section.embedded.begin.cs-razor *@
+@*  ^ punctuation.section.embedded.begin.cs-razor *@
 @*   ^^^ keyword.control.loop.for.cs *@
 @*       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.cs *@
 @*       ^ punctuation.section.group.begin.cs *@
@@ -335,25 +337,26 @@
 @*                          ^ variable.other.cs *@
 @*                           ^ punctuation.section.brackets.end.cs *@
 @*                            ^ punctuation.terminator.statement.cs *@
+
         <text>Name: @person.Name</text>
 @*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.cs *@
-@*      ^^^^^^ meta.tag.other.html *@
+@*      ^^^^^^ meta.tag.block.text.cs-razor *@
 @*      ^ punctuation.definition.tag.begin.html *@
-@*       ^^^^ entity.name.tag.other.html *@
+@*       ^^^^ entity.name.tag.text.cs-razor *@
 @*           ^ punctuation.definition.tag.end.html *@
-@*                  ^ punctuation.section.embedded.line.cs-razor *@
+@*                  ^ punctuation.section.embedded.begin.cs-razor *@
 @*                   ^^^^^^^^^^^ source.cs.embedded.html *@
 @*                   ^^^^^^ variable.other.cs *@
 @*                         ^ punctuation.accessor.dot.cs *@
 @*                          ^^^^ variable.other.cs *@
-@*                              ^^^^^^^ meta.tag.other.html *@
+@*                              ^^^^^^^ meta.tag.block.text.cs-razor *@
 @*                              ^^ punctuation.definition.tag.begin.html *@
-@*                                ^^^^ entity.name.tag.other.html *@
+@*                                ^^^^ entity.name.tag.text.cs-razor *@
 @*                                    ^ punctuation.definition.tag.end.html *@
     }
 
     @for (var i = 0; i < people.Length; i++)
-@*  ^ meta.embedded.cs punctuation.section.embedded.begin.cs-razor *@
+@*  ^ punctuation.section.embedded.begin.cs-razor *@
 @*   ^^^ keyword.control.loop.for.cs *@
 @*       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.cs *@
 @*       ^ punctuation.section.group.begin.cs *@
@@ -375,7 +378,7 @@
         var person = people[i];
         @:Name: @person.Name
 @*^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.cs *@
-@*      ^^ punctuation.section.embedded.html.cs-razor *@
+@*      ^^ punctuation.section.embedded.begin.cs-razor *@
 @*        ^^^^^^^^^^^^^^^^^^ text.html.basic - punctuation *@
     }
 
@@ -404,7 +407,7 @@
 @*  ^ punctuation.definition.tag.begin.html *@
 @*   ^ entity.name.tag.block.any.html *@
 @*    ^ punctuation.definition.tag.end.html *@
-@*     ^ punctuation.section.embedded.line.cs-razor *@
+@*     ^ punctuation.section.embedded.begin.cs-razor *@
 @*      ^^^^^ source.cs.embedded.html variable.other.cs *@
 @*           ^^^^ meta.tag.block.any.html *@
 @*           ^^ punctuation.definition.tag.begin.html *@
@@ -420,7 +423,7 @@
 @*  ^ punctuation.definition.tag.begin.html *@
 @*   ^ entity.name.tag.block.any.html *@
 @*    ^ punctuation.definition.tag.end.html *@
-@*     ^ punctuation.section.embedded.line.cs-razor *@
+@*     ^ punctuation.section.embedded.begin.cs-razor *@
 @*      ^^^^^ source.cs.embedded.html variable.other.cs *@
 @*           ^^^^ meta.tag.block.any.html *@
 @*           ^^ punctuation.definition.tag.begin.html *@
@@ -438,7 +441,7 @@
     }
 
     @try
-@*  ^ meta.embedded.cs punctuation.section.embedded.begin.cs-razor *@
+@*  ^ punctuation.section.embedded.begin.cs-razor *@
 @*   ^^^ keyword.control.exception.try.cs *@
     {
         throw new InvalidOperationException("You did something invalid.");
@@ -469,7 +472,7 @@
 @*      ^ punctuation.definition.tag.begin.html *@
 @*       ^ entity.name.tag.block.any.html *@
 @*        ^ punctuation.definition.tag.end.html *@
-@*                                ^ punctuation.section.embedded.line.cs-razor *@
+@*                                ^ punctuation.section.embedded.begin.cs-razor *@
 @*                                 ^^^^^^^^^^ source.cs.embedded.html *@
 @*                                 ^^ variable.other.cs *@
 @*                                   ^ punctuation.accessor.dot.cs *@
@@ -494,7 +497,7 @@
     }
 
     @lock (SomeLock)
-@*  ^ meta.embedded.cs punctuation.section.embedded.begin.cs-razor *@
+@*  ^ punctuation.section.embedded.begin.cs-razor *@
 @*   ^^^^ keyword.control.flow.lock.cs *@
 @*        ^^^^^^^^^^ meta.group.cs *@
 @*        ^ punctuation.section.group.begin.cs *@
@@ -524,7 +527,7 @@
 
 
     @functions {
-@*  ^ punctuation.section.embedded.line.cs-razor *@
+@*  ^ punctuation.section.embedded.begin.cs-razor *@
 @*   ^^^^^^^^^ source.cs.embedded.html keyword.other.cs-razor *@
 @*             ^ punctuation.section.block.begin.cs-razor *@
         public string GetHello()
@@ -551,7 +554,7 @@
 @*  ^ punctuation.definition.tag.begin.html *@
 @*   ^^^ entity.name.tag.block.any.html *@
 @*      ^ punctuation.definition.tag.end.html *@
-@*                    ^ punctuation.section.embedded.line.cs-razor *@
+@*                    ^ punctuation.section.embedded.begin.cs-razor *@
 @*                     ^^^^^^^^^^ source.cs.embedded.html *@
 @*                     ^^^^^^^^ meta.function-call.identifier.cs variable.function.cs *@
 @*                             ^^ meta.function-call.arguments.cs meta.group.cs *@

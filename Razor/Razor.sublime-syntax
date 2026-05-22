@@ -15,330 +15,31 @@ file_extensions:
 contexts:
   prototype:
     - meta_prepend: true
-    - include: comments
-    - include: csharp-embedded
-
-  main:
-    - meta_include_prototype: false
-    - match: ''
-      push: [razor]
+    - include: comment
+    - include: razor
 
   razor:
     # This is the main Razor context.
     # It includes `csharp-tags` which are allowed to be closed by } tags at any
     # level of code-block on stack resuming with the next top-level @{ tag.
     - meta_include_prototype: false
-    - include: directives
-    - include: csharp-tags
-    - include: html
-
-###[ COMMENTS ]################################################################
-
-  comments:
-    - meta_prepend: true
     - include: razor-block-comments
-
-  razor-block-comments:
-    - match: '@\*'
-      scope: punctuation.definition.comment.block.begin.cs-razor
-      push: razor-block-comment-body
-  razor-block-comment-body:
-    - meta_scope: comment.block.cs-razor
-    - match: '\*@'
-      scope: punctuation.definition.comment.block.end.cs-razor
-      pop: 1
-
-###[ DIRECTIVES ]##############################################################
-
-  # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#directives
-  directives:
-    - meta_include_prototype: false
-    - include: comments
-    - include: directives-attribute
-    - include: directives-code
-    - include: directives-functions
-    - include: directives-inheritance
-    - include: directives-inject
-    - include: directives-layout
-    - include: directives-model
-    - include: directives-namespace
-    - include: directives-page
-    - include: directives-preservewhitespace
-    - include: directives-rendermode
-    - include: directives-section
-    - include: directives-typeparam
-    - include: directives-using
-    - include: directives-taghelpers
-
-  directives-attribute:
-    - match: (@)(attribute)\b
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#attributes
-      embed_scope: source.cs.embedded.html
-      escape: $
-
-  directives-code:
-    - match: (@)(code)\b
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      push: expect-code-body
-  expect-code-body:
-    - match: \{
-      scope: punctuation.section.block.begin.razor
-      push: code-body
-    - include: else-pop
-  code-body:
-    - meta_scope: meta.block.razor
-    - match: \}
-      scope: punctuation.section.block.end.razor
-      pop: 2
-    - include: Packages/C#/C#.sublime-syntax#csharp
-
-  directives-functions:
-    - match: (@)(functions)\b
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      push: expect-functions-body
-  expect-functions-body:
-    - match: \{
-      scope: punctuation.section.block.begin.cs-razor
-      push: functions-body
-    - include: else-pop
-  functions-body:
-    - clear_scopes: 1
-    - meta_scope: source.cs.embedded.functions.cs-razor
-    - match: \}
-      scope: punctuation.section.block.end.cs-razor
-      pop: 2
-    - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#razor-functions-block
-
-  directives-inheritance:
-    - match: (@)(implements|inherits)\b
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#inherited-classes
-      embed_scope: source.cs.embedded.html
-      escape: $
-
-  # TODO: Possibly figure out better scopes for this
-  directives-inject:
-    - match: (@)(inject)\b(?!\s*\()
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#using-type
-      embed_scope: source.cs.embedded.html
-      escape: $
-
-  # Only for `.razor` files
-  directives-layout:
-    - match: (@)(layout)\b(?!\s*\()
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#using-type
-      embed_scope: source.cs.embedded.html
-      escape: $
-
-  # Only for `.cshtml` files
-  directives-model:
-    - match: (@)(model)\b
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#inherited-classes
-      embed_scope: source.cs.embedded.html
-      escape: $
-
-  directives-namespace:
-    - match: (@)(namespace)\b
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#namespace-declaration-name
-      embed_scope: source.cs.embedded.html
-      escape: $
-
-  directives-page:
-    - match: (@)(page)\b
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#expression
-      embed_scope: source.cs.embedded.html
-      escape: $
-
-  # Only for `.razor` files
-  directives-preservewhitespace:
-    - match: (@)(preservewhitespace)\b
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#constants
-      embed_scope: source.cs.embedded.html
-      escape: $
-
-  # Only for `.razor` files
-  directives-rendermode:
-    - match: (@)(rendermode)\b(?!\s*\()
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#using-type
-      embed_scope: source.cs.embedded.html
-      escape: $
-
-  # Only for `.cshtml` files
-  directives-section:
-    - match: (@)(section)\b(?:\s+(\w+))?
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-        3: entity.name.section.cs-razor
-      push: expect-section-body
-  expect-section-body:
-    - match: \{
-      scope: punctuation.section.block.begin.cs-razor
-      push: section-body
-    - include: else-pop
-  section-body:
-    - match: \}
-      scope: punctuation.section.block.end.cs-razor
-      pop: 2
-    - include: razor
-
-  directives-typeparam:
-    - match: (@)(typeparam)\b
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#inherited-classes
-      embed_scope: source.cs.embedded.html
-      escape: $
-
-  directives-using:
-    - match: (@)(using)\b(?!\s*\()
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#using-type
-      embed_scope: source.cs.embedded.html
-      escape: $
-
-  # Only for `.cshtml` files
-  directives-taghelpers:
-    # TODO: Better embed context
-    - match: (@)(addTagHelper|removeTagHelper|tagHelperPrefix)\b
-      captures:
-        1: punctuation.section.embedded.line.cs-razor
-        2: source.cs.embedded.html keyword.other.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#using-type
-      embed_scope: source.cs.embedded.html
-      escape: $
-
-###[ ATTRIBUTE DIRECTIVES ]####################################################
-
-  # This is HTML attributes with a leading `@` for .razor files only.
-
-###[ RAZOR CONSTRUCTS ]########################################################
-
-  razor-constructs:
     - include: razor-escapes
     - include: directives
-    - include: razor-statements
-    - match: '[\w-+]+@\w+' # ignore email addresses
-    - include: razor-function-calls
-    - include: razor-groups
-    #- match: '@(?=\w+(?:\.\w+)*)(?!\s*[+=|(])' # TODO: support a.b[2] etc.
-    #  comment: property/variable access
-    #  scope: punctuation.section.embedded.line.cs-razor
-    #  #push: razor-block # TODO: stop at closing " etc.
-    - include: razor-interpolations
+    - include: control-structures
+    - include: expressions
+    - include: code-blocks
 
-  # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#razor-reserved-keywords
-  razor-escapes:
-    - match: '@@'
-      scope: constant.character.escape.cs-razor
-    - match: (@\(){{razor_keywords}}(\))
-      scope: constant.character.escape.cs-razor
-      captures:
-        1: punctuation.definition.constant.begin.cs-razor
-        2: punctuation.definition.constant.end.cs-razor
-    - match: (@\(@){{csharp_keywords}}(\))
-      scope: constant.character.escape.cs-razor
-      captures:
-        1: punctuation.definition.constant.begin.cs-razor
-        2: punctuation.definition.constant.end.cs-razor
+###[ HTML OVERRIDES ]##########################################################
 
-  razor-statements:
-    - match: (@)(?={{csharp_keywords}})
-      captures:
-        1: punctuation.section.embedded.cs-razor
-      push: razor-statement-body
-  razor-statement-body:
-    - clear_scopes: 1
-    - meta_content_scope: source.cs.embedded.html
-    - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#embedded-statement-pop
-
-  razor-function-calls:
-    - match: '@(?=(?:\w+\.)*\w+\()'
-      scope: punctuation.section.embedded.line.cs-razor
-      push: razor-function-call-body
-  razor-function-call-body:
-    - meta_content_scope: source.cs.embedded.html
-    - match: (?=[<\s])
-      pop: true
-    - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#expression
-
-  razor-groups:
-    - match: '@\('
-      scope: punctuation.section.embedded.begin.cs-razor
-      push: razor-group-body
-  razor-group-body:
-    - clear_scopes: 1
-    - meta_content_scope: source.cs.embedded.html
-    - match: \)
-      scope: punctuation.section.embedded.end.cs-razor
-      pop: true
-    - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#expression
-
-
-  razor-block-prototype:
-    - match: (?=&\w{1,8};|<[\w/!])
-      embed: razor
-      escape: (?=[@}]|$)
-    - match: '@:'
-      scope: punctuation.section.embedded.html.cs-razor
-      embed: scope:text.html.basic
-      escape: $
-    - include: razor-interpolations
-
-  razor-interpolations:
-    - match: '@'
-      scope: punctuation.section.embedded.line.cs-razor
-      push: razor-interpolation-body
-  razor-interpolation-body:
-    - meta_content_scope: source.cs.embedded.html
-    - match: (?=[<\s])
-      pop: 1
-    - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#expression
-
-###[ HTML CONTENT ]###########################################################
-
-  tag-html:
+  comment:
     - meta_prepend: true
-    - include: razor-constructs
-    - include: csharp-interpolations
+    - include: razor-block-comments
 
   cdata-content:
     - meta_prepend: true
     - meta_include_prototype: false
-    - include: csharp-interpolations
+    - include: expressions
 
   script-javascript-content:
     - meta_include_prototype: false
@@ -430,63 +131,347 @@ contexts:
 
   tag-attribute-value-content:
     - meta_prepend: true
-    - include: csharp-interpolations
+    - include: eat-email-addresses
+    - match: (?=@)
+      push: C# (Razor).sublime-syntax#html-attribute-expression
 
   tag-generic-attribute-value-content:
     - meta_prepend: true
-    - include: csharp-interpolations
+    - include: eat-email-addresses
+    - match: (?=@)
+      push: C# (Razor).sublime-syntax#html-attribute-expression
 
   strings-common-content:
     - meta_prepend: true
-    - include: csharp-interpolations
+    - include: eat-email-addresses
+    - match: (?=@)
+      push: C# (Razor).sublime-syntax#html-attribute-expression
 
-###[ C# TAGS ]#################################################################
+###[ COMMENTS ]################################################################
 
-  csharp-tags:
-    - include: comments
-    - match: '{{csharp_tag}}'
+  razor-block-comments:
+    - match: '@\*'
+      scope: punctuation.definition.comment.block.begin.cs-razor
+      push: razor-block-comment-body
+  razor-block-comment-body:
+    - meta_scope: comment.block.cs-razor
+    - match: '\*@'
+      scope: punctuation.definition.comment.block.end.cs-razor
+      pop: 1
+
+###[ EXPRESSIONS ]#############################################################
+
+  expressions:
+    - include: razor-escapes
+    - include: expressions-explicit
+    - include: expressions-implicit
+
+  eat-email-addresses:
+    - match: '[\w-+]+@\w+'
+
+  # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#implicit-razor-expressions
+  expressions-implicit:
+    - include: eat-email-addresses
+    - match: '@(?=\w)'
       scope: punctuation.section.embedded.begin.cs-razor
-      push: csharp-tag-content
+      push: implicit-expression-body
+  implicit-expression-body:
+    - meta_content_scope: source.cs.embedded.html
+    - match: (?=[<\s"'])
+      scope: punctuation.section.embedded.end.cs-razor
+      pop: 1
+    - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#expression
 
-  csharp-tag-content:
-    - meta_include_prototype: false
+  # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#explicit-razor-expressions
+  expressions-explicit:
+    - match: '@\('
+      scope: punctuation.section.embedded.begin.cs-razor
+      push: explicit-expression-body
+  explicit-expression-body:
+    - meta_content_scope: source.cs.embedded.html
+    - match: \)
+      scope: punctuation.section.embedded.end.cs-razor
+      pop: 1
+    - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#expression
+
+###[ CODE BLOCKS ]#############################################################
+
+  code-blocks:
+    - include: comment
+    - match: '@\{'
+      scope: punctuation.section.embedded.begin.cs-razor
+      push: code-block-body
+  code-block-body:
+    # - meta_include_prototype: false
     - meta_scope: meta.embedded.cs
     - meta_content_scope: source.cs.embedded.html
-    - match: ({{csharp_tag_end}})(\s*\n)?
+    - match: (\})(\s*\n)?
       captures:
         1: punctuation.section.embedded.end.cs-razor
         2: meta.html-newline-after-csharp.cs-razor  # used by indentation rules
       pop: 1
-    - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax
+    - include: razor
+    # - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax
+    - include: Packages/HTML (C#)/Razor/embeddings/C# (for C# Razor).sublime-syntax
       apply_prototype: true
 
-  csharp-interpolations:
+  razor-transitions:
+    - include: transitions-explicit
+    - include: transitions-implicit
+
+  transitions-implicit:
+    - match: (?=&\w{1,8};|<[\w/!])
+      embed: main
+      escape: (?=[@}]|$)
+    - match: '@:'
+      scope: punctuation.section.embedded.begin.cs-razor
+      embed: scope:text.html.basic
+      escape: $
+    - include: expressions
+
+  transitions-explicit:
+    - match: (<)(text)(>)
+      scope: meta.tag.block.text.cs-razor
+      captures:
+        1: punctuation.definition.tag.begin.html
+        2: entity.name.tag.text.cs-razor
+        3: punctuation.definition.tag.end.html
+      embed: razor
+      escape: (</)(text)(>)
+      escape_captures:
+        0: meta.tag.block.text.cs-razor
+        1: punctuation.definition.tag.begin.html
+        2: entity.name.tag.text.cs-razor
+        3: punctuation.definition.tag.end.html
+
+###[ CONTROL STRUCTURES ]######################################################
+
+  control-structures:
+    - match: (@)(?={{csharp_keywords}})
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+      push: control-structure-body
+  control-structure-body:
+    - clear_scopes: 1
+    - meta_content_scope: source.cs.embedded.html
+    - include: comment
+    - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#embedded-statement-pop
+
+###[ DIRECTIVES ]##############################################################
+
+  # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#directives
+  directives:
     - meta_include_prototype: false
+    - include: comment
+    - include: directives-attribute
+    - include: directives-code
+    - include: directives-functions
+    - include: directives-inheritance
+    - include: directives-inject
+    - include: directives-layout
+    - include: directives-model
+    - include: directives-namespace
+    - include: directives-page
+    - include: directives-preservewhitespace
+    - include: directives-rendermode
+    - include: directives-section
+    - include: directives-typeparam
+    - include: directives-using
+    - include: directives-taghelpers
+
+  directives-attribute:
+    - match: (@)(attribute)\b
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: Packages/C#/C#.sublime-syntax#attributes
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+  directives-code:
+    - match: (@)(code)\b
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      push: expect-code-body
+  expect-code-body:
+    - match: \{
+      scope: punctuation.section.block.begin.razor
+      push: code-body
+    - include: else-pop
+  code-body:
+    - meta_scope: meta.block.razor
+    - match: \}
+      scope: punctuation.section.block.end.razor
+      pop: 2
+    - include: comment
+    - include: Packages/C#/C#.sublime-syntax#csharp
+
+  directives-functions:
+    - match: (@)(functions)\b
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      push: expect-functions-body
+  expect-functions-body:
+    - match: \{
+      scope: punctuation.section.block.begin.cs-razor
+      push: functions-body
+    - include: else-pop
+  functions-body:
+    - clear_scopes: 1
+    - meta_scope: source.cs.embedded.functions.cs-razor
+    - match: \}
+      scope: punctuation.section.block.end.cs-razor
+      pop: 2
+    - include: comment
+    - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#razor-functions-block
+
+  directives-inheritance:
+    - match: (@)(implements|inherits)\b
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: Packages/C#/C#.sublime-syntax#inherited-classes
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+  # TODO: Possibly figure out better scopes for this
+  directives-inject:
+    - match: (@)(inject)\b(?!\s*\()
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: Packages/C#/C#.sublime-syntax#using-type
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+  # Only for `.razor` files
+  directives-layout:
+    - match: (@)(layout)\b(?!\s*\()
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: Packages/C#/C#.sublime-syntax#using-type
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+  # Only for `.cshtml` files
+  directives-model:
+    - match: (@)(model)\b
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: Packages/C#/C#.sublime-syntax#inherited-classes
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+  directives-namespace:
+    - match: (@)(namespace)\b
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: Packages/C#/C#.sublime-syntax#namespace-declaration-name
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+  directives-page:
+    - match: (@)(page)\b
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: Packages/C#/C#.sublime-syntax#expression
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+  # Only for `.razor` files
+  directives-preservewhitespace:
+    - match: (@)(preservewhitespace)\b
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: Packages/C#/C#.sublime-syntax#constants
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+  # Only for `.razor` files
+  directives-rendermode:
+    - match: (@)(rendermode)\b(?!\s*\()
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: Packages/C#/C#.sublime-syntax#using-type
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+  # Only for `.cshtml` files
+  directives-section:
+    - match: (@)(section)\b(?:\s+(\w+))?
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+        3: entity.name.section.cs-razor
+      push: expect-section-body
+  expect-section-body:
+    - match: \{
+      scope: punctuation.section.block.begin.cs-razor
+      push: section-body
+    - include: else-pop
+  section-body:
+    - match: \}
+      scope: punctuation.section.block.end.cs-razor
+      pop: 2
+    - include: html
+
+  directives-typeparam:
+    - match: (@)(typeparam)\b
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: Packages/C#/C#.sublime-syntax#inherited-classes
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+  directives-using:
+    - match: (@)(using)\b(?!\s*\()
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: Packages/C#/C#.sublime-syntax#using-type
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+  # Only for `.cshtml` files
+  directives-taghelpers:
+    # TODO: Better embed context
+    - match: (@)(addTagHelper|removeTagHelper|tagHelperPrefix)\b
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html keyword.other.cs-razor
+      embed: Packages/C#/C#.sublime-syntax#using-type
+      embed_scope: source.cs.embedded.html
+      escape: $
+
+###[ ATTRIBUTE DIRECTIVES ]####################################################
+
+  # This is HTML attributes with a leading `@` for .razor files only.
+
+###[ RESERVED WORDS ]##########################################################
+
+  # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#razor-reserved-keywords
+  razor-escapes:
     - match: '@@'
       scope: constant.character.escape.cs-razor
-    - match: \B{{csharp_tag_interpolation}}
-      scope: punctuation.section.interpolation.begin.razor
-      push: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#html-attribute-single-expression
-
-  csharp-embedded:
-    - meta_include_prototype: false
-    - match: '{{csharp_tag_interpolation_bare}}'
-      scope: meta.embedded.cs punctuation.section.embedded.begin.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#csharp
-      embed_scope: meta.embedded.cs source.cs.embedded.html
-      escape: ((?=")|\s*\n)?
-      escape_captures:
-        0: meta.embedded.cs
-        1: meta.html-newline-after-csharp.cs-razor
-    - match: '{{csharp_tag_interpolation_paren}}'
-      scope: meta.embedded.cs punctuation.section.embedded.begin.cs-razor
-      embed: Packages/C#/C#.sublime-syntax#csharp
-      embed_scope: meta.embedded.cs source.cs.embedded.html
-      escape: (\))(\s*\n)?
-      escape_captures:
-        0: meta.embedded.cs
-        1: punctuation.section.embedded.end.cs-razor
-        2: meta.html-newline-after-csharp.cs-razor
+    - match: (@\(){{razor_keywords}}(\))
+      scope: constant.character.escape.cs-razor
+      captures:
+        1: punctuation.definition.constant.begin.cs-razor
+        2: punctuation.definition.constant.end.cs-razor
+    - match: (@\(@){{csharp_keywords}}(\))
+      scope: constant.character.escape.cs-razor
+      captures:
+        1: punctuation.definition.constant.begin.cs-razor
+        2: punctuation.definition.constant.end.cs-razor
 
 ###[ PROTOTYPE ]###############################################################
 
@@ -497,10 +482,5 @@ contexts:
 ###[ VARIABLES ]###############################################################
 
 variables:
-  csharp_tag: '@{'
-  csharp_tag_end: '}'
-  csharp_tag_interpolation_paren: '@\('
-  csharp_tag_interpolation_bare: '@(?=\w)'
-  csharp_tag_interpolation: '@(?:\(|(?=\w))'
   razor_keywords: (?:page|namespace|functions|inherits|model|section|helper)
   csharp_keywords: (?:case|do|default|for|foreach|if|else|lock|switch|try|catch|finally|using|while)
