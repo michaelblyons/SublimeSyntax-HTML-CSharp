@@ -187,6 +187,10 @@
     @* <div id='@MyClass.MyId' class='theclass'></div> *@
 
     @section test {
+@*  ^ punctuation.section.embedded.line.cs-razor *@
+@*   ^^^^^^^ source.cs.embedded.html keyword.other.cs-razor *@
+@*           ^^^^ entity.name.section.cs-razor *@
+@*                ^ punctuation.section.block.begin.cs-razor *@
 
         <text>
             Some stuff
@@ -200,16 +204,54 @@
     @section header {
 
         <p>This is a test</p>
+@*      ^^^ meta.tag.block.any.html *@
+@*      ^ punctuation.definition.tag.begin.html *@
+@*       ^ entity.name.tag.block.any.html *@
+@*        ^ punctuation.definition.tag.end.html *@
+@*                       ^^^^ meta.tag.block.any.html *@
+@*                       ^^ punctuation.definition.tag.begin.html *@
+@*                         ^ entity.name.tag.block.any.html *@
+@*                          ^ punctuation.definition.tag.end.html *@
 
         @* Some type of comment *@
 
+        @* TODO: Fix this expression *@
         @variable.whatever(x => { x < 10 })<p>Okay</p>
 
         @if (test == 1) {
+@*       ^^ keyword.control.conditional.if.cs *@
+@*          ^^^^^^^^^^^ meta.group.cs *@
+@*          ^ punctuation.section.group.begin.cs *@
+@*           ^^^^ variable.other.cs *@
+@*                ^^ keyword.operator.comparison.cs *@
+@*                   ^ meta.number.integer.decimal.cs constant.numeric.value.cs *@
+@*                    ^ punctuation.section.group.end.cs *@
+@*                      ^^ meta.block.cs *@
+@*                      ^ punctuation.section.block.begin.cs *@
             int i = a;
+@*^^^^^^^^^^^^^^^^^^^^^ meta.block.cs *@
+@*          ^^^ storage.type.primitive.cs *@
+@*              ^ variable.other.cs *@
+@*                ^ keyword.operator.assignment.cs *@
+@*                  ^ variable.other.cs *@
+@*                   ^ punctuation.terminator.statement.cs *@
         }
 
         @using (var service = GetService()) {
+@*      ^ meta.embedded.cs punctuation.section.embedded.begin.cs-razor *@
+@*       ^^^^^ keyword.declaration.using.cs *@
+@*             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.cs *@
+@*             ^ punctuation.section.group.begin.cs *@
+@*              ^^^ storage.type.variant.cs *@
+@*                  ^^^^^^^ variable.other.cs *@
+@*                          ^ keyword.operator.assignment.cs *@
+@*                            ^^^^^^^^^^ meta.function-call.identifier.cs variable.function.cs *@
+@*                                      ^^ meta.function-call.arguments.cs meta.group.cs *@
+@*                                      ^ punctuation.section.group.begin.cs *@
+@*                                       ^ punctuation.section.group.end.cs *@
+@*                                        ^ punctuation.section.group.end.cs *@
+@*                                          ^^ meta.block.cs *@
+@*                                          ^ punctuation.section.block.begin.cs *@
             int i = a;
         }
     }

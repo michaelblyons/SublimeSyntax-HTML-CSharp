@@ -1,6 +1,7 @@
 %YAML 1.2
 ---
 # http://www.sublimetext.com/docs/syntax.html
+# https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor
 name: HTML (C# Razor)
 scope: text.html.cs.razor
 version: 2
@@ -9,6 +10,7 @@ extends: Packages/HTML/HTML.sublime-syntax
 
 file_extensions:
   - cshtml
+  - razor
 
 contexts:
   prototype:
@@ -243,10 +245,10 @@ contexts:
 
   # This is HTML attributes with a leading `@` for .razor files only.
 
-###[ RAZOR CONSTRUCTS ]#######################################################
+###[ RAZOR CONSTRUCTS ]########################################################
 
   razor-constructs:
-    - include: razor-escape
+    - include: razor-escapes
     - include: directives
     - include: razor-statements
     - match: '[\w-+]+@\w+' # ignore email addresses
@@ -258,12 +260,23 @@ contexts:
     #  #push: razor-block # TODO: stop at closing " etc.
     - include: razor-interpolations
 
-  razor-escape:
+  # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#razor-reserved-keywords
+  razor-escapes:
     - match: '@@'
       scope: constant.character.escape.cs-razor
+    - match: (@\(){{razor_keywords}}(\))
+      scope: constant.character.escape.cs-razor
+      captures:
+        1: punctuation.definition.constant.begin.cs-razor
+        2: punctuation.definition.constant.end.cs-razor
+    - match: (@\(@){{csharp_keywords}}(\))
+      scope: constant.character.escape.cs-razor
+      captures:
+        1: punctuation.definition.constant.begin.cs-razor
+        2: punctuation.definition.constant.end.cs-razor
 
   razor-statements:
-    - match: (@)(?=(?:if|switch|for|foreach|using|try|lock|do)\b)
+    - match: (@)(?={{csharp_keywords}})
       captures:
         1: punctuation.section.embedded.cs-razor
       push: razor-statement-body
@@ -427,7 +440,7 @@ contexts:
     - meta_prepend: true
     - include: csharp-interpolations
 
-###[ C# TAGS ]###############################################################
+###[ C# TAGS ]#################################################################
 
   csharp-tags:
     - include: comments
@@ -489,3 +502,5 @@ variables:
   csharp_tag_interpolation_paren: '@\('
   csharp_tag_interpolation_bare: '@(?=\w)'
   csharp_tag_interpolation: '@(?:\(|(?=\w))'
+  razor_keywords: (?:page|namespace|functions|inherits|model|section|helper)
+  csharp_keywords: (?:case|do|default|for|foreach|if|else|lock|switch|try|catch|finally|using|while)
