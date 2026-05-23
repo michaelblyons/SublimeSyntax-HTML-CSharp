@@ -6,6 +6,9 @@ version: 2
 
 extends: Packages/C#/C#.sublime-syntax
 
+variables:
+  sql_indicator: (?!)
+
 contexts:
 
 ###[ CSHARP OVERRIDES ]########################################################
@@ -33,17 +36,9 @@ contexts:
 
   # Don't let C# embed extra syntaxes in strings
 
-  inside-triple-quoted-raw-string-syntax:
-    - meta_include_prototype: false
-    - include: immediately-pop
-
-  inside-verbatim-string-syntax:
-    - meta_include_prototype: false
-    - include: immediately-pop
-
-  inside-verbatim-format-string-syntax:
-    - meta_include_prototype: false
-    - include: immediately-pop
+  inside-triple-quoted-raw-string-sql: []
+  inside-verbatim-string-sql: []
+  inside-verbatim-format-string-sql: []
 
 ###[ UTILITY ]#################################################################
 
