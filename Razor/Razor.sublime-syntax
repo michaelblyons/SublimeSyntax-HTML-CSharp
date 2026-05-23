@@ -224,8 +224,11 @@ contexts:
 
   transitions-implicit:
     - match: (?=&\w{1,8};|<[\w/!])
-      embed: main
-      escape: (?=[@}]|$)
+      push: transition-implicit-body
+  transition-implicit-body:
+    - match: (?=\}|$)
+      pop: 1
+    - include: main
 
   transitions-explicit:
     # Explicit line transition
@@ -233,7 +236,6 @@ contexts:
       scope: punctuation.section.embedded.begin.cs-razor
       embed: main
       escape: $
-    - include: expressions
 
     # Explicit delimited transition
     - match: (<)(text)(>)

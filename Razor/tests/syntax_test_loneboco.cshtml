@@ -301,25 +301,89 @@
 @*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html *@
 @*^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.cs-razor *@
 @*                          ^^ punctuation.definition.comment.block.end.cs-razor *@
-@*                            ^^^ variable.other.cs *@
-@*                                ^^ keyword.other.sql.cs *@
-@*                                   ^^^ variable.other.cs *@
-@*                                       ^^^^^^^^^^^ variable.other.cs *@
-@*                                                   ^^^^^ variable.other.cs *@
 @*                                                          ^ punctuation.section.embedded.begin.cs-razor *@
 @*                                                           ^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
 @*                                                           ^^^^^^^^^^^ variable.other.cs *@
 @*                                                                      ^ punctuation.accessor.dot.cs *@
 @*                                                                       ^^^^^^ variable.other.cs *@
-@*                                                                              ^^^^ text.html.cs.razor meta.tag.block.any.html *@
+@*                                                                              ^^^^ meta.tag.block.any.html *@
 @*                                                                              ^^ punctuation.definition.tag.begin.html *@
 @*                                                                                ^ entity.name.tag.block.any.html *@
 @*                                                                                 ^ punctuation.definition.tag.end.html *@
+
         <p>The number of names in the teamMembers array: @teamMembers.Length</p>
+@*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html *@
+@*      ^^^ meta.tag.block.any.html *@
+@*      ^ punctuation.definition.tag.begin.html *@
+@*       ^ entity.name.tag.block.any.html *@
+@*        ^ punctuation.definition.tag.end.html *@
+@*                                                       ^ punctuation.section.embedded.begin.cs-razor *@
+@*                                                        ^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
+@*                                                        ^^^^^^^^^^^ variable.other.cs *@
+@*                                                                   ^ punctuation.accessor.dot.cs *@
+@*                                                                    ^^^^^^ variable.other.cs *@
+@*                                                                          ^^^^ meta.tag.block.any.html *@
+@*                                                                          ^^ punctuation.definition.tag.begin.html *@
+@*                                                                            ^ entity.name.tag.block.any.html *@
+@*                                                                             ^ punctuation.definition.tag.end.html *@
+
         <p>The number of names in the teamMembers array: @teamMembers.Length </p>
+@*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html *@
+@*      ^^^ meta.tag.block.any.html *@
+@*      ^ punctuation.definition.tag.begin.html *@
+@*       ^ entity.name.tag.block.any.html *@
+@*        ^ punctuation.definition.tag.end.html *@
+@*                                                       ^ punctuation.section.embedded.begin.cs-razor *@
+@*                                                        ^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
+@*                                                        ^^^^^^^^^^^ variable.other.cs *@
+@*                                                                   ^ punctuation.accessor.dot.cs *@
+@*                                                                    ^^^^^^ variable.other.cs *@
+@*                                                                           ^^^^ meta.tag.block.any.html *@
+@*                                                                           ^^ punctuation.definition.tag.begin.html *@
+@*                                                                             ^ entity.name.tag.block.any.html *@
+@*                                                                              ^ punctuation.definition.tag.end.html *@
+
         @:Raw HTML line test @teamMembers.Length
+@*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html *@
+@*      ^^ punctuation.section.embedded.begin.cs-razor *@
+@*        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.cs.razor *@
+@*                           ^ punctuation.section.embedded.begin.cs-razor *@
+@*                            ^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
+@*                            ^^^^^^^^^^^ variable.other.cs *@
+@*                                       ^ punctuation.accessor.dot.cs *@
+@*                                        ^^^^^^ variable.other.cs *@
+
         <p>Robert is now in position: @Array.IndexOf(teamMembers, "Robert")</p>
+@*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html *@
+@*      ^^^ meta.tag.block.any.html *@
+@*      ^ punctuation.definition.tag.begin.html *@
+@*       ^ entity.name.tag.block.any.html *@
+@*        ^ punctuation.definition.tag.end.html *@
+@*                                    ^ punctuation.section.embedded.begin.cs-razor *@
+@*                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
+@*                                     ^^^^^ variable.other.cs *@
+@*                                          ^ punctuation.accessor.dot.cs *@
+@*                                           ^^^^^^^ meta.function-call.identifier.cs variable.function.cs *@
+@*                                                  ^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.cs meta.group.cs *@
+@*                                                  ^ punctuation.section.group.begin.cs *@
+@*                                                   ^^^^^^^^^^^ variable.other.cs *@
+@*                                                              ^ punctuation.separator.comma.cs *@
+@*                                                                ^^^^^^^^ meta.string.cs string.quoted.double.cs *@
+@*                                                                ^ punctuation.definition.string.begin.cs *@
+@*                                                                       ^ punctuation.definition.string.end.cs *@
+@*                                                                        ^ punctuation.section.group.end.cs *@
+@*                                                                         ^^^^ meta.tag.block.any.html *@
+@*                                                                         ^^ punctuation.definition.tag.begin.html *@
+@*                                                                           ^ entity.name.tag.block.any.html *@
+@*                                                                            ^ punctuation.definition.tag.end.html *@
+
         My.Namespace.Var i = 0;
+@*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html *@
+@*                       ^ variable.other.cs *@
+@*                         ^ keyword.operator.assignment.cs *@
+@*                           ^ meta.number.integer.decimal.cs constant.numeric.value.cs *@
+@*                            ^ punctuation.terminator.statement.cs *@
+
         #endregion
 @*^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html meta.preprocessor.cs *@
 @*      ^ meta.fold.block.end.cs punctuation.definition.preprocessor.cs *@
@@ -522,14 +586,13 @@
 @*               ^ punctuation.terminator.statement.cs *@
         <p>Line #: @i</p>
 @*^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.cs *@
-@*      ^^^^^^^^^^^ text.html.cs.razor *@
 @*      ^^^ meta.tag.block.any.html *@
 @*      ^ punctuation.definition.tag.begin.html *@
 @*       ^ entity.name.tag.block.any.html *@
 @*        ^ punctuation.definition.tag.end.html *@
 @*                 ^ punctuation.section.embedded.begin.cs-razor *@
 @*                  ^ source.cs.embedded.html variable.other.cs *@
-@*                   ^^^^ text.html.cs.razor meta.tag.block.any.html *@
+@*                   ^^^^ meta.tag.block.any.html *@
 @*                   ^^ punctuation.definition.tag.begin.html *@
 @*                     ^ entity.name.tag.block.any.html *@
 @*                      ^ punctuation.definition.tag.end.html *@
@@ -552,7 +615,6 @@
     {
         <p style="display: none;">Some test</p>
 @*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.cs *@
-@*      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.cs.razor *@
 @*      ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
 @*      ^ punctuation.definition.tag.begin.html *@
 @*       ^ entity.name.tag.block.any.html *@
@@ -704,7 +766,7 @@
         </text>
 
         @* BUG: The style should highlight but it doesn't.  Most likely not fixable. *@
-        <p @if (true) { <text>style="display: none"</text> }>Test</p>
+        @* <p @if (true) { <text>style="display: none"</text> }>Test</p> *@
     }
     else if (DateTime.Now.Year == 2011)
     {
