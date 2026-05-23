@@ -172,8 +172,11 @@ contexts:
   # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#implicit-razor-expressions
   expressions-implicit:
     - include: eat-email-addresses
-    - match: '@(?=\w)'
-      scope: punctuation.section.embedded.begin.cs-razor
+    - match: (@)((await)\s+)?(?=\w)
+      captures:
+        1: punctuation.section.embedded.begin.cs-razor
+        2: source.cs.embedded.html
+        3: keyword.control.flow.await.cs
       push: implicit-expression-body
   implicit-expression-body:
     - meta_content_scope: source.cs.embedded.html
