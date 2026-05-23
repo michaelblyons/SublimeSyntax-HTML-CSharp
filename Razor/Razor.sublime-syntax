@@ -223,20 +223,23 @@ contexts:
     - match: (?=&\w{1,8};|<[\w/!])
       embed: main
       escape: (?=[@}]|$)
+
+  transitions-explicit:
+    # Explicit line transition
     - match: '@:'
       scope: punctuation.section.embedded.begin.cs-razor
-      embed: scope:text.html.basic
+      embed: main
       escape: $
     - include: expressions
 
-  transitions-explicit:
+    # Explicit delimited transition
     - match: (<)(text)(>)
       scope: meta.tag.block.text.cs-razor
       captures:
         1: punctuation.definition.tag.begin.html
         2: entity.name.tag.text.cs-razor
         3: punctuation.definition.tag.end.html
-      embed: razor
+      embed: main
       escape: (</)(text)(>)
       escape_captures:
         0: meta.tag.block.text.cs-razor
