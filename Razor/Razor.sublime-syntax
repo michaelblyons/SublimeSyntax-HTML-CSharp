@@ -129,23 +129,45 @@ contexts:
         0: meta.string.html string.quoted.single.html punctuation.definition.string.end.html
     - include: else-pop
 
-  tag-attribute-value-content:
+  tag-class-attribute-value-double-quoted-content:
     - meta_prepend: true
-    - include: eat-email-addresses
-    - match: (?=@)
-      push: C# (Razor).sublime-syntax#html-attribute-expression
+    - include: html-attribute-prototype-double-quoted
+  tag-class-attribute-value-single-quoted-content:
+    - meta_prepend: true
+    - include: html-attribute-prototype-single-quoted
 
-  tag-generic-attribute-value-content:
+  tag-href-attribute-value-double-quoted-content:
     - meta_prepend: true
-    - include: eat-email-addresses
-    - match: (?=@)
-      push: C# (Razor).sublime-syntax#html-attribute-expression
+    - include: html-attribute-prototype-double-quoted
+  tag-href-attribute-value-single-quoted-content:
+    - meta_prepend: true
+    - include: html-attribute-prototype-single-quoted
 
-  strings-common-content:
+  tag-id-attribute-value-double-quoted-content:
     - meta_prepend: true
-    - include: eat-email-addresses
+    - include: html-attribute-prototype-double-quoted
+  tag-id-attribute-value-single-quoted-content:
+    - meta_prepend: true
+    - include: html-attribute-prototype-single-quoted
+
+  tag-generic-attribute-value-double-quoted-content:
+    - meta_prepend: true
+    - include: html-attribute-prototype-double-quoted
+  tag-generic-attribute-value-single-quoted-content:
+    - meta_prepend: true
+    - include: html-attribute-prototype-single-quoted
+
+###[ OVERRIDE UTILITIES ]######################################################
+
+  html-attribute-prototype-double-quoted:
+    - include: email-addresses
     - match: (?=@)
-      push: C# (Razor).sublime-syntax#html-attribute-expression
+      push: C# (Razor).sublime-syntax#html-attribute-expression-double-quoted
+
+  html-attribute-prototype-single-quoted:
+    - include: email-addresses
+    - match: (?=@)
+      push: C# (Razor).sublime-syntax#html-attribute-expression-single-quoted
 
 ###[ COMMENTS ]################################################################
 
@@ -166,12 +188,9 @@ contexts:
     - include: expressions-explicit
     - include: expressions-implicit
 
-  eat-email-addresses:
-    - match: '[\w-+]+@\w+'
-
   # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#implicit-razor-expressions
   expressions-implicit:
-    - include: eat-email-addresses
+    - include: email-addresses
     - match: (@)((await)\s+)?(?=\w)
       captures:
         1: punctuation.section.embedded.begin.cs-razor
@@ -205,7 +224,6 @@ contexts:
       scope: punctuation.section.embedded.begin.cs-razor
       push: code-block-body
   code-block-body:
-    # - meta_include_prototype: false
     - meta_scope: meta.embedded.cs
     - meta_content_scope: source.cs.embedded.html
     - match: (\})(\s*\n)?
@@ -214,9 +232,7 @@ contexts:
         2: meta.html-newline-after-csharp.cs-razor  # used by indentation rules
       pop: 1
     - include: razor
-    # - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax
     - include: Packages/HTML (C#)/Razor/embeddings/C# (for C# Razor).sublime-syntax
-      apply_prototype: true
 
   razor-transitions:
     - include: transitions-explicit
@@ -482,6 +498,10 @@ contexts:
         2: punctuation.definition.constant.end.cs-razor
 
 ###[ PROTOTYPE ]###############################################################
+
+  email-addresses:
+    - match: '[\w+.-]+@[\w+.-]+'
+      scope: markup.underline.link.cs-razor
 
   else-pop:
     - match: (?=\S)

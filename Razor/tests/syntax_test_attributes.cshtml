@@ -2,6 +2,27 @@
 @* https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-2.1 *@
 
 
+    <div class="@foo @bar"></div>
+@*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
+@*  ^ punctuation.definition.tag.begin.html *@
+@*   ^^^ entity.name.tag.block.any.html *@
+@*       ^^^^^^^^^^^^^^^^^ meta.attribute-with-value.class.html *@
+@*       ^^^^^ entity.other.attribute-name.class.html *@
+@*            ^ punctuation.separator.key-value.html *@
+@*             ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html *@
+@*              ^^^^ meta.class-name.html meta.string.html string.quoted.double.html *@
+@*              ^ punctuation.section.embedded.begin.cs-razor *@
+@*               ^^^ source.cs.embedded.html variable.other.cs *@
+@*                  ^ meta.string.html string.quoted.double.html *@
+@*                   ^^^^ meta.class-name.html meta.string.html string.quoted.double.html *@
+@*                   ^ punctuation.section.embedded.begin.cs-razor *@
+@*                    ^^^ source.cs.embedded.html variable.other.cs *@
+@*                       ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html *@
+@*                        ^ punctuation.definition.tag.end.html *@
+@*                         ^^ punctuation.definition.tag.begin.html *@
+@*                           ^^^ entity.name.tag.block.any.html *@
+@*                              ^ punctuation.definition.tag.end.html *@
+
     <div class="grid-mvc" data-gridname="@Model.RenderOptions.GridName" data-selectable="@Model.RenderOptions.Selectable.ToString().ToLower()">
 @*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
 @*  ^ punctuation.definition.tag.begin.html *@
