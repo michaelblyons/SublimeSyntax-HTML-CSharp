@@ -445,6 +445,8 @@ contexts:
     - match: \}
       scope: punctuation.section.block.end.cs-razor
       pop: 2
+    - include: razor
+    # BUG: For some reason, changing `html` to `main` clobbers EVERYTHING.
     - include: html
 
   directives-typeparam:

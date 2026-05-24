@@ -242,6 +242,10 @@
 @*           ^^^^ entity.name.section.cs-razor *@
 @*                ^ punctuation.section.block.begin.cs-razor *@
 
+        @foo
+@*      ^ punctuation.section.embedded.begin.cs-razor *@
+@*       ^^^ source.cs.embedded.html variable.other.cs *@
+
         <text>
 @*      ^^^^^^ meta.tag.other.html *@
 @*      ^ punctuation.definition.tag.begin.html *@
@@ -273,8 +277,32 @@
 
         @* Some type of comment *@
 
-        @* TODO: Fix this expression *@
         @variable.whatever(x => { x < 10 })<p>Okay</p>
+@*      ^ punctuation.section.embedded.begin.cs-razor *@
+@*       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
+@*       ^^^^^^^^ variable.other.cs *@
+@*               ^ punctuation.accessor.dot.cs *@
+@*                ^^^^^^^^ meta.function-call.identifier.cs variable.function.cs *@
+@*                        ^^^^^^^^^^^^^^^^^ meta.function-call.arguments.cs meta.group.cs *@
+@*                        ^ punctuation.section.group.begin.cs *@
+@*                         ^ meta.function.anonymous.parameters.cs variable.parameter.cs *@
+@*                          ^^^^ meta.function.anonymous.cs *@
+@*                           ^^ keyword.declaration.function.arrow.cs *@
+@*                              ^^^^^^^^^^ meta.function.anonymous.body.cs meta.block.cs *@
+@*                              ^ punctuation.section.block.begin.cs *@
+@*                                ^ variable.other.cs *@
+@*                                  ^ keyword.operator.comparison.cs *@
+@*                                    ^^ meta.number.integer.decimal.cs constant.numeric.value.cs *@
+@*                                       ^ punctuation.section.block.end.cs *@
+@*                                        ^ punctuation.section.group.end.cs *@
+@*                                         ^^^ meta.tag.block.any.html *@
+@*                                         ^ punctuation.definition.tag.begin.html *@
+@*                                          ^ entity.name.tag.block.any.html *@
+@*                                           ^ punctuation.definition.tag.end.html *@
+@*                                                ^^^^ meta.tag.block.any.html *@
+@*                                                ^^ punctuation.definition.tag.begin.html *@
+@*                                                  ^ entity.name.tag.block.any.html *@
+@*                                                   ^ punctuation.definition.tag.end.html *@
 
         @if (test == 1) {
 @*       ^^ keyword.control.conditional.if.cs *@
@@ -1004,6 +1032,7 @@
         // Do critical section work
     }
 
+    @* TODO: Chain contexts not to lose focus without { }s *@
     @if (condition)
         Console.WriteLine("Hello");
     else

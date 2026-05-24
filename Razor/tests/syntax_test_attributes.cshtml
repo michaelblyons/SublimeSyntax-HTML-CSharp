@@ -183,10 +183,10 @@
 @*                                                                            ^^^ entity.name.tag.block.any.html *@
 @*                                                                               ^ punctuation.definition.tag.end.html *@
 
-        @* TODO: scope @ constructs in HTML attribute values correctly *@
+        @* TODO: Embeds of CSS pop early with double quote *@
         <div style="@(HtmlHelpers.DevModeEnabled(Request) ? "display: none;" : "")"></div>
 
-        @* TODO: scope @ constructs in HTML attribute values correctly *@
+        @* TODO: Embeds of JavaScript pop early with double quote *@
         <div onclick="@(HtmlHelpers.DevModeEnabled(Request) ? "display: none;" : "")"></div>
 
         @* TODO: scope @ constructs in HTML attribute values correctly *@
@@ -289,21 +289,26 @@
 @*                        ^^^^^ variable.language.this.razor *@
 @*                             ^ punctuation.section.group.end.cs *@
     {
-        @* TODO: scope at constructs in HTML attribute values correctly even when inside a razor code block *@
         <p data-foo="@item.foo"></p>
 @*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.cs *@
-@*      ^^^^^^^^^^^^^ meta.tag.block.any.html *@
+@*      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
 @*      ^ punctuation.definition.tag.begin.html *@
 @*       ^ entity.name.tag.block.any.html *@
-@*         ^^^^^^^^^^ meta.attribute-with-value.html *@
+@*         ^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.html *@
 @*         ^^^^^^^^ entity.other.attribute-name.html *@
 @*                 ^ punctuation.separator.key-value.html *@
-@*                  ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html *@
+@*                  ^^^^^^^^^^^ meta.string.html string.quoted.double.html *@
+@*                  ^ punctuation.definition.string.begin.html *@
 @*                   ^ punctuation.section.embedded.begin.cs-razor *@
-@*                    ^^^^^^^^^^^^^^^ source.cs.embedded.html *@
+@*                    ^^^^^^^^ source.cs.embedded.html *@
 @*                    ^^^^ variable.other.cs *@
 @*                        ^ punctuation.accessor.dot.cs *@
 @*                         ^^^ variable.other.cs *@
+@*                            ^ punctuation.definition.string.end.html *@
+@*                             ^ punctuation.definition.tag.end.html *@
+@*                              ^^ punctuation.definition.tag.begin.html *@
+@*                                ^ entity.name.tag.block.any.html *@
+@*                                 ^ punctuation.definition.tag.end.html *@
 
         if (item.ShouldBeDisplayed)
 @*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.cs *@
@@ -315,22 +320,40 @@
 @*               ^^^^^^^^^^^^^^^^^ variable.other.cs *@
 @*                                ^ punctuation.section.group.end.cs *@
         {
-            @* TODO: scope at constructs in HTML attribute values correctly even when inside a razor code block *@
             <article data-id="@item.ID"></article>
 @*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.cs meta.block.cs *@
-@*          ^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
+@*          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
 @*          ^ punctuation.definition.tag.begin.html *@
 @*           ^^^^^^^ entity.name.tag.block.any.html *@
-@*                   ^^^^^^^^^ meta.attribute-with-value.html *@
+@*                   ^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.html *@
 @*                   ^^^^^^^ entity.other.attribute-name.html *@
 @*                          ^ punctuation.separator.key-value.html *@
-@*                           ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html *@
+@*                           ^^^^^^^^^^ meta.string.html string.quoted.double.html *@
+@*                           ^ punctuation.definition.string.begin.html *@
 @*                            ^ punctuation.section.embedded.begin.cs-razor *@
-@*                             ^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
+@*                             ^^^^^^^ source.cs.embedded.html *@
 @*                             ^^^^ variable.other.cs *@
 @*                                 ^ punctuation.accessor.dot.cs *@
 @*                                  ^^ variable.other.cs *@
+@*                                    ^ punctuation.definition.string.end.html *@
+@*                                     ^ punctuation.definition.tag.end.html *@
+@*                                      ^^ punctuation.definition.tag.begin.html *@
+@*                                        ^^^^^^^ entity.name.tag.block.any.html *@
+@*                                               ^ punctuation.definition.tag.end.html *@
 
             <p></p>
+@*^^^^^^^^^^^^^^^^^^ meta.block.cs meta.block.cs *@
+@*          ^^^^^^^ meta.tag.block.any.html *@
+@*          ^ punctuation.definition.tag.begin.html *@
+@*           ^ entity.name.tag.block.any.html *@
+@*            ^ punctuation.definition.tag.end.html *@
+@*             ^^ punctuation.definition.tag.begin.html *@
+@*               ^ entity.name.tag.block.any.html *@
+@*                ^ punctuation.definition.tag.end.html *@
         }
+@*^^^^^^^^ meta.block.cs *@
+@*^^^^^^^ meta.block.cs meta.block.cs *@
+@*      ^ punctuation.section.block.end.cs *@
     }
+@*^^^ meta.block.cs *@
+@*  ^ punctuation.section.block.end.cs *@
