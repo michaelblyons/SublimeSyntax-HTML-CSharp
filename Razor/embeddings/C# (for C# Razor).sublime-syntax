@@ -14,14 +14,15 @@ contexts:
 
   expression:
     - meta_prepend: true
-    - include: at-strings
+    - include: razor-templated-delegates
     - include: Packages/HTML (C#)/Razor/Razor.sublime-syntax#razor-transitions
 
-  at-strings:
+  # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#templated-razor-delegates
+  razor-templated-delegates:
     - match: '@(?=<)'
       scope: punctuation.definition.string.begin.razor
-      push: at-string-body
-  at-string-body:
+      push: razor-templated-delegate-body
+  razor-templated-delegate-body:
     - meta_scope: string.unquoted.cs-razor
     - match: (?=;|$)
       pop: 1

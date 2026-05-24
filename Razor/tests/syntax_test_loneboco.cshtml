@@ -184,7 +184,57 @@
     </form>
 
     <link rel="stylesheet" href="@Assets["BlazorApp.styles.css"]" />
-    @* <div id='@MyClass.MyId' class='theclass'></div> *@
+@*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
+@*  ^ punctuation.definition.tag.begin.html *@
+@*   ^^^^ entity.name.tag.block.any.html *@
+@*        ^^^^^^^^^^^^^^^^ meta.attribute-with-value.html *@
+@*        ^^^ entity.other.attribute-name.html *@
+@*           ^ punctuation.separator.key-value.html *@
+@*            ^^^^^^^^^^^^ meta.string.html string.quoted.double.html *@
+@*            ^ punctuation.definition.string.begin.html *@
+@*                       ^ punctuation.definition.string.end.html *@
+@*                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.href.html *@
+@*                         ^^^^ entity.other.attribute-name.href.html *@
+@*                             ^ punctuation.separator.key-value.html *@
+@*                              ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html *@
+@*                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.path.url.html meta.string.html string.quoted.double.html *@
+@*                               ^ punctuation.section.embedded.begin.cs-razor *@
+@*                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
+@*                                ^^^^^^ variable.other.cs *@
+@*                                      ^^^^^^^^^^^^^^^^^^^^^^^^ meta.brackets.cs *@
+@*                                      ^ punctuation.section.brackets.begin.cs *@
+@*                                       ^^^^^^^^^^^^^^^^^^^^^^ meta.string.cs string.quoted.double.cs *@
+@*                                       ^ punctuation.definition.string.begin.cs *@
+@*                                                            ^ punctuation.definition.string.end.cs *@
+@*                                                             ^ punctuation.section.brackets.end.cs *@
+@*                                                              ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html *@
+@*                                                                ^^ punctuation.definition.tag.end.html *@
+
+    <div id='@MyClass.MyId' class='theclass'></div>
+@*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
+@*  ^ punctuation.definition.tag.begin.html *@
+@*   ^^^ entity.name.tag.block.any.html *@
+@*       ^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.id.html *@
+@*       ^^ entity.other.attribute-name.id.html *@
+@*         ^ punctuation.separator.key-value.html *@
+@*          ^ meta.string.html string.quoted.single.html punctuation.definition.string.begin.html *@
+@*           ^^^^^^^^^^^^^ meta.toc-list.id.html meta.string.html string.quoted.single.html *@
+@*           ^ punctuation.section.embedded.begin.cs-razor *@
+@*            ^^^^^^^^^^^^ source.cs.embedded.html *@
+@*            ^^^^^^^ variable.other.cs *@
+@*                   ^ punctuation.accessor.dot.cs *@
+@*                    ^^^^ variable.other.cs *@
+@*                        ^ meta.string.html string.quoted.single.html punctuation.definition.string.end.html *@
+@*                          ^^^^^^^^^^^^^^^^ meta.attribute-with-value.class.html *@
+@*                          ^^^^^ entity.other.attribute-name.class.html *@
+@*                               ^ punctuation.separator.key-value.html *@
+@*                                ^ meta.string.html string.quoted.single.html punctuation.definition.string.begin.html *@
+@*                                 ^^^^^^^^ meta.class-name.html meta.string.html string.quoted.single.html *@
+@*                                         ^ meta.string.html string.quoted.single.html punctuation.definition.string.end.html *@
+@*                                          ^ punctuation.definition.tag.end.html *@
+@*                                           ^^ punctuation.definition.tag.begin.html *@
+@*                                             ^^^ entity.name.tag.block.any.html *@
+@*                                                ^ punctuation.definition.tag.end.html *@
 
     @section test {
 @*  ^ punctuation.section.embedded.begin.cs-razor *@
@@ -490,7 +540,7 @@
 @*                          ^ punctuation.definition.generic.end.cs *@
 @*                            ^^^^^^^^^^^ variable.other.cs *@
 @*                                        ^ keyword.operator.assignment.cs *@
-@*                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted.cs-razor *@
+@*                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted.cs-razor *@
 @*                                          ^ punctuation.definition.string.begin.razor *@
 @*                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.cs.razor *@
 @*                                           ^^^ meta.tag.block.any.html *@
@@ -507,12 +557,48 @@
 @*                                                                                ^ punctuation.accessor.dot.cs *@
 
         var pets = new List<Pet>
+@*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html *@
+@*      ^^^ storage.type.variant.cs *@
+@*          ^^^^ variable.other.cs *@
+@*               ^ keyword.operator.assignment.cs *@
+@*                 ^^^^^^^^^^^^^^ meta.instantiation.cs *@
+@*                 ^^^ keyword.operator.new.cs *@
+@*                     ^^^^^^^^^^ meta.function-call.identifier.cs *@
+@*                     ^^^^ support.type.cs *@
+@*                         ^^^^^ meta.generic.cs *@
+@*                         ^ punctuation.definition.generic.begin.cs *@
+@*                          ^^^ support.type.cs *@
+@*                             ^ punctuation.definition.generic.end.cs *@
         {
             new Pet { Name = "Rin Tin Tin" },
             new Pet { Name = "Mr. Bigglesworth" },
             new Pet { Name = "K-9" }
+@*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html meta.instantiation.cs meta.braces.cs *@
+@*          ^^^^^^^^^^^^^^^^^^^^^^^^ meta.instantiation.cs *@
+@*          ^^^ keyword.operator.new.cs *@
+@*              ^^^^ meta.function-call.identifier.cs *@
+@*              ^^^ support.type.cs *@
+@*                  ^^^^^^^^^^^^^^^^ meta.braces.cs *@
+@*                  ^ punctuation.section.braces.begin.cs *@
+@*                    ^^^^ variable.other.member.cs *@
+@*                         ^ keyword.operator.assignment.cs *@
+@*                           ^^^^^ meta.string.cs string.quoted.double.cs *@
+@*                           ^ punctuation.definition.string.begin.cs *@
+@*                               ^ punctuation.definition.string.end.cs *@
+@*                                 ^ punctuation.section.braces.end.cs *@
         };
     }
+
+    @foreach (var pet in pets)
+    {
+        @petTemplate(pet)
+    }
+
+    <ul>
+        @* TODO: Fix templated delegate in function call *@
+        @Repeat(pets, 3, @<li>@item.Name</li>)
+    </ul>
+
 
     @{
         <p style="display: none;" class='whatever'></p>
@@ -549,7 +635,7 @@
 @*      ^^^ variable.other.cs *@
 @*          ^ variable.other.cs *@
 @*            ^ keyword.operator.assignment.cs *@
-@*              ^^^^^^^^^^^^^^^^^^^^^ string.unquoted.cs-razor *@
+@*              ^^^^^^^^^^^^^^^^^^^^ string.unquoted.cs-razor *@
 @*              ^ punctuation.definition.string.begin.razor *@
 @*               ^^^^^^^^^^^^^^^^^^^^ text.html.cs.razor *@
 @*               ^^^ meta.tag.block.any.html *@
@@ -561,8 +647,30 @@
 @*                                ^ entity.name.tag.block.any.html *@
 @*                                 ^ punctuation.definition.tag.end.html *@
 
-        @* TODO: Figure out what this `Func...` stuff should be and fix it *@
         Func<dynamic, object> b = @<strong>@item</strong>;
+@*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs source.cs.embedded.html *@
+@*      ^^^^ support.type.cs *@
+@*          ^^^^^^^^^^^^^^^^^ meta.generic.cs *@
+@*          ^ punctuation.definition.generic.begin.cs *@
+@*           ^^^^^^^ storage.type.primitive.cs *@
+@*                  ^ punctuation.separator.comma.cs *@
+@*                    ^^^^^^ storage.type.primitive.cs *@
+@*                          ^ punctuation.definition.generic.end.cs *@
+@*                            ^ variable.other.cs *@
+@*                              ^ keyword.operator.assignment.cs *@
+@*                                ^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted.cs-razor *@
+@*                                ^ punctuation.definition.string.begin.razor *@
+@*                                 ^^^^^^^^ meta.tag.inline.any.html *@
+@*                                 ^ punctuation.definition.tag.begin.html *@
+@*                                  ^^^^^^ entity.name.tag.inline.any.html *@
+@*                                        ^ punctuation.definition.tag.end.html *@
+@*                                         ^ punctuation.section.embedded.begin.cs-razor *@
+@*                                          ^^^^ source.cs.embedded.html variable.other.cs *@
+@*                                              ^^^^^^^^^ meta.tag.inline.any.html *@
+@*                                              ^^ punctuation.definition.tag.begin.html *@
+@*                                                ^^^^^^ entity.name.tag.inline.any.html *@
+@*                                                      ^ punctuation.definition.tag.end.html *@
+@*                                                       ^ punctuation.terminator.statement.cs *@
     }
 
     <ul>

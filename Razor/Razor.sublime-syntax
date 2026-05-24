@@ -242,7 +242,7 @@ contexts:
     - match: (?=&\w{1,8};|<[\w/!])
       push: transition-implicit-body
   transition-implicit-body:
-    - match: (?=\}|$)
+    - match: (?=\}|(?:\s*;\s*)?$)
       pop: 1
     - include: main
 
