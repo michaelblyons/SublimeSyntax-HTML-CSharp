@@ -17,7 +17,7 @@ contexts:
     - meta_prepend: true
     - include: Razor.sublime-syntax#comment
 
-  stray-punctuations:
+  stray-punctuation:
     - match: \]|\)
       scope: invalid.illegal.stray.cs
     - match: (?=})

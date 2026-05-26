@@ -38,13 +38,13 @@ public class Handler : IHttpHandler
     public void ProcessRequest(HttpContext context)
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.body.cs meta.block.cs
 //  ^^^^^^ storage.modifier.access.cs
-//         ^^^^ storage.type.cs
+//         ^^^^ storage.type.primitive.cs
 //              ^^^^^^^^^^^^^^ meta.method.cs entity.name.function.cs
 //                            ^^^^^^^^^^^^^^^^^^^^^ meta.method.parameters.cs
-//                            ^ punctuation.section.parameters.begin.cs
+//                            ^ punctuation.section.group.begin.cs
 //                             ^^^^^^^^^^^ support.type.cs
 //                                         ^^^^^^^ variable.parameter.cs
-//                                                ^ punctuation.section.parameters.end.cs
+//                                                ^ punctuation.section.group.end.cs
     {
         context.Response.ContentType = "text/plain";
         context.Response.Write("Hello World");
