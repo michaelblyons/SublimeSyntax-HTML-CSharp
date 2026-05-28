@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Review artifact for Package Control
-        uses: kaste/st_package_reviewer/gh_action_package@ad89510c574e97d92cfd4d9e0f5c9029394f5c94
+        uses: kaste/st_package_reviewer/gh_action_package@v1
         with:
           package-name: 'HTML (C#)'
           st-build: 4204
