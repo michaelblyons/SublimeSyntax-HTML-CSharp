@@ -84,7 +84,6 @@ Also see [LoneBoco's version][loneboco].
 - No support for `@bind` attributes.
 - Chaining expressions together like `@if`-`for`-etc.
   may require curly braces, even for single commands.
-- Templated delegates do not look good in a function call.
 - File new issues [on GitHub][gh]
 
 

@@ -189,7 +189,6 @@
         @* TODO: Embeds of JavaScript pop early with double quote *@
         <div onclick="@(HtmlHelpers.DevModeEnabled(Request) ? "display: none;" : "")"></div>
 
-        @* TODO: scope @ constructs in HTML attribute values correctly *@
         <div class='@(HtmlHelpers.DevModeEnabled(Request) ? "foo" : "bar")'></div>
 @*      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
 @*      ^ punctuation.definition.tag.begin.html *@
@@ -217,6 +216,7 @@
 @*                                                                          ^^ punctuation.definition.tag.begin.html *@
 @*                                                                            ^^^ entity.name.tag.block.any.html *@
 @*                                                                               ^ punctuation.definition.tag.end.html *@
+
         <div style='@(HtmlHelpers.DevModeEnabled(Request) ? "display: none;" : "")'></div>
 @*      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
 @*      ^ punctuation.definition.tag.begin.html *@
