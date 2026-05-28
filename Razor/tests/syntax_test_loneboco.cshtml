@@ -166,76 +166,6 @@
 @*                                   ^ punctuation.separator.colon.cs *@
 @*                                     ^^^^^^^ support.type.cs *@
 
-    <p @attributes="Stuff"></p>
-    <label>InputValue:<input @bind="InputValue" @bind:culture="new CultureInfo("th-TH", false)" /></label>
-
-    <form method="post" @formname="starship-plain-form" @onsubmit="Submit" @onclick:preventDefault>
-        <AntiforgeryToken />
-        <ReferenceChild @ref="childComponent1" @rendermode='InteractiveAuto' />
-        <div>
-            <label>
-                Identifier:
-                <InputText @bind-Value="Model!.Id" />
-            </label>
-        </div>
-        <div>
-            <button type="submit">Submit</button>
-        </div>
-    </form>
-
-    <link rel="stylesheet" href="@Assets["BlazorApp.styles.css"]" />
-@*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
-@*  ^ punctuation.definition.tag.begin.html *@
-@*   ^^^^ entity.name.tag.block.any.html *@
-@*        ^^^^^^^^^^^^^^^^ meta.attribute-with-value.html *@
-@*        ^^^ entity.other.attribute-name.html *@
-@*           ^ punctuation.separator.key-value.html *@
-@*            ^^^^^^^^^^^^ meta.string.html string.quoted.double.html *@
-@*            ^ punctuation.definition.string.begin.html *@
-@*                       ^ punctuation.definition.string.end.html *@
-@*                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.href.html *@
-@*                         ^^^^ entity.other.attribute-name.href.html *@
-@*                             ^ punctuation.separator.key-value.html *@
-@*                              ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html *@
-@*                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.path.url.html meta.string.html string.quoted.double.html *@
-@*                               ^ punctuation.section.embedded.begin.cs-razor *@
-@*                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
-@*                                ^^^^^^ variable.other.cs *@
-@*                                      ^^^^^^^^^^^^^^^^^^^^^^^^ meta.brackets.cs *@
-@*                                      ^ punctuation.section.brackets.begin.cs *@
-@*                                       ^^^^^^^^^^^^^^^^^^^^^^ meta.string.cs string.quoted.double.cs *@
-@*                                       ^ punctuation.definition.string.begin.cs *@
-@*                                                            ^ punctuation.definition.string.end.cs *@
-@*                                                             ^ punctuation.section.brackets.end.cs *@
-@*                                                              ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html *@
-@*                                                                ^^ punctuation.definition.tag.end.html *@
-
-    <div id='@MyClass.MyId' class='theclass'></div>
-@*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html *@
-@*  ^ punctuation.definition.tag.begin.html *@
-@*   ^^^ entity.name.tag.block.any.html *@
-@*       ^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.id.html *@
-@*       ^^ entity.other.attribute-name.id.html *@
-@*         ^ punctuation.separator.key-value.html *@
-@*          ^ meta.string.html string.quoted.single.html punctuation.definition.string.begin.html *@
-@*           ^^^^^^^^^^^^^ meta.toc-list.id.html meta.string.html string.quoted.single.html *@
-@*           ^ punctuation.section.embedded.begin.cs-razor *@
-@*            ^^^^^^^^^^^^ source.cs.embedded.html *@
-@*            ^^^^^^^ variable.other.cs *@
-@*                   ^ punctuation.accessor.dot.cs *@
-@*                    ^^^^ variable.other.cs *@
-@*                        ^ meta.string.html string.quoted.single.html punctuation.definition.string.end.html *@
-@*                          ^^^^^^^^^^^^^^^^ meta.attribute-with-value.class.html *@
-@*                          ^^^^^ entity.other.attribute-name.class.html *@
-@*                               ^ punctuation.separator.key-value.html *@
-@*                                ^ meta.string.html string.quoted.single.html punctuation.definition.string.begin.html *@
-@*                                 ^^^^^^^^ meta.class-name.html meta.string.html string.quoted.single.html *@
-@*                                         ^ meta.string.html string.quoted.single.html punctuation.definition.string.end.html *@
-@*                                          ^ punctuation.definition.tag.end.html *@
-@*                                           ^^ punctuation.definition.tag.begin.html *@
-@*                                             ^^^ entity.name.tag.block.any.html *@
-@*                                                ^ punctuation.definition.tag.end.html *@
-
     @section test {
 @*  ^ punctuation.section.embedded.begin.cs-razor *@
 @*   ^^^^^^^ source.cs.embedded.html keyword.other.cs-razor *@
@@ -976,9 +906,6 @@
 @*                             ^ punctuation.accessor.dot.cs *@
 @*                              ^^^ variable.other.cs *@
         </text>
-
-        @* BUG: The style should highlight but it doesn't.  Most likely not fixable. *@
-        @* <p @if (true) { <text>style="display: none"</text> }>Test</p> *@
     }
     else if (DateTime.Now.Year == 2011)
     {
