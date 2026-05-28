@@ -14,5 +14,4 @@ contexts:
 
   expression:
     - meta_prepend: true
-    - include: Packages/HTML (C#)/Razor/Razor.sublime-syntax#razor-templated-delegates
     - include: Packages/HTML (C#)/Razor/Razor.sublime-syntax#razor-transitions
