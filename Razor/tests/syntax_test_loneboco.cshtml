@@ -623,8 +623,32 @@
     }
 
     <ul>
-        @* TODO: Fix templated delegate in function call *@
         @Repeat(pets, 3, @<li>@item.Name</li>)
+@*      ^ punctuation.section.embedded.begin.cs-razor *@
+@*       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
+@*       ^^^^^^ meta.function-call.identifier.cs variable.function.cs *@
+@*             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.cs meta.group.cs *@
+@*             ^ punctuation.section.group.begin.cs *@
+@*              ^^^^ variable.other.cs *@
+@*                  ^ punctuation.separator.comma.cs *@
+@*                    ^ meta.number.integer.decimal.cs constant.numeric.value.cs *@
+@*                     ^ punctuation.separator.comma.cs *@
+@*                       ^^^^^^^^^^^^^^^^^^^^ string.unquoted.cs-razor *@
+@*                       ^ punctuation.definition.string.begin.razor *@
+@*                        ^^^^ meta.tag.block.any.html *@
+@*                        ^ punctuation.definition.tag.begin.html *@
+@*                         ^^ entity.name.tag.block.any.html *@
+@*                           ^ punctuation.definition.tag.end.html *@
+@*                            ^ punctuation.section.embedded.begin.cs-razor *@
+@*                             ^^^^^^^^^ source.cs.embedded.html *@
+@*                             ^^^^ variable.other.cs *@
+@*                                 ^ punctuation.accessor.dot.cs *@
+@*                                  ^^^^ variable.other.cs *@
+@*                                      ^^^^^ meta.tag.block.any.html *@
+@*                                      ^^ punctuation.definition.tag.begin.html *@
+@*                                        ^^ entity.name.tag.block.any.html *@
+@*                                          ^ punctuation.definition.tag.end.html *@
+@*                                           ^ punctuation.section.group.end.cs *@
     </ul>
 
 

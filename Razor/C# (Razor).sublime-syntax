@@ -34,6 +34,10 @@ contexts:
     - meta_prepend: true
     - include: Razor.sublime-syntax#razor-transitions
 
+  expression:
+    - meta_prepend: true
+    - include: Packages/HTML (C#)/Razor/Razor.sublime-syntax#razor-templated-delegates
+
   # Don't let C# embed extra syntaxes in strings
 
   inside-triple-quoted-raw-string-sql: []

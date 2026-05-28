@@ -482,6 +482,19 @@ contexts:
 
   # This is HTML attributes with a leading `@` for .razor files only.
 
+###[ TEMPLATED DELEGATES ]#####################################################
+
+  # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#templated-razor-delegates
+  razor-templated-delegates:
+    - match: '@(?=<([\w:-]+)(?=[\s>]))'
+      scope: punctuation.definition.string.begin.razor
+      embed: razor-templated-delegate-body
+      escape: (?<=</\1>)
+
+  razor-templated-delegate-body:
+    - meta_scope: string.unquoted.cs-razor
+    - include: razor-transitions
+
 ###[ RESERVED WORDS ]##########################################################
 
   # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#razor-reserved-keywords
