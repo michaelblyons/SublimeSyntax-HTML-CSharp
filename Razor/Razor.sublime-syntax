@@ -202,7 +202,7 @@ contexts:
     - match: (?=[<\s"'])
       scope: punctuation.section.embedded.end.cs-razor
       pop: 1
-    - include: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax#expression
+    - include: Packages/HTML (C#)/Razor/C# (Razor implicit).sublime-syntax#expression
 
   # https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-10.0#explicit-razor-expressions
   expressions-explicit:

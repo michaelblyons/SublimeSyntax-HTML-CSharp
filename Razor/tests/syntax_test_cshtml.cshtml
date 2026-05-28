@@ -104,8 +104,21 @@
 @*                                 ^ entity.name.tag.block.any.html *@
 @*                                  ^ punctuation.definition.tag.end.html *@
 
-    @* TODO: This should end right before `<int>` *@
     <p>@GenericMethod<int>()</p>
+@*  ^^^ meta.tag.block.any.html *@
+@*  ^ punctuation.definition.tag.begin.html *@
+@*   ^ entity.name.tag.block.any.html *@
+@*    ^ punctuation.definition.tag.end.html *@
+@*     ^ punctuation.section.embedded.begin.cs-razor *@
+@*      ^^^^^^^^^^^^^ source.cs.embedded.html variable.other.cs *@
+@*                   ^^^^^ meta.tag.other.html *@
+@*                   ^ punctuation.definition.tag.begin.html *@
+@*                    ^^^ entity.name.tag.other.html *@
+@*                       ^ punctuation.definition.tag.end.html *@
+@*                          ^^^^ meta.tag.block.any.html *@
+@*                          ^^ punctuation.definition.tag.begin.html *@
+@*                            ^ entity.name.tag.block.any.html *@
+@*                             ^ punctuation.definition.tag.end.html *@
 
     <p>@(GenericMethod<int>())</p>
 @*  ^^^ meta.tag.block.any.html *@
