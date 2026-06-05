@@ -3,6 +3,8 @@ name: Syntax Tests
 
 on:
   push:
+    branches:
+      - 'master'
     paths:
       - '.github/workflows/syntax.yml'
       - '**.sublime-syntax'
@@ -14,6 +16,7 @@ on:
       - '**.sublime-syntax'
       - '**/syntax_test_*'
       - '**.tmPreferences'
+  workflow_dispatch:
 
 jobs:
   main:

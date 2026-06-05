@@ -61,9 +61,9 @@ Microsoft later released
 a simplified, less-intrusive frontend templating syntax
 that supplanted WebForms.
 
-A huge thank-you is owed
-to [@keith-hall][keith]
-for his work on this.
+First version thanks to [Keith Hall][keith].
+Rebuilt by Michael Lyons.
+Also see [LoneBoco's version][loneboco].
 
 ### Current Support
 
@@ -79,13 +79,11 @@ for his work on this.
 
 ### Known issues
 
-- Trouble with `@(` in HTML attributes
-  if the expression contains `"`
-- Trouble with `@` expressions in HTML attributes
-  if they are inside `@` block expressions
-- Trouble with `@` expressions in embedded languages
-  (i.e. in JavaScript)
-  if they are inside `@` block expressions
+- Trouble with `@(` in CSS- or JS-embedding HTML attributes
+  if the expression contains the tag string delimiter.
+- No support for `@bind` attributes.
+- Chaining expressions together like `@if`-`for`-etc.
+  may require curly braces, even for single commands.
 - File new issues [on GitHub][gh]
 
 
@@ -94,3 +92,4 @@ for his work on this.
 [ss-docs]: https://www.sublimetext.com/docs/syntax.html
 [gh]: https://github.com/michaelblyons/SublimeSyntax-HTML-CSharp
 [keith]: https://github.com/keith-hall
+[loneboco]: https://github.com/LoneBoco/razor-sublime

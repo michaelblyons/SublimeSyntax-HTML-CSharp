@@ -1,0 +1,10 @@
+%YAML 1.2
+---
+scope: source.cs.embedded.cs.razor
+version: 2
+hidden: true
+
+extends: Packages/HTML (C#)/Razor/C# (Razor).sublime-syntax
+
+variables:
+  generic_declaration: (?!)

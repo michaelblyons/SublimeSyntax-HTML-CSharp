@@ -9,25 +9,14 @@ extends: Packages/JavaScript/JavaScript.sublime-syntax
 
 contexts:
 
-  prototype:
+  comments:
     - meta_prepend: true
-    - include: Razor.sublime-syntax#comments
+    - include: Razor.sublime-syntax#razor-block-comments
+
+  statement:
+    - meta_prepend: true
+    - include: Razor.sublime-syntax#expressions
 
   string-content:
     - meta_prepend: true
-    - include: Razor.sublime-syntax#csharp-interpolations
-
-  csharp-interpolations:
-    - meta_include_prototype: false
-    - match: (?=<%[=#:$])
-      push: csharp-interpolation-body
-
-  csharp-interpolation-body:
-    - clear_scopes: 1
-    - meta_include_prototype: false
-    - include: csharp-embedded
-    - include: immediately-pop
-
-  csharp-embedded:
-    - meta_include_prototype: false
-    - include: Razor.sublime-syntax#razor-constructs
+    - include: Razor.sublime-syntax#expressions

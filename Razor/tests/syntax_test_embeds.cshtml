@@ -1,0 +1,51 @@
+@* SYNTAX TEST "Packages/HTML (C#)/Razor/Razor.sublime-syntax" *@
+@* https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-2.1 *@
+
+
+    @section Scripts {
+@*  ^ punctuation.section.embedded.begin.cs-razor *@
+@*   ^^^^^^^ source.cs.embedded.html keyword.other.cs-razor *@
+@*           ^^^^^^^ entity.name.section.cs-razor *@
+@*                   ^ punctuation.section.block.begin.cs-razor *@
+        <script type="text/javascript" src="/scripts/main.js"></script>
+
+        <script type="text/javascript">
+            function find() {
+                var val = $('@HtmlHelpers.Something').val();
+@*                           ^ punctuation.section.embedded.begin.cs-razor *@
+@*                            ^^^^^^^^^^^^^^^^^^^^^ source.cs.embedded.html *@
+@*                            ^^^^^^^^^^^ variable.other.cs *@
+@*                                       ^ punctuation.accessor.dot.cs *@
+@*                                        ^^^^^^^^^ variable.other.cs *@
+
+                @("alert()");
+            }
+        </script>
+    }
+
+
+    @section Styles {
+        <style>
+            #@foo {
+@*^^^^^^^^^^^^^^^^^^ source.css.embedded.html *@
+@*          ^^^^^^ meta.selector.css *@
+@*          ^ entity.other.attribute-name.id.css punctuation.definition.entity.css *@
+@*           ^ punctuation.section.embedded.begin.cs-razor *@
+@*            ^^^ source.cs.embedded.html variable.other.cs *@
+@*                ^^ meta.property-list.css meta.block.css *@
+@*                ^ punctuation.section.block.begin.css *@
+                color: red;
+            }
+
+            .bar {
+                color: @my_blue;
+@*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html meta.property-list.css meta.block.css *@
+@*              ^^^^^ meta.property-name.css support.type.property-name.css *@
+@*                   ^ punctuation.separator.key-value.css *@
+@*                    ^^^^^^^^^ meta.property-value.css *@
+@*                     ^ punctuation.section.embedded.begin.cs-razor *@
+@*                      ^^^^^^^ source.cs.embedded.html variable.other.cs *@
+@*                             ^ punctuation.terminator.rule.css *@
+            }
+        </style>
+    }

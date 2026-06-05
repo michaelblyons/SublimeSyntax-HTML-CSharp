@@ -6,11 +6,18 @@ version: 2
 
 extends: Packages/C#/C#.sublime-syntax
 
-##############################################################################
+variables:
+  sql_indicator: (?!)
 
 contexts:
 
-  stray_close_bracket:
+###[ CSHARP OVERRIDES ]########################################################
+
+  comments:
+    - meta_prepend: true
+    - include: Razor.sublime-syntax#comment
+
+  stray-punctuation:
     - match: \]|\)
       scope: invalid.illegal.stray.cs
     - match: (?=})
@@ -23,14 +30,46 @@ contexts:
     - match: \bHtml\b
       scope: variable.language.this.razor
 
-  inside_triple_quoted_raw_string_syntax:
-    - meta_include_prototype: false
-    - include: immediately_pop
+  inside-statement-block:
+    - meta_prepend: true
+    - include: Razor.sublime-syntax#razor-transitions
 
-  inside_verbatim_string_syntax:
-    - meta_include_prototype: false
-    - include: immediately_pop
+  expression:
+    - meta_prepend: true
+    - include: Packages/HTML (C#)/Razor/Razor.sublime-syntax#razor-templated-delegates
 
-  inside_verbatim_format_string_syntax:
-    - meta_include_prototype: false
-    - include: immediately_pop
+  # Don't let C# embed extra syntaxes in strings
+
+  inside-triple-quoted-raw-string-sql: []
+  inside-verbatim-string-sql: []
+  inside-verbatim-format-string-sql: []
+
+###[ UTILITY ]#################################################################
+
+  razor-functions-block:
+    - include: visibility
+    - include: modifiers
+    - include: local-declarations
+
+  embedded-statement-pop:
+    - include: embedded-statements
+    - include: statement-blocks
+    - include: else-pop
+
+  html-attribute-expression:
+    - include: Razor.sublime-syntax#expressions-explicit
+    - match: (?=["'\s])
+      pop: 1
+    - include: Razor.sublime-syntax#expressions
+
+  html-attribute-expression-double-quoted:
+    - include: Razor.sublime-syntax#expressions-explicit
+    - match: (?=["\s])
+      pop: 1
+    - include: Razor.sublime-syntax#expressions
+
+  html-attribute-expression-single-quoted:
+    - include: Razor.sublime-syntax#expressions-explicit
+    - match: (?=['\s])
+      pop: 1
+    - include: Razor.sublime-syntax#expressions

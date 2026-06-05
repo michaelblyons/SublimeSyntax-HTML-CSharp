@@ -112,7 +112,7 @@
 <%--^^^^^^^ meta.embedded.cs --%>
 <%--^^ punctuation.section.embedded.begin.cs-webforms --%>
 <%--  ^^^ source.cs.embedded.html --%>
-<%--   ^ invalid.illegal.stray.brace.cs --%>
+<%--   ^ invalid.illegal.stray.cs --%>
 <%--     ^^ punctuation.section.embedded.end.cs-webforms - source --%>
 
     <% if(3 > 10)
@@ -170,31 +170,31 @@
 <asp:Repeater runat="server">
     <ItemTemplate>
         <%# Eval("Property") %>
-<%--    ^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs --%>
+<%--    ^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs --%>
 <%--    ^^^ punctuation.section.embedded.begin.cs-webforms --%>
 <%--       ^^^^^^^^^^^^^^^^^^ source.cs.embedded.html --%>
-<%--        ^^^^^^^^^^^^^^^^ meta.function-call.cs --%>
-<%--        ^^^^ variable.function.cs --%>
-<%--            ^^^^^^^^^^^^ meta.group.cs --%>
+<%--        ^^^^ meta.function-call.identifier.cs variable.function.cs --%>
+<%--            ^^^^^^^^^^^^ meta.function-call.arguments.cs meta.group.cs --%>
 <%--            ^ punctuation.section.group.begin.cs --%>
 <%--             ^^^^^^^^^^ meta.string.cs string.quoted.double.cs --%>
 <%--             ^ punctuation.definition.string.begin.cs --%>
 <%--                      ^ punctuation.definition.string.end.cs --%>
 <%--                       ^ punctuation.section.group.end.cs --%>
 <%--                         ^^ punctuation.section.embedded.end.cs-webforms --%>
+<%--                           ^ meta.html-newline-after-csharp.cs-webforms --%>
         <%#: Eval("Property") %>
-<%--    ^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs --%>
+<%--    ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.cs --%>
 <%--    ^^^^ punctuation.section.embedded.begin.cs-webforms --%>
 <%--        ^^^^^^^^^^^^^^^^^^ source.cs.embedded.html --%>
-<%--         ^^^^^^^^^^^^^^^^ meta.function-call.cs --%>
-<%--         ^^^^ variable.function.cs --%>
-<%--             ^^^^^^^^^^^^ meta.group.cs --%>
+<%--         ^^^^ meta.function-call.identifier.cs variable.function.cs --%>
+<%--             ^^^^^^^^^^^^ meta.function-call.arguments.cs meta.group.cs --%>
 <%--             ^ punctuation.section.group.begin.cs --%>
 <%--              ^^^^^^^^^^ meta.string.cs string.quoted.double.cs --%>
 <%--              ^ punctuation.definition.string.begin.cs --%>
 <%--                       ^ punctuation.definition.string.end.cs --%>
 <%--                        ^ punctuation.section.group.end.cs --%>
 <%--                          ^^ punctuation.section.embedded.end.cs-webforms --%>
+<%--                            ^ meta.html-newline-after-csharp.cs-webforms --%>
     </ItemTemplate>
 </asp:Repeater>
 
